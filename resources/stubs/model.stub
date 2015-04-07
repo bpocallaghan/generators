@@ -1,0 +1,22 @@
+<?php
+
+namespace {{namespace}};
+
+use Titan\Models\TitanCMSModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class {{class}} extends TitanCMSModel
+{
+	use SoftDeletes;
+
+	protected $table = '{{table}}';
+
+	protected $guarded = ['id'];
+
+	/**
+     * Validation rules for this model
+     */
+    static public $rules = [
+        'title' => 'required|min:3:max:255',
+    ];
+}

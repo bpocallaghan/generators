@@ -1,0 +1,101 @@
+<?php
+
+namespace {{namespace}};
+
+use {{rootNamespace}}Models\{{model}};
+use {{rootNamespace}}Http\Requests;
+use Titan\Controllers\TitanAdminController;
+
+use Illuminate\Http\Request;
+
+class {{class}} extends TitanAdminController
+{
+
+	/**
+	 * Display a listing of the {{resource}}.
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+		return $this->view('{{view}}.index')->with('items', {{model}}::all());
+	}
+
+	/**
+	 * Show the form for creating a new {{resource}}.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		return $this->view('{{view}}.add_edit');
+	}
+
+	/**
+	 * Store a newly created {{resource}} in storage.
+	 *
+	 * @param Request $request
+	 * @return Response
+	 */
+	public function store(Request $request)
+	{
+		$this->validate($request, {{model}}::$rules, {{model}}::$messages);
+
+        ${{resource}} = $this->createEntry('App\Models\{{model}}', $request->all());
+
+        return Redirect::route('{{view}}.index');
+	}
+
+	/**
+	 * Display the specified {{resource}}.
+	 *
+	 * @param {{model}} ${{resource}}
+	 * @return Response
+	 */
+	public function show({{model}} ${{resource}})
+	{
+		return $this->view('{{view}}.show')->with('item', ${{resource}});
+	}
+
+	/**
+	 * Show the form for editing the specified {{resource}}.
+	 *
+	 * @param {{model}} ${{resource}}
+     * @return Response
+     */
+    public function edit({{model}} ${{resource}})
+	{
+		return $this->view('{{view}}.add_edit')->with('item', ${{resource}});
+	}
+
+	/**
+	 * Update the specified {{resource}} in storage.
+	 *
+	 * @param {{model}}  ${{resource}}
+     * @param Request    $request
+     * @return Response
+     */
+    public function update({{model}} ${{resource}}, Request $request)
+	{
+		$this->validate($request, {{model}}::$rules, {{model}}::$messages);
+
+        ${{resource}} = $this->updateEntry(${{resource}}, $request->all());
+
+        return Redirect::route('{{view}}.index');
+	}
+
+	/**
+	 * Remove the specified {{resource}} from storage.
+	 *
+	 * @param {{model}}  ${{resource}}
+     * @param Request    $request
+	 * @return Response
+	 */
+	public function destroy({{model}} ${{resource}}, Request $request)
+	{
+		$this->deleteEntry(${{resource}}, $request);
+
+        return Redirect::route('{{view}}.index');
+	}
+
+}
