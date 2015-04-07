@@ -2,8 +2,9 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
-use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Console\GeneratorCommand as LaravelGeneratorCommand;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
 abstract class GeneratorCommand extends LaravelGeneratorCommand
 {
@@ -27,6 +28,18 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	{
 		return [
 			['name', InputArgument::REQUIRED, 'The name of class being generated.'],
+		];
+	}
+
+	/**
+	 * Get the console command options.
+	 *
+	 * @return array
+	 */
+	protected function getOptions()
+	{
+		return [
+			['plain', null, InputOption::VALUE_OPTIONAL, 'Generate an empty class.'],
 		];
 	}
 }

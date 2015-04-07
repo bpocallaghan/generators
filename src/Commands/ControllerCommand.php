@@ -4,7 +4,7 @@ namespace Bpocallaghan\Generators\Commands;
 
 use Symfony\Component\Console\Input\InputOption;
 
-class ControllerMakeCommand extends GeneratorCommand
+class ControllerCommand extends GeneratorCommand
 {
 	/**
 	 * The console command name.
