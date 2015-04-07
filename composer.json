@@ -1,6 +1,6 @@
 {
     "name": "bpocallaghan/generators",
-    "description": "Laravel 5 File Generators",
+    "description": "Custom Laravel 5 File Generators with config and publishable stubs.",
 	"keywords": ["laravel", "generators"],
     "license": "MIT",
     "authors": [

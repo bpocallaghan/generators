@@ -21,7 +21,7 @@ The migration and seed commands are from [Jeffrey Way's package](https://github.
 
 ## Installation
 
-First, pull in the package through Composer.
+Update your project's `composer.json` file.
 
 ```js
 "require-dev": {
@@ -29,7 +29,13 @@ First, pull in the package through Composer.
 }
 ```
 
-And then, include the service provider within `app/config/app.php`.
+Download latest code from github via `composer update`
+
+```batch
+composer update --dev
+```
+
+Include the service provider within `app/config/app.php`.
 
 ```php
 'providers' => [
@@ -37,7 +43,8 @@ And then, include the service provider within `app/config/app.php`.
 ];
 ```
 
-Run Artisan to see the new commands.
+Run `artisan` command to see the new commands.
+
 ```bash
 php artisan
 ```
@@ -103,4 +110,4 @@ This will copy the config file to `/config/generators.php`.
 Here you can change the default location of the stubs
 
 This will also copy all the stubs to `/resources/stubs/`.
-Here you can overide the skeleton of the files to suit your personal workflow / boilerplate code
+Here you can overide the skeleton of the files to suit your personal workflow / boilerplate code.
