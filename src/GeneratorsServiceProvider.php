@@ -32,8 +32,11 @@ class GeneratorsServiceProvider extends ServiceProvider
 		$this->mergeConfigFrom($configPath, 'generators');
 
 		$this->registerCommand('PublishCommand', 'publish');
-		$this->registerCommand('ControllerMakeCommand', 'controller');
-		$this->registerCommand('ModelMakeCommand', 'model');
+		$this->registerCommand('ControllerCommand', 'controller');
+		$this->registerCommand('ModelCommand', 'model');
+		$this->registerCommand('MigrationCommand', 'migration');
+		$this->registerCommand('MigrationPivotCommand', 'migrate.pivot');
+		$this->registerCommand('SeedCommand', 'seed');
 	}
 
 	/**
