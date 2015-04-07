@@ -6,7 +6,7 @@ use File;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 
-class PublishStubsCommand extends GeneratorCommand
+class PublishCommand extends GeneratorCommand
 {
 
 	/**
@@ -20,7 +20,7 @@ class PublishStubsCommand extends GeneratorCommand
 	 *
 	 * @var string
 	 */
-	protected $description = 'Copy generator stubs for user modification';
+	protected $description = 'Copy stubs and config for user modification';
 
 	/**
 	 * Execute the command
@@ -56,7 +56,7 @@ class PublishStubsCommand extends GeneratorCommand
 	 */
 	private function updateStubsPathsInConfigFile()
 	{
-		$updated = str_replace('packages/bpocallaghan/generators/', '', File::get($this->getConfigPath()));
+		$updated = str_replace('vendor/bpocallaghan/generators/', '', File::get($this->getConfigPath()));
 		File::put($this->getConfigPath(), $updated);
 	}
 

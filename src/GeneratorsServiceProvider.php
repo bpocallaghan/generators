@@ -31,7 +31,7 @@ class GeneratorsServiceProvider extends ServiceProvider
 		$configPath = __DIR__ . '/config/config.php';
 		$this->mergeConfigFrom($configPath, 'generators');
 
-		$this->registerCommand('PublishStubsCommand', 'publish');
+		$this->registerCommand('PublishCommand', 'publish');
 		$this->registerCommand('ControllerMakeCommand', 'controller');
 		$this->registerCommand('ModelMakeCommand', 'model');
 	}
