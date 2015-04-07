@@ -7,6 +7,18 @@ It may not suit your workflow, but please let me know if I can help optimize thi
 To be honest, the idea behind this package is not to suit everyone's needs.
 I focus more on the stubs, so that anyone can publish the stubs and update them to suit your need.
 
+## Commands
+```bash
+php artisan generate:migration
+php artisan generate:migration:pivot
+php artisan generate:seed
+php artisan generate:model
+php artisan generate:controller
+php artisan generate:publish-stubs
+```
+
+The migration and seed commands are from [Jeffrey Way's package](https://github.com/laracasts/Laravel-5-Generators-Extended)
+
 ## Installation
 
 First, pull in the package through Composer.
@@ -25,15 +37,70 @@ And then, include the service provider within `app/config/app.php`.
 ];
 ```
 
-## Usage
-
-coming soon
-
-## Commands
+Run Artisan to see the new commands.
 ```bash
-php artisan generate:publish-stubs
-php artisan generate:controller FooController
-php artisan generate:model Foo
+php artisan
 ```
 
-## currently in development
+## Examples
+
+- [Migrations](#migrations)
+- [Pivot Tables](#pivot-tables)
+- [Models](#models)
+- [Database Seeders](#database-seeders)
+- [Controllers](#controllers)
+- Views *coming soon*
+- Resource *coming soon*
+- [Configuration](#configuration)
+
+*would like to add a --plain option for the commands*
+
+### Migrations
+
+```
+php artisan generate:migration create_users_table
+php artisan generate:migration create_posts_table --schema="title:string, body:text, slug:string:unique, published_at:date"
+```
+
+- [More](https://github.com/laracasts/Laravel-5-Generators-Extended#migrations-with-schema)
+
+### Pivot Tables
+
+```
+php artisan generate:migration:pivot tags posts
+```
+
+- [More](https://github.com/laracasts/Laravel-5-Generators-Extended#pivot-tables)
+
+### Models
+
+```
+php artisan generate:model Region
+```
+
+### Database Seeders
+
+```
+php artisan generate:seed users
+```
+
+- [More](https://github.com/laracasts/Laravel-5-Generators-Extended#database-seeders)
+
+### Controllers
+
+```
+php artisan generate:controllers RegionsController
+php artisan generate:controllers Geopgraphy\RegionsController
+```
+
+### Configuration
+
+```
+php artisan generate:publish-stubs
+```
+
+This will copy the config file to `/config/generators.php`.
+Here you can change the default location of the stubs
+
+This will also copy all the stubs to `/resources/stubs/`.
+Here you can overide the skeleton of the files to suit your personal workflow / boilerplate code
