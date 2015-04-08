@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Migrations;
 
-use Bpocallaghan\Generators\GeneratorException;
+use Bpocallaghan\Generators\Exceptions\GeneratorException;
 
 class SyntaxBuilder
 {

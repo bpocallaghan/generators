@@ -1,6 +1,6 @@
 <?php
 
-namespace Bpocallaghan\Generators;
+namespace Bpocallaghan\Generators\Exceptions;
 
 class GeneratorException extends \Exception
 {
