@@ -1,0 +1,67 @@
+@extends('admin.master')
+
+@section('content')
+	<section id="widget-{{resource}}-add-edit" class="">
+		<div class="row">
+			<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="jarviswidget jarviswidget-color-darken" id="wid-id-add-edit-form" data-widget-editbutton="true" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"><i class="fa fa-edit"></i></span>
+
+						<h2>{{ isset($item)? 'Edit ' . $item->title : 'Add new {{model}} Item' }}</h2>
+					</header>
+
+					<div>
+						<div class="widget-body no-padding">
+							{!! Form::open(['method' => isset($item)? 'put':'post', 'class' => 'smart-form', 'id' => 'form-edit-{{resource}}',
+									'url' => url('{{url}}' . (isset($item)? '/' . $item->id : ''))])
+							!!}
+
+							<header>
+								{{ isset($item)? 'Edit ' . $item->title : 'Add new {{model}} Item' }}
+							</header>
+
+							<fieldset>
+								<section>
+									<label class="label">Icon</label>
+									<label class="input {{ form_error_class('icon', $errors) }}">
+										<i class="icon-append fa fa-desktop"></i>
+										<input type="text" name="icon" placeholder="Icon" value="{{ isset($item)? ($errors && $errors->any()? old('icon'):$item->icon) : old('icon') }}">
+										<b class="tooltip tooltip-top-right">Icon of Item</b>
+									</label>
+									{!! form_error_message('icon', $errors) !!}
+								</section>
+
+								<section>
+									<label class="label">Title</label>
+									<label class="input {{ form_error_class('title', $errors) }}">
+										<input type="text" name="title" placeholder="Title" value="{{ isset($item)? ($errors && $errors->any()? old('title'):$item->title) : old('title') }}">
+										<b class="tooltip tooltip-top-right">Title of Item</b>
+									</label>
+									{!! form_error_message('title', $errors) !!}
+								</section>
+							</fieldset>
+
+							<footer>
+								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
+							</footer>
+
+							{!! Form::close() !!}
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+@endsection
+
+@section('scripts')
+	@parent
+	<script type="text/javascript" charset="utf-8">
+		$(function ()
+		{
+			initFormValidation('form-edit-{{resource}}', ['title']);
+		})
+	</script>
+@endsection
