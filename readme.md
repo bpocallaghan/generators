@@ -9,12 +9,15 @@ I focus more on the stubs, so that anyone can publish the stubs and update them 
 
 ## Commands
 ```bash
+php artisan generate:publish-stubs
 php artisan generate:migration
 php artisan generate:migration:pivot
 php artisan generate:seed
 php artisan generate:model
 php artisan generate:controller
-php artisan generate:publish-stubs
+php artisan generate:view:index
+php artisan generate:view:add_edit
+
 ```
 
 The migration and seed commands are from [Jeffrey Way's package](https://github.com/laracasts/Laravel-5-Generators-Extended)
@@ -56,7 +59,7 @@ php artisan
 - [Models](#models)
 - [Database Seeders](#database-seeders)
 - [Controllers](#controllers)
-- Views *coming soon*
+- [Views](#views)
 - Resource *coming soon*
 - [Configuration](#configuration)
 
@@ -96,9 +99,21 @@ php artisan generate:seed users
 ### Controllers
 
 ```
-php artisan generate:controllers RegionsController
-php artisan generate:controllers Geopgraphy\RegionsController
+php artisan generate:controller RegionsController
+php artisan generate:controller Geopgraphy\RegionsController
 ```
+### Views
+
+```
+php artisan generate:view:index posts
+php artisan generate:view:index posts.comments
+php artisan generate:view:add_edit posts
+php artisan generate:view:add_edit posts.comments
+```
+
+This will create then index.blade and add_edit.blade files for the posts and comments.
+The `posts.comments` will be in the folder `posts/comments/index.blade.php`.
+The `resource`, `model` and post `url` placeholders will be replaces as well.
 
 ### Configuration
 
