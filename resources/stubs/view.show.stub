@@ -1,0 +1,38 @@
+@extends('admin.master')
+
+@section('content')
+	<section id="section-{{resource}}-show">
+		<div class="row">
+			<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			    <div class="jarviswidget jarviswidget-color-darken" id="wid-{{resource}}-show" data-widget-editbutton="false" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"><i class="fa fa-eye"></i></span>
+						<h2>View {{ $item->title }}</h2>
+					</header>
+
+					<div>
+						<div class="widget-body no-padding">
+                            <form class="smart-form">
+                                <fieldset>
+                                    <section>
+                                        <label class="label">Title</label>
+                                        <label class="input"><input readonly type="text" value="{{ $item->title }}"></label>
+                                    </section>
+
+                                    <section>
+                                        <label class="label">Description</label>
+                                        <label class="input">
+                                            <div class="well well-light" style="padding: 5px; border-radius: 0px; border-color: #BDBDBD;">
+                                                {!! $item->description !!}
+                                            </div>
+                                        </label>
+                                    </section>
+                                </fieldset>
+                            </form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+@endsection

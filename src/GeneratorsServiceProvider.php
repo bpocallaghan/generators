@@ -31,14 +31,17 @@ class GeneratorsServiceProvider extends ServiceProvider
 		$configPath = __DIR__ . '/config/config.php';
 		$this->mergeConfigFrom($configPath, 'generators');
 
+		// register all the artisan commands
 		$this->registerCommand('PublishCommand', 'publish');
 		$this->registerCommand('ControllerCommand', 'controller');
 		$this->registerCommand('ModelCommand', 'model');
 		$this->registerCommand('MigrationCommand', 'migration');
 		$this->registerCommand('MigrationPivotCommand', 'migrate.pivot');
 		$this->registerCommand('SeedCommand', 'seed');
+		$this->registerCommand('ViewCommand', 'view');
 		$this->registerCommand('ViewIndexCommand', 'view.index');
 		$this->registerCommand('ViewAddEditCommand', 'view.add_edit');
+		$this->registerCommand('ViewShowCommand', 'view.show');
 	}
 
 	/**
