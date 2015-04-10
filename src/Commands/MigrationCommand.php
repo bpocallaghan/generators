@@ -156,9 +156,9 @@ class MigrationCommand extends GeneratorCommand
 	 */
 	protected function getOptions()
 	{
-		return [
+		return array_merge([
 			['model', 'm', InputOption::VALUE_OPTIONAL, 'Want a model for this table?', true],
 			['schema', 's', InputOption::VALUE_OPTIONAL, 'Optional schema to be attached to the migration', null],
-		];
+		], parent::getOptions());
 	}
 }

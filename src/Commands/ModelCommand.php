@@ -65,8 +65,8 @@ class ModelCommand extends GeneratorCommand
 	 */
 	protected function getOptions()
 	{
-		return [
+		return array_merge(parent::getOptions(), [
 			['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file as well.'],
-		];
+		]);
 	}
 }
