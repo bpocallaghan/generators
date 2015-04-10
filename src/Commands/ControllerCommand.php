@@ -112,7 +112,7 @@ class ControllerCommand extends GeneratorCommand
 	}
 
 	/**
-	 * Get the controller name without the controller prefix
+	 * Get the controller name without the controller postfix
 	 *
 	 * @return string
 	 */
@@ -139,9 +139,8 @@ class ControllerCommand extends GeneratorCommand
 	 */
 	protected function getOptions()
 	{
-		return [
-			['plain', 'p', InputOption::VALUE_NONE, 'Generate an empty controller.'],
+		return array_merge(parent::getOptions(), [
 			['resource', 'r', InputOption::VALUE_NONE, 'Generate a resource controller.'],
-		];
+		]);
 	}
 }
