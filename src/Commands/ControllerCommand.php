@@ -6,6 +6,7 @@ use Symfony\Component\Console\Input\InputOption;
 
 class ControllerCommand extends GeneratorCommand
 {
+
 	/**
 	 * The console command name.
 	 *
@@ -28,44 +29,107 @@ class ControllerCommand extends GeneratorCommand
 	protected $type = 'Controller';
 
 	/**
+	 * Build the class with the given name.
+	 *
+	 * @param  string $name
+	 * @return string
+	 */
+	protected function buildClass($name)
+	{
+		$stub = $this->files->get($this->getStub());
+
+		$stub = $this->replaceClass($stub, $name);
+
+		$this->replaceNamespace($stub, $name);
+
+		// regions
+		$this->replaceCollection($stub);
+
+		// region
+		$this->replaceResource($stub);
+
+		// Region
+		$this->replaceModel($stub);
+
+		// regions || geography.regions (folder seperator)
+		$this->replaceView($stub);
+
+		return $stub;
+	}
+
+	/**
+	 * Replace the collection placeholder for the given stub.
+	 *
+	 * @param  string $stub
+	 * @return $this
+	 */
+	protected function replaceCollection(&$stub)
+	{
+		$stub = str_replace('{{collection}}', $this->getCollectionName(), $stub);
+
+		return $this;
+	}
+
+	/**
+	 * Replace the collection placeholder for the given stub.
+	 *
+	 * @param $stub
+	 * @return $this
+	 */
+	public function replaceResource(&$stub)
+	{
+		$stub = str_replace('{{resource}}', $resource = str_singular($this->getCollectionName()), $stub);
+
+		return $this;
+	}
+
+	/**
+	 * Replace the collection placeholder for the given stub.
+	 *
+	 * @param $stub
+	 * @return $this
+	 */
+	public function replaceModel(&$stub)
+	{
+		$stub = str_replace('{{model}}', ucwords($this->getCollectionName()), $stub);
+
+		return $this;
+	}
+
+	/**
+	 * Replace the collection placeholder for the given stub.
+	 *
+	 * @param $stub
+	 * @return $this
+	 */
+	public function replaceView(&$stub)
+	{
+		$view = strtolower(str_replace(['Controller', '\\'], ['', '.'], $this->argument('name')));
+
+		$stub = str_replace('{{view}}', $view, $stub);
+
+		return $this;
+	}
+
+	/**
+	 * Get the controller name without the controller prefix
+	 *
+	 * @return string
+	 */
+	private function getCollectionName()
+	{
+		return strtolower(str_replace('Controller', '', class_basename($this->argument('name'))));
+	}
+
+	/**
 	 * Get the default namespace for the class.
 	 *
-	 * @param  string  $rootNamespace
+	 * @param  string $rootNamespace
 	 * @return string
 	 */
 	protected function getDefaultNamespace($rootNamespace)
 	{
-		return $rootNamespace.'\Http\Controllers';
-	}
-
-	/**
-	 * Replace the placeholders for the given stub.
-	 *
-	 * @param  string $stub
-	 * @param  string $name
-	 * @return $this
-	 */
-	protected function replaceNamespace(&$stub, $name)
-	{
-		parent::replaceNamespace($stub, $name);
-
-		$collection = strtolower(str_replace('Controller', '', class_basename($name)));
-
-		$view = strtolower(str_replace(['Controller', '\\'], ['', '.'], $this->argument('name')));
-
-		// regions || geography.regions (folder seperator)
-		$stub = str_replace('{{view}}', $view, $stub);
-
-		// regions
-		$stub = str_replace('{{collection}}', $collection, $stub);
-
-		// region
-		$stub = str_replace('{{resource}}', $resource = str_singular($collection), $stub);
-
-		// Region
-		$stub = str_replace('{{model}}', ucwords($resource), $stub);
-
-		return $this;
+		return $rootNamespace . '\Http\Controllers';
 	}
 
 	/**
