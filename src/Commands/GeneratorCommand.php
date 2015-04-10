@@ -10,13 +10,38 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 {
 
 	/**
+	 * Execute the console command.
+	 *
+	 * @return void
+	 */
+	public function fire()
+	{
+		$name = $this->parseName($this->getNameInput());
+
+		$path = $this->getPath($name);
+
+		if ($this->files->exists($path) && $this->option('force') === false)
+		{
+			return $this->error($this->type.' already exists!');
+		}
+
+		$this->makeDirectory($path);
+
+		$this->files->put($path, $this->buildClass($name));
+
+		$this->info($this->type.' created successfully.');
+
+		$this->info('- ' . $path = $this->getPath($name));
+	}
+
+	/**
 	 * Get the stub file for the generator.
 	 *
 	 * @return string
 	 */
 	protected function getStub()
 	{
-		return config('generators.' . strtolower($this->type) . '_stub');
+		return config('generators.' . strtolower($this->type) . ($this->option('plain')? '_plain':'') . '_stub');
 	}
 
 	/**
@@ -39,7 +64,8 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	protected function getOptions()
 	{
 		return [
-			['plain', null, InputOption::VALUE_OPTIONAL, 'Generate an empty class.'],
+			['plain', null, InputOption::VALUE_NONE, 'Generate an empty class.'],
+			['force', null, InputOption::VALUE_NONE, 'Warning: Overide file if it already exist'],
 		];
 	}
 }
