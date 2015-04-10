@@ -21,6 +21,11 @@ php artisan generate:view:add_edit
 php artisan generate:view:show
 ```
 
+### Options *(in development)*
+- It is available for `generate:controller`
+`--plain` This will generate an empty file (only file structure, no code)
+`--force` This will overide the existing file, if it exist
+
 The migration and seed commands are from [Jeffrey Way's package](https://github.com/laracasts/Laravel-5-Generators-Extended)
 
 ## Installation
