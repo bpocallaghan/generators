@@ -2,6 +2,11 @@
 
 return [
 
+	'model_namespace'      => '\Models',
+
+	'controller_namespace' => '\Http\Controllers',
+
+
 	/*
     |--------------------------------------------------------------------------
     | Where the stubs for the generators are stored
@@ -10,7 +15,11 @@ return [
 
 	'model_stub'            => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/model.stub',
 
+	'model_plain_stub'      => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/model.plain.stub',
+
 	'migration_stub'        => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/migration.stub',
+
+	'migration_plain_stub'  => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/migration.plain.stub',
 
 	'controller_stub'       => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/controller.stub',
 
@@ -19,6 +28,8 @@ return [
 	'pivot_stub'            => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/pivot.stub',
 
 	'seed_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/seed.stub',
+
+	'seed_plain_stub'       => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/seed.plain.stub',
 
 	'view_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/view.stub',
 
