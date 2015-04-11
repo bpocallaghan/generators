@@ -29,33 +29,40 @@ class ModelCommand extends GeneratorCommand
 	protected $type = 'Model';
 
 	/**
-	 * Get the default namespace for the class.
+	 * Execute the console command.
 	 *
-	 * @param  string $rootNamespace
-	 * @return string
+	 * @return void
 	 */
-	protected function getDefaultNamespace($rootNamespace)
+	public function fire()
 	{
-		return $rootNamespace . '\Models';
+		parent::fire();
+
+		if($this->option('migration'))
+		{
+			$name = $this->getMigrationName($this->getTableName($this->getNameInput()));
+
+			$this->call('generate:migration', [
+				'name' => $name,
+				'--model'  => false,
+				'--schema' => $this->option('schema')
+			]);
+		}
 	}
 
 	/**
-	 * Replace the placeholders for the given stub.
+	 * Build the class with the given name.
 	 *
-	 * @param  string $stub
 	 * @param  string $name
-	 * @return $this
+	 * @return string
 	 */
-	protected function replaceNamespace(&$stub, $name)
+	protected function buildClass($name)
 	{
-		parent::replaceNamespace($stub, $name);
+		$stub = parent::buildClass($name);
 
-		$table = str_plural(snake_case($this->argument('name')));
+		// countries
+		$stub = str_replace('{{table}}', $this->getTableName($name), $stub);
 
-		// regions
-		$stub = str_replace('{{table}}', $table, $stub);
-
-		return $this;
+		return $stub;
 	}
 
 	/**
@@ -67,6 +74,7 @@ class ModelCommand extends GeneratorCommand
 	{
 		return array_merge(parent::getOptions(), [
 			['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file as well.'],
+			['schema', 's', InputOption::VALUE_OPTIONAL, 'Optional schema to be attached to the migration', null],
 		]);
 	}
 }
