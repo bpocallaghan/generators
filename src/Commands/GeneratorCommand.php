@@ -16,11 +16,16 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	 */
 	protected $composer;
 
+	/**
+	 * The resource argument
+	 *
+	 * @var string
+	 */
 	protected $resource = "";
 
 	function __construct(Filesystem $files, Composer $composer)
 	{
-	    parent::__construct($files);
+		parent::__construct($files);
 
 		$this->composer = $composer;
 	}
@@ -125,13 +130,19 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 		return str_plural($this->getResourceName($name));
 	}
 
+	/**
+	 * Get the path to the view file
+	 *
+	 * @param $name
+	 * @return string
+	 */
 	protected function getViewPath($name)
 	{
 		$name = substr($name, strpos($name, '\Controllers') + 13);
 
 		$name = implode('\\', array_map('str_plural', explode('\\', $name)));
 
-		return strtolower(str_replace(['Controller', '\\'], ['', '.'], $name));
+		return strtolower(str_replace(['Controllers', 'Controller', '\\'], ['', '', '.'], $name));
 	}
 
 	/**
@@ -191,6 +202,8 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	}
 
 	/**
+	 * Convert the name into a valid namespace
+	 *
 	 * @param $name
 	 * @return mixed
 	 */

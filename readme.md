@@ -28,7 +28,7 @@ Update your project's `composer.json` file.
 
 ```js
 "require-dev": {
-	"bpocallaghan/generators": "dev-master"
+	"bpocallaghan/generators": "1.0.*"
 }
 ```
 
@@ -163,6 +163,22 @@ Here you can change the model and controller namespace as well as the location f
 
 This will also copy all the stubs to `/resources/stubs/`.
 Here you can make changes to the current stubs, add your own boilerplate / comments to the files.
+
+## Shortcuts
+
+```
+art=php artisan
+model=php artisan generate:model
+view=php artisan generate:view
+view:index=php artisan generate:view:index
+view:add_edit=php artisan generate:view:add_edit
+view:show=php artisan generate:view:show
+controller=php artisan generate:controller
+migration=php artisan generate:migration
+migration:pivot=php artisan generate:migration:pivot
+seed=php artisan generate:seed
+resource=php artisan generate:resource
+```
 
 ## Tank you
 
