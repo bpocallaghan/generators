@@ -131,7 +131,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 
 		$name = implode('\\', array_map('str_plural', explode('\\', $name)));
 
-		return strtolower(str_replace(['Controllers', 'Controller', '\\'], ['', '', '.'], $name));
+		return strtolower(str_replace(['Controller', '\\'], ['', '.'], $name));
 	}
 
 	/**
