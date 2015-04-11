@@ -12,7 +12,7 @@ class {{class}} extends TitanAdminController
 {
 
 	/**
-	 * Display a listing of the {{resource}}.
+	 * Display a listing of {{collection}}.
 	 *
 	 * @return Response
 	 */
