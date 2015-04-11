@@ -4,6 +4,8 @@ namespace {{namespace}};
 
 use {{rootNamespace}}Models\{{model}};
 use {{rootNamespace}}Http\Requests;
+
+use Redirect;
 use Titan\Controllers\TitanAdminController;
 
 use Illuminate\Http\Request;
