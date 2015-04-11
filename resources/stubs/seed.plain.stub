@@ -6,6 +6,6 @@ class {{class}} extends Seeder
 {
 	public function run()
 	{
-		// todo boilerplate
+
 	}
 }

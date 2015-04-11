@@ -34,7 +34,9 @@ class SeedCommand extends GeneratorCommand
 	 */
 	protected function parseName($name)
 	{
-		return ucwords(camel_case($name)) . 'TableSeeder';
+		$name = $this->convertNameToNamespace($name);
+
+		return $this->getSeedName($name);
 	}
 
 	/**
@@ -45,6 +47,6 @@ class SeedCommand extends GeneratorCommand
 	 */
 	protected function getPath($name)
 	{
-		return './database/seeds/' . str_replace('\\', '/', $name) . '.php';
+		return './database/seeds/' . $this->getSeedName($name) . '.php';
 	}
 }
