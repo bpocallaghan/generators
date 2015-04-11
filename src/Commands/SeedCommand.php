@@ -40,6 +40,27 @@ class SeedCommand extends GeneratorCommand
 	}
 
 	/**
+	 * Build the class with the given name.
+	 *
+	 * @param  string $name
+	 * @return string
+	 */
+	protected function buildClass($name)
+	{
+		$stub = parent::buildClass($name);
+
+		$name = strtolower(str_replace(['TableSeeder'], [''], $name));
+
+		// posts
+		$stub = str_replace('{{collection}}', $this->getCollectionName($name), $stub);
+
+		// Post
+		$stub = str_replace('{{model}}', $this->getModelName($name), $stub);
+
+		return $stub;
+	}
+
+	/**
 	 * Get the destination class path.
 	 *
 	 * @param  string $name

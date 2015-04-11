@@ -1,11 +1,20 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use {{rootNamespace}}Models\{{model}};
 
 class {{class}} extends Seeder
 {
 	public function run()
 	{
-		// todo boilerplate
+		$csvPath = database_path() . '/seeds/csv/' . '{{collection}}.csv';
+        $items = csv_to_array($csvPath);
+
+        foreach ($items as $key => $item)
+        {
+            {{model}}::create([
+                                
+            ]);
+        }
 	}
 }
