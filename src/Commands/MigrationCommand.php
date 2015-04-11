@@ -49,13 +49,14 @@ class MigrationCommand extends GeneratorCommand
 
 		parent::fire();
 
-		$this->info($this->getPath('') . ' created successfully.');
-
 		// if model is required
 		if ($this->option('model') === true || $this->option('model') === 'true')
 		{
 			$this->call('generate:model', [
 				'name' => $this->getModelName(),
+				'--plain' => $this->option('plain'),
+				'--force' => $this->option('force'),
+				'--schema' => $this->option('schema')
 			]);
 		}
 	}
@@ -101,12 +102,16 @@ class MigrationCommand extends GeneratorCommand
 	 */
 	protected function replaceSchema(&$stub)
 	{
-		if ($schema = $this->option('schema'))
+		$schema = '';
+		if(!$this->option('plain'))
 		{
-			$schema = (new SchemaParser)->parse($schema);
-		}
+			if ($schema = $this->option('schema'))
+			{
+				$schema = (new SchemaParser)->parse($schema);
+			}
 
-		$schema = (new SyntaxBuilder)->create($schema, $this->meta);
+			$schema = (new SyntaxBuilder)->create($schema, $this->meta);
+		}
 
 		$stub = str_replace(['{{schema_up}}', '{{schema_down}}'], $schema, $stub);
 
@@ -131,9 +136,10 @@ class MigrationCommand extends GeneratorCommand
 	/**
 	 * Get the class name for the Eloquent model generator.
 	 *
+	 * @param null $name
 	 * @return string
 	 */
-	protected function getModelName()
+	protected function getModelName($name = null)
 	{
 		return ucwords(str_singular(camel_case($this->meta['table'])));
 	}
