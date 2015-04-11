@@ -1,14 +1,14 @@
 @extends('admin.master')
 
 @section('content')
-	<section id="widget-index" class="">
+	<section id="widget-{{collection}}-index" class="">
 		<div class="row">
 			<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="jarviswidget jarviswidget-color-darken" id="wid-id-list" data-widget-editbutton="false" data-widget-deletebutton="false">
 					<header>
 						<span class="widget-icon"><i class="fa fa-table"></i></span>
 
-						<h2>List All {{resource}}</h2>
+						<h2>List All {{collectionUpper}}</h2>
 					</header>
 
 					<div>
@@ -20,7 +20,7 @@
 								</a>
 
 								<a class="btn btn-labeled btn-default text-primary" href="{{ Request::url().'/order' }}">
-									<span class="btn-label"><i class="fa fa-fw fa-align-center"></i></span>{{resource}} Order
+									<span class="btn-label"><i class="fa fa-fw fa-align-center"></i></span>{{model}} Order
 								</a>
 							</div>
 

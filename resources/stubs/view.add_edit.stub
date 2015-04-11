@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('content')
-	<section id="widget-{{resource}}-add-edit" class="">
+	<section id="widget-{{collection}}-add-edit" class="">
 		<div class="row">
 			<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="jarviswidget jarviswidget-color-darken" id="wid-id-add-edit-form" data-widget-editbutton="true" data-widget-deletebutton="false">
