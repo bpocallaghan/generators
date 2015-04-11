@@ -42,6 +42,7 @@ class GeneratorsServiceProvider extends ServiceProvider
 		$this->registerCommand('ViewIndexCommand', 'view.index');
 		$this->registerCommand('ViewAddEditCommand', 'view.add_edit');
 		$this->registerCommand('ViewShowCommand', 'view.show');
+		$this->registerCommand('ResourceCommand', 'resource');
 	}
 
 	/**
