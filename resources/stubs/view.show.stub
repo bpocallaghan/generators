@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('content')
-	<section id="section-{{collection}}-show">
+	<section id="widget-grid">
 		<div class="row">
 			<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			    <div class="jarviswidget jarviswidget-color-darken" id="wid-{{resource}}-show" data-widget-editbutton="false" data-widget-deletebutton="false">
@@ -22,7 +22,7 @@
                                     <section>
                                         <label class="label">Description</label>
                                         <label class="input">
-                                            <div class="well well-light" style="padding: 5px; border-radius: 0px; border-color: #BDBDBD;">
+                                            <div class="well well-light well-form-description">
                                                 {!! $item->description !!}
                                             </div>
                                         </label>
@@ -35,4 +35,8 @@
 			</article>
 		</div>
 	</section>
+
+	<div class="well well-sm">
+		<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
+    </div>
 @endsection

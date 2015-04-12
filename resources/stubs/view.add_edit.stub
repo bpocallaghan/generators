@@ -1,14 +1,14 @@
 @extends('admin.master')
 
 @section('content')
-	<section id="widget-{{collection}}-add-edit" class="">
+	<section id="widget-grid">
 		<div class="row">
 			<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="jarviswidget jarviswidget-color-darken" id="wid-id-add-edit-form" data-widget-editbutton="true" data-widget-deletebutton="false">
 					<header>
 						<span class="widget-icon"><i class="fa fa-edit"></i></span>
 
-						<h2>{{ isset($item)? 'Edit ' . $item->title : 'Add new {{model}} Item' }}</h2>
+						<h2>{{ isset($item)? 'Edit ' . $item->title : 'Add new {{model}}' }}</h2>
 					</header>
 
 					<div>
@@ -18,7 +18,7 @@
 							!!}
 
 							<header>
-								{{ isset($item)? 'Edit ' . $item->title : 'Add new {{model}} Item' }}
+								{{ isset($item)? 'Edit ' . $item->title : 'Add new {{model}}' }}
 							</header>
 
 							<fieldset>
@@ -43,7 +43,7 @@
 							</fieldset>
 
 							<footer>
-								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="submit" class="btn btn-primary btn-submit">Submit</button>
 								<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
 							</footer>
 
