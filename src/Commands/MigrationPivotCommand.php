@@ -104,8 +104,14 @@ class MigrationPivotCommand extends GeneratorCommand
 		$tables = $this->getSortedTableNames();
 
 		$stub = str_replace(
-			['{{columnOne}}', '{{columnTwo}}', '{{tableOne}}', '{{tableTwo}}'],
+			['{{columnOne}}', '{{columnTwo}}'],
 			array_merge(array_map('str_singular', $tables), $tables),
+			$stub
+		);
+
+		$stub = str_replace(
+			['{{tableOne}}', '{{tableTwo}}'],
+			array_merge(array_map('str_plural', $tables), $tables),
 			$stub
 		);
 
