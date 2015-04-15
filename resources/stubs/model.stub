@@ -1,13 +1,15 @@
 <?php
-
 namespace {{namespace}};
 
-use Titan\Models\TitanCMSModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class {{class}} extends TitanCMSModel
+use Titan\Models\Traits\ModifyBy;
+use Titan\Models\Traits\LogsActivity;
+
+class {{class}} extends Model
 {
-	use SoftDeletes;
+	use LogsActivity, ModifyBy, SoftDeletes;
 
 	protected $table = '{{table}}';
 
@@ -19,4 +21,9 @@ class {{class}} extends TitanCMSModel
     static public $rules = [
         'title' => 'required|min:3:max:255',
     ];
+
+	/**
+	 * Validation custom messages for this model
+	 */
+	static public $messages = [];
 }
