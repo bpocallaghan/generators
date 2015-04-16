@@ -27,7 +27,7 @@
 									<label class="input {{ form_error_class('icon', $errors) }}">
 										<i class="icon-append fa fa-desktop"></i>
 										<input type="text" name="icon" placeholder="Icon" value="{{ isset($item)? ($errors && $errors->any()? old('icon'):$item->icon) : old('icon') }}">
-										<b class="tooltip tooltip-top-right">Icon of Item</b>
+										<b class="tooltip tooltip-top-right">Icon of {{model}}</b>
 									</label>
 									{!! form_error_message('icon', $errors) !!}
 								</section>
@@ -36,7 +36,7 @@
 									<label class="label">Title</label>
 									<label class="input {{ form_error_class('title', $errors) }}">
 										<input type="text" name="title" placeholder="Title" value="{{ isset($item)? ($errors && $errors->any()? old('title'):$item->title) : old('title') }}">
-										<b class="tooltip tooltip-top-right">Title of Item</b>
+										<b class="tooltip tooltip-top-right">Title of {{model}}</b>
 									</label>
 									{!! form_error_message('title', $errors) !!}
 								</section>
