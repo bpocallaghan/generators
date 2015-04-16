@@ -184,3 +184,7 @@ resource=php artisan generate:resource
 
 - Thank you [Jeffrey Way](https://github.com/JeffreyWay) for the awesome resources at [Laracasts](https://laracasts.com/).
 - Thank you [Taylor Ottwell](https://github.com/taylorotwell) for [Laravel](http://laravel.com/).
+
+
+### License
+- MIT © 2015
