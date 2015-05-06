@@ -29,6 +29,25 @@ class ViewCommand extends GeneratorCommand
 	protected $type = 'View';
 
 	/**
+	 * Get the stub file for the generator.
+	 *
+	 * @return string
+	 */
+	protected function getStub()
+	{
+		$key = 'view_' . $this->option('stub') . '_stub';
+		$stub = config('generators.' . $key);
+
+		if(is_null($stub))
+		{
+			$this->error('The stub does not exist in the config file - "' . $key . '"');
+			exit;
+		}
+
+		return $stub;
+	}
+
+	/**
 	 * Build the class with the given name.
 	 *
 	 * @param  string $name
@@ -81,6 +100,7 @@ class ViewCommand extends GeneratorCommand
 	protected function getOptions()
 	{
 		return [
+			['stub', null, InputOption::VALUE_OPTIONAL, 'The name of the view stub you would like to generate.', 'index'],
 			['force', null, InputOption::VALUE_NONE, 'Warning: Overide file if it already exist'],
 		];
 	}
