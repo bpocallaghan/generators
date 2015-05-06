@@ -96,6 +96,20 @@ The `.` will be used as a folder seperator, `posts.comments` will be `/resources
 `generate:views:show`
 - This will generate a `show.blade.php` file with the show resource boilerplate code.
 
+## Views Custom Stubs
+
+```
+php artisan generate:view posts
+php artisan generate:view admin.posts --stub=custom
+php artisan generate:view admin.posts --stub=another_file
+```
+
+You can create your own custom `--stub` options.
+- Publish the config file.
+- Add your own view stub, eg. `'view_custom_stub' => [path_to_stubs] . 'view.custom.stub'
+- Then this will generate a view file from that stub.
+- For now, please refer to the [buildClass() in ViewCommand](https://github.com/bpocallaghan/generators/blob/master/src/Commands/ViewCommand.php) for the available placeholders.
+
 ### Controllers
 
 ```
