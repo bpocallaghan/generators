@@ -43,6 +43,7 @@ class GeneratorsServiceProvider extends ServiceProvider
 		$this->registerCommand('ViewAddEditCommand', 'view.add_edit');
 		$this->registerCommand('ViewShowCommand', 'view.show');
 		$this->registerCommand('ResourceCommand', 'resource');
+		$this->registerCommand('FileCommand', 'file');
 	}
 
 	/**
