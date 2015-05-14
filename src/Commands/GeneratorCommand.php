@@ -243,6 +243,46 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	}
 
 	/**
+	 * Get the stub file for the generator.
+	 *
+	 * @return string
+	 */
+	protected function getStub()
+	{
+		$key = $this->getOptionStubKey();
+
+		// get the stub path
+		$stub = config('generators.' . $key);
+
+		if (is_null($stub))
+		{
+			$this->error('The stub does not exist in the config file - "' . $key . '"');
+			exit;
+		}
+
+		return $stub;
+	}
+
+	/**
+	 * Get the key where the stub is located
+	 *
+	 * @return string
+	 */
+	protected function getOptionStubKey()
+	{
+		$plain = $this->option('plain');
+		$stub = $this->option('stub') . ($plain ? '_plain' : '') . '_stub';
+
+		// if no stub, we assume its the same as the type
+		if (is_null($this->option('stub')))
+		{
+			$stub = $this->option('type') . ($plain ? '_plain' : '') . '_stub';
+		}
+
+		return $stub;
+	}
+
+	/**
 	 * Get the argument name of the file that needs to be generated
 	 * If settings exist, remove the postfix from the file
 	 *
