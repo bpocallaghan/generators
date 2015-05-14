@@ -30,6 +30,28 @@ class MigrationPivotCommand extends GeneratorCommand
 	protected $type = 'Pivot';
 
 	/**
+	 * Execute the console command.
+	 *
+	 * @return mixed
+	 */
+	public function fire()
+	{
+		$name = $this->parseName($this->getNameInput());
+		$path = $this->getPath($name);
+
+		if ($this->files->exists($path) && $this->getOptionForce() === false)
+		{
+			return $this->error($this->type . ' already exists!');
+		}
+
+		$this->makeDirectory($path);
+		$this->files->put($path, $this->buildClass($name));
+
+		$this->info($this->type . ' created successfully.');
+		$this->info('- ' . $path);
+	}
+
+	/**
 	 * Empty 'name' argument
 	 *
 	 * @return string
@@ -143,6 +165,16 @@ class MigrationPivotCommand extends GeneratorCommand
 		sort($tables);
 
 		return $tables;
+	}
+
+	/**
+	 * Get the stub file for the generator.
+	 *
+	 * @return string
+	 */
+	protected function getStub()
+	{
+		return config('generators.' . strtolower($this->type) . '_stub');
 	}
 
 	/**
