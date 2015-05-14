@@ -42,7 +42,6 @@ return [
 		'view_index'    => 'index',
 		'view_add_edit' => 'add_edit',
 		'view_show'     => 'show',
-		'view'          => 'superman',
 	],
 
 	/*
