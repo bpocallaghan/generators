@@ -39,9 +39,6 @@ class GeneratorsServiceProvider extends ServiceProvider
 		$this->registerCommand('MigrationPivotCommand', 'migrate.pivot');
 		$this->registerCommand('SeedCommand', 'seed');
 		$this->registerCommand('ViewCommand', 'view');
-		$this->registerCommand('ViewIndexCommand', 'view.index');
-		$this->registerCommand('ViewAddEditCommand', 'view.add_edit');
-		$this->registerCommand('ViewShowCommand', 'view.show');
 		$this->registerCommand('ResourceCommand', 'resource');
 		$this->registerCommand('FileCommand', 'file');
 	}

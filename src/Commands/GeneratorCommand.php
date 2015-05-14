@@ -2,6 +2,7 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
+use Bpocallaghan\Generators\Traits\ArgumentsOptionsAccessors;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Composer;
 use Symfony\Component\Console\Input\InputOption;
@@ -10,6 +11,7 @@ use Illuminate\Console\GeneratorCommand as LaravelGeneratorCommand;
 
 abstract class GeneratorCommand extends LaravelGeneratorCommand
 {
+	use ArgumentsOptionsAccessors;
 
 	/**
 	 * @var Composer
@@ -280,52 +282,6 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 		}
 
 		return $stub;
-	}
-
-	/**
-	 * Get the argument name of the file that needs to be generated
-	 * If settings exist, remove the postfix from the file
-	 *
-	 * @return array|mixed|string
-	 */
-	protected function getArgumentName()
-	{
-		if ($this->settings)
-		{
-			return str_replace($this->settings['postfix'], '', $this->argument('name'));
-		}
-
-		return $this->argument('name');
-	}
-
-	/**
-	 * Get the value for the force option
-	 *
-	 * @return array|string
-	 */
-	protected function getOptionForce()
-	{
-		return $this->option('force');
-	}
-
-	/**
-	 * Get the value for the plain option
-	 *
-	 * @return array|string
-	 */
-	protected function getOptionPlain()
-	{
-		return $this->option('plain');
-	}
-
-	/**
-	 * Get the value for the stub option
-	 *
-	 * @return array|string
-	 */
-	protected function getOptionStub()
-	{
-		return $this->option('stub');
 	}
 
 	/**
