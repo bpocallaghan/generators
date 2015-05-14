@@ -2,16 +2,56 @@
 
 return [
 
-	'model_namespace'      => '\Models',
+	/*
+    |--------------------------------------------------------------------------
+    | The default keys and values for the settings of each type to be generated
+    |--------------------------------------------------------------------------
+    */
 
-	'controller_namespace' => '\Http\Controllers',
+	'defaults' => [
+		'namespace'     => '',
+		'path'          => '.app/',
+		'path_format'   => '',
+		'prefix'        => '',
+		'postfix'       => '',
+		'file_type'     => '.php',
+		'dump_autoload' => false,
+	],
 
+	/*
+    |--------------------------------------------------------------------------
+    | Types of files that can be generated
+    |--------------------------------------------------------------------------
+    */
+
+	'settings' => [
+		'view'       => ['path' => './resources/views/', 'path_format' => 'strtolower', 'file_type' => '.blade.php'],
+		'model'      => ['namespace' => '\Models', 'path' => './app/Models/'],
+		'controller' => ['namespace' => '\Http\Controllers', 'path' => './app/Http/Controllers/', 'postfix' => 'Controller', 'dump_autoload' => true],
+		'seed'       => ['path' => './database/seeds/', 'postfix' => 'TableSeeder'],
+		'migration'  => ['path' => './database/migrations/'],
+	],
+
+	/*
+    |--------------------------------------------------------------------------
+    | Resource Views [stub_key | name of the file]
+    |--------------------------------------------------------------------------
+    */
+
+	'resource_views' => [
+		'view_index'    => 'index',
+		'view_add_edit' => 'add_edit',
+		'view_show'     => 'show',
+		'view'          => 'superman',
+	],
 
 	/*
     |--------------------------------------------------------------------------
     | Where the stubs for the generators are stored
     |--------------------------------------------------------------------------
     */
+
+	'example_stub'          => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/example.stub',
 
 	'model_stub'            => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/model.stub',
 

@@ -47,15 +47,27 @@ class MigrationCommand extends GeneratorCommand
 	{
 		$this->meta = (new NameParser)->parse($this->argument('name'));
 
-		parent::fire();
+		$name = $this->parseName($this->getNameInput());
+		$path = $this->getPath($name);
+
+		if ($this->files->exists($path) && $this->option('force') === false)
+		{
+			return $this->error($this->type . ' already exists!');
+		}
+
+		$this->makeDirectory($path);
+		$this->files->put($path, $this->buildClass($name));
+
+		$this->info($this->type . ' created successfully.');
+		$this->info('- ' . $path);
 
 		// if model is required
 		if ($this->option('model') === true || $this->option('model') === 'true')
 		{
 			$this->call('generate:model', [
-				'name' => $this->getModelName(),
-				'--plain' => $this->option('plain'),
-				'--force' => $this->option('force'),
+				'name'     => $this->getModelName(),
+				'--plain'  => $this->option('plain'),
+				'--force'  => $this->option('force'),
 				'--schema' => $this->option('schema')
 			]);
 		}
@@ -103,7 +115,7 @@ class MigrationCommand extends GeneratorCommand
 	protected function replaceSchema(&$stub)
 	{
 		$schema = '';
-		if(!$this->option('plain'))
+		if (!$this->option('plain'))
 		{
 			if ($schema = $this->option('schema'))
 			{

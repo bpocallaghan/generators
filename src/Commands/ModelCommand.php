@@ -50,31 +50,15 @@ class ModelCommand extends GeneratorCommand
 	}
 
 	/**
-	 * Build the class with the given name.
-	 *
-	 * @param  string $name
-	 * @return string
-	 */
-	protected function buildClass($name)
-	{
-		$stub = parent::buildClass($name);
-
-		// countries
-		$stub = str_replace('{{table}}', $this->getTableName($name), $stub);
-
-		return $stub;
-	}
-
-	/**
 	 * Get the console command options.
 	 *
 	 * @return array
 	 */
 	protected function getOptions()
 	{
-		return array_merge(parent::getOptions(), [
+		return array_merge([
 			['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file as well.'],
 			['schema', 's', InputOption::VALUE_OPTIONAL, 'Optional schema to be attached to the migration', null],
-		]);
+		], parent::getOptions());
 	}
 }

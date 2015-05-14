@@ -23,6 +23,20 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	 */
 	protected $resource = "";
 
+	/**
+	 * Settings of the file to be generated
+	 *
+	 * @var array
+	 */
+	protected $settings = [];
+
+	/**
+	 * The url for the new generated file
+	 *
+	 * @var string
+	 */
+	protected $url = "";
+
 	function __construct(Filesystem $files, Composer $composer)
 	{
 		parent::__construct($files);
@@ -37,35 +51,104 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	 */
 	public function fire()
 	{
-		$name = $this->parseName($this->getNameInput());
+		$this->call('generate:file', [
+			'name'    => $this->getArgumentName(),
+			'--type'  => strtolower($this->type),
+			'--stub'  => $this->getOptionStub(),
+			'--plain' => $this->getOptionPlain()
+		]);
+	}
 
-		$path = $this->getPath($name);
+	/**
+	 * Only return the name of the file
+	 * Ignore the path / namespace of the file
+	 *
+	 * @return array|mixed|string
+	 */
+	protected function getArgumentNameOnly()
+	{
+		$name = $this->getArgumentName();
 
-		if ($this->files->exists($path) && $this->option('force') === false)
+		if (str_contains($name, '/'))
 		{
-			return $this->error($this->type . ' already exists!');
+			$name = str_replace('/', '.', $name);
 		}
 
-		$this->makeDirectory($path);
+		if (str_contains($name, '\\'))
+		{
+			$name = str_replace('\\', '.', $name);
+		}
 
-		$this->files->put($path, $this->buildClass($name));
+		if (str_contains($name, '.'))
+		{
+			return substr($name, strrpos($name, '.') + 1);
+		}
 
-		$this->info($this->type . ' created successfully.');
-
-		$this->info('- ' . $path);
+		return $name;
 	}
+
+	/**
+	 * Return the path of the file
+	 *
+	 * @param bool $withName
+	 * @return array|mixed|string
+	 */
+	protected function getArgumentPath($withName = false)
+	{
+		$name = $this->getArgumentName();
+
+		if (str_contains($name, '.'))
+		{
+			$name = str_replace('.', '/', $name);
+		}
+
+		if (str_contains($name, '\\'))
+		{
+			$name = str_replace('\\', '/', $name);
+		}
+
+		// ucfirst char, for correct namespace
+		$name = implode('/', array_map('ucfirst', explode('/', $name)));
+
+		// if we need to keep lowercase
+		if ($this->settings['path_format'] === 'strtolower')
+		{
+			$name = implode('/', array_map('strtolower', explode('/', $name)));
+		}
+
+		// if we want the path with name
+		if ($withName)
+		{
+			return $name . '/';
+		}
+
+		if (str_contains($name, '/'))
+		{
+			return substr($name, 0, strrpos($name, '/') + 1);
+		}
+
+		return '';
+	}
+
 
 	/**
 	 * Get the resource name
 	 *
-	 * @param $name
+	 * @param      $name
+	 * @param bool $format
 	 * @return string
 	 */
-	protected function getResourceName($name)
+	protected function getResourceName($name, $format = true)
 	{
+		// we assume its already formatted to resource name
+		if($name && $format === false)
+		{
+			return $name;
+		}
+
 		$name = isset($name) ? $name : $this->resource;
 
-		return str_singular(strtolower(str_replace('Controller', '', class_basename($name))));
+		return str_singular(strtolower(class_basename($name)));
 	}
 
 	/**
@@ -76,47 +159,30 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	 */
 	protected function getModelName($name = null)
 	{
-		// bar => Bar
-		// bars => Bar
 		return ucwords(camel_case($this->getResourceName($name)));
 	}
 
 	/**
 	 * Get the name for the controller
 	 *
-	 * @param null $resource
+	 * @param null $name
+	 * @param bool $format
 	 * @return string
 	 */
-	protected function getControllerName($resource = null)
+	protected function getControllerName($name = null, $format = true)
 	{
-		// bar => BarsController
-		// Foo\Bar => Foo\BarsController
-		// foo_bar => FooBarsController
-		// BarController => BarsController
-		return ucwords(str_plural(camel_case(str_replace('Controller', '', $resource)))) . 'Controller';
+		return ucwords(camel_case(str_replace($this->settings['postfix'], '', $this->getResourceName($name, $format))));
 	}
 
 	/**
-	 * Get the full path for the controller
+	 * Get the name for the seed
 	 *
-	 * @param $name
-	 * @return mixed|string
+	 * @param null $name
+	 * @return string
 	 */
-	protected function getControllerPath($name)
+	protected function getSeedName($name = null)
 	{
-		$rootNamespace = $this->getAppNamespace();
-
-		if (starts_with($name, $rootNamespace))
-		{
-			return $name;
-		}
-
-		$name = $this->convertNameToNamespace($name);
-
-		// Bar => BarController
-		$name = str_replace('Controller', '', $name) . 'Controller';
-
-		return $this->getControllerPath($this->getDefaultNamespace(trim($rootNamespace, '\\')) . '\\' . $name);
+		return ucwords(camel_case(str_replace($this->settings['postfix'], '', $this->getResourceName($name))));
 	}
 
 	/**
@@ -138,11 +204,9 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	 */
 	protected function getViewPath($name)
 	{
-		$name = substr($name, strpos($name, '\Controllers') + 13);
+		$name = implode('.', array_map('str_plural', explode('/', $name)));
 
-		$name = implode('\\', array_map('str_plural', explode('\\', $name)));
-
-		return strtolower(str_replace(['Controllers', 'Controller', '\\'], ['', '', '.'], $name));
+		return strtolower(rtrim(ltrim($name, '.'), '.'));
 	}
 
 	/**
@@ -157,37 +221,14 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	}
 
 	/**
-	 * Get the name for the migration
+	 * Get name of file/class with the pre and post fix
 	 *
-	 * @param null $name
+	 * @param $name
 	 * @return string
 	 */
-	protected function getMigrationName($name = null)
+	protected function getFileNameComplete($name)
 	{
-		return 'create_' . str_plural($this->getResourceName($name)) . '_table';
-	}
-
-	/**
-	 * Get the name for the seed
-	 *
-	 * @param null $resource
-	 * @return string
-	 */
-	protected function getSeedName($resource = null)
-	{
-		$resource = str_replace('tableseeder', '', $this->getResourceName($resource));
-
-		return ucwords(str_singular(camel_case($resource))) . 'TableSeeder';
-	}
-
-	/**
-	 * Get the stub file for the generator.
-	 *
-	 * @return string
-	 */
-	protected function getStub()
-	{
-		return config('generators.' . strtolower($this->type) . ($this->input->hasOption('plain') && $this->option('plain') ? '_plain' : '') . '_stub');
+		return $this->settings['prefix'] . $name . $this->settings['postfix'];
 	}
 
 	/**
@@ -202,23 +243,49 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	}
 
 	/**
-	 * Convert the name into a valid namespace
+	 * Get the argument name of the file that needs to be generated
+	 * If settings exist, remove the postfix from the file
 	 *
-	 * @param $name
-	 * @return mixed
+	 * @return array|mixed|string
 	 */
-	protected function convertNameToNamespace($name)
+	protected function getArgumentName()
 	{
-		// foo/bar => foo\bar
-		$name = str_replace('/', '\\', $name);
+		if ($this->settings)
+		{
+			return str_replace($this->settings['postfix'], '', $this->argument('name'));
+		}
 
-		// foo.bar => foo\bar
-		$name = str_replace('.', '\\', $name);
+		return $this->argument('name');
+	}
 
-		// upercase after every \ || foo\bar => Foo\Bar
-		$name = implode('\\', array_map('ucfirst', explode('\\', $name)));
+	/**
+	 * Get the value for the force option
+	 *
+	 * @return array|string
+	 */
+	protected function getOptionForce()
+	{
+		return $this->option('force');
+	}
 
-		return $name;
+	/**
+	 * Get the value for the plain option
+	 *
+	 * @return array|string
+	 */
+	protected function getOptionPlain()
+	{
+		return $this->option('plain');
+	}
+
+	/**
+	 * Get the value for the stub option
+	 *
+	 * @return array|string
+	 */
+	protected function getOptionStub()
+	{
+		return $this->option('stub');
 	}
 
 	/**
@@ -243,6 +310,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 		return [
 			['plain', null, InputOption::VALUE_NONE, 'Generate an empty class.'],
 			['force', null, InputOption::VALUE_NONE, 'Warning: Overide file if it already exist'],
+			['stub', null, InputOption::VALUE_OPTIONAL, 'The name of the view stub you would like to generate.'],
 		];
 	}
 }

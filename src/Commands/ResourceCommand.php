@@ -37,6 +37,7 @@ class ResourceCommand extends GeneratorCommand
 	public function fire()
 	{
 		$this->resource = $this->getResourceInput();
+		$this->settings = config('generators.defaults');
 
 		$this->callModel();
 		$this->callView();
@@ -48,7 +49,7 @@ class ResourceCommand extends GeneratorCommand
 		$this->info('All Done!');
 		$this->info('Remember to add ' .
 			"`Route::resource('" . $this->getCollectionName() . "', '" .
-			$this->getControllerName($this->convertNameToNamespace($this->argument('resource'))) . "');`" .
+			$this->getControllerName() . "');`" .
 			' in the `app\\Http\\routes.php`');
 	}
 
@@ -61,41 +62,35 @@ class ResourceCommand extends GeneratorCommand
 
 		if ($this->confirm("Create a $name model? [yes|no]"))
 		{
-			$this->callCommand('model', $name);
+			$this->callCommandFile('model');
 		}
 	}
 
 	/**
-	 * Call the generate:view command
+	 * Generate the resource views
 	 */
 	private function callView()
 	{
 		if ($this->confirm("Create crud views for the $this->resource resource? [yes|no]"))
 		{
-			$name = str_plural($this->argument('resource'));
-
-			foreach (['index', 'add_edit', 'show'] as $key => $command)
+			$views = config('generators.resource_views');
+			foreach ($views as $key => $name)
 			{
-				$this->call('generate:view:' . $command, [
-					'name'    => $name,
-					'--force' => $this->option('force')
-				]);
+				$this->callCommandFile('view', $key, ['--view-name' => $name]);
 			}
 		}
 	}
 
 	/**
-	 * Call the generate:controller command
+	 * Generate the resource controller
 	 */
 	private function callController()
 	{
-		$namespace = $this->convertNameToNamespace($this->argument('resource'));
-
-		$name = $this->getControllerName($namespace);
+		$name = $this->getControllerName(str_plural($this->resource), false) . config('generators.settings.controller.postfix');
 
 		if ($this->confirm("Create a controller ($name) for the $this->resource resource? [yes|no]"))
 		{
-			$this->callCommand('controller', $name);
+			$this->callCommandFile('controller');
 		}
 	}
 
@@ -120,11 +115,11 @@ class ResourceCommand extends GeneratorCommand
 	 */
 	private function callSeed()
 	{
-		$name = $this->getSeedName();
+		$name = $this->getSeedName() . config('generators.settings.seed.postfix');
 
 		if ($this->confirm("Create a seed ($name) for the $this->resource resource? [yes|no]"))
 		{
-			$this->callCommand('seed', $name);
+			$this->callCommandFile('seed');
 		}
 	}
 
@@ -156,18 +151,48 @@ class ResourceCommand extends GeneratorCommand
 	}
 
 	/**
+	 * Call the generate:file command to generate the given file
+	 *
+	 * @param       $type
+	 * @param null  $stub
+	 * @param array $options
+	 */
+	private function callCommandFile($type, $stub = null, $options = [])
+	{
+		$this->call('generate:file', array_merge($options, [
+			'name'    => $this->argument('resource'),
+			'--type'  => $type,
+			'--force' => $this->getOptionForce(),
+			'--plain' => $this->getOptionPlain(),
+			'--stub'  => ($stub ? $stub : $this->getOptionStub()),
+		]));
+	}
+
+	/**
 	 * If there are '.' in the name, get the last occurence
 	 *
 	 * @return string
 	 */
 	private function getResourceInput()
 	{
-		if (strpos($this->argument('resource'), '.') === false)
+		$name = $this->argument('resource');
+		if (strpos($name, '.') === false)
 		{
-			return strtolower(str_singular($this->argument('resource')));
+			return strtolower(str_singular($name));
 		}
 
-		return strtolower(str_singular(substr($this->argument('resource'), strpos($this->argument('resource'), '.') + 1)));
+		return strtolower(str_singular(substr($name, strpos($name, '.') + 1)));
+	}
+
+	/**
+	 * Get the name for the migration
+	 *
+	 * @param null $name
+	 * @return string
+	 */
+	private function getMigrationName($name = null)
+	{
+		return 'create_' . str_plural($this->getResourceName($name)) . '_table';
 	}
 
 	/**
