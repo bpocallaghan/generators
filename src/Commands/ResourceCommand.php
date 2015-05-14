@@ -162,9 +162,9 @@ class ResourceCommand extends GeneratorCommand
 		$this->call('generate:file', array_merge($options, [
 			'name'    => $this->argument('resource'),
 			'--type'  => $type,
-			'--force' => $this->getOptionForce(),
-			'--plain' => $this->getOptionPlain(),
-			'--stub'  => ($stub ? $stub : $this->getOptionStub()),
+			'--force' => $this->optionForce(),
+			'--plain' => $this->optionPlain(),
+			'--stub'  => ($stub ? $stub : $this->optionStub()),
 		]));
 	}
 

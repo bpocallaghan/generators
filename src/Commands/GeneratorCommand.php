@@ -54,10 +54,10 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	public function fire()
 	{
 		$this->call('generate:file', [
-			'name'    => $this->getArgumentName(),
+			'name'    => $this->argumentName(),
 			'--type'  => strtolower($this->type),
-			'--stub'  => $this->getOptionStub(),
-			'--plain' => $this->getOptionPlain()
+			'--stub'  => $this->optionStub(),
+			'--plain' => $this->optionPlain()
 		]);
 	}
 
@@ -69,7 +69,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	 */
 	protected function getArgumentNameOnly()
 	{
-		$name = $this->getArgumentName();
+		$name = $this->argumentName();
 
 		if (str_contains($name, '/'))
 		{
@@ -97,7 +97,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	 */
 	protected function getArgumentPath($withName = false)
 	{
-		$name = $this->getArgumentName();
+		$name = $this->argumentName();
 
 		if (str_contains($name, '.'))
 		{

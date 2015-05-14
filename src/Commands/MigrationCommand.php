@@ -45,12 +45,12 @@ class MigrationCommand extends GeneratorCommand
 	 */
 	public function fire()
 	{
-		$this->meta = (new NameParser)->parse($this->argument('name'));
+		$this->meta = (new NameParser)->parse($this->argumentName());
 
 		$name = $this->parseName($this->getNameInput());
 		$path = $this->getPath($name);
 
-		if ($this->files->exists($path) && $this->option('force') === false)
+		if ($this->files->exists($path) && $this->optionForce() === false)
 		{
 			return $this->error($this->type . ' already exists!');
 		}
@@ -62,13 +62,13 @@ class MigrationCommand extends GeneratorCommand
 		$this->info('- ' . $path);
 
 		// if model is required
-		if ($this->option('model') === true || $this->option('model') === 'true')
+		if ($this->optionModel() === true || $this->optionModel() === 'true')
 		{
 			$this->call('generate:model', [
 				'name'     => $this->getModelName(),
-				'--plain'  => $this->option('plain'),
-				'--force'  => $this->option('force'),
-				'--schema' => $this->option('schema')
+				'--plain'  => $this->optionPlain(),
+				'--force'  => $this->optionForce(),
+				'--schema' => $this->optionSchema()
 			]);
 		}
 	}
@@ -99,7 +99,7 @@ class MigrationCommand extends GeneratorCommand
 	 */
 	protected function replaceClassName(&$stub)
 	{
-		$className = ucwords(camel_case($this->argument('name')));
+		$className = ucwords(camel_case($this->argumentName()));
 
 		$stub = str_replace('{{class}}', $className, $stub);
 
@@ -115,9 +115,9 @@ class MigrationCommand extends GeneratorCommand
 	protected function replaceSchema(&$stub)
 	{
 		$schema = '';
-		if (!$this->option('plain'))
+		if (!$this->optionPlain())
 		{
-			if ($schema = $this->option('schema'))
+			if ($schema = $this->optionSchema())
 			{
 				$schema = (new SchemaParser)->parse($schema);
 			}
@@ -164,7 +164,17 @@ class MigrationCommand extends GeneratorCommand
 	 */
 	protected function getPath($name)
 	{
-		return './database/migrations/' . date('Y_m_d_His') . '_' . $this->argument('name') . '.php';
+		return './database/migrations/' . date('Y_m_d_His') . '_' . $this->argumentName() . '.php';
+	}
+
+	/**
+	 * Get the stub file for the generator.
+	 *
+	 * @return string
+	 */
+	protected function getStub()
+	{
+		return config('generators.' . strtolower($this->type) . ($this->input->hasOption('plain') && $this->option('plain') ? '_plain' : '') . '_stub');
 	}
 
 	/**

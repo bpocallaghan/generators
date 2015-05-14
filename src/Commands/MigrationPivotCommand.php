@@ -39,7 +39,7 @@ class MigrationPivotCommand extends GeneratorCommand
 		$name = $this->parseName($this->getNameInput());
 		$path = $this->getPath($name);
 
-		if ($this->files->exists($path) && $this->getOptionForce() === false)
+		if ($this->files->exists($path) && $this->optionForce() === false)
 		{
 			return $this->error($this->type . ' already exists!');
 		}

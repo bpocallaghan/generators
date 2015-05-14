@@ -133,6 +133,7 @@ class FileCommand extends GeneratorCommand
 	{
 		$this->setSettings();
 		$this->url = $this->getUrl();
+//		$this->resource = $this->getResourceName();
 
 		$path = $this->getPath('');
 		if ($this->files->exists($path) && $this->option('force') === false)
@@ -142,7 +143,7 @@ class FileCommand extends GeneratorCommand
 
 		$this->makeDirectory($path);
 
-		$this->files->put($path, $this->buildClass($this->getArgumentName()));
+		$this->files->put($path, $this->buildClass($this->argumentName()));
 
 		$this->info(ucfirst($this->option('type')) . ' created successfully.');
 		$this->info('- ' . $path);

@@ -4,13 +4,12 @@ namespace Bpocallaghan\Generators\Traits;
 
 trait ArgumentsOptionsAccessors
 {
+
 	/**
 	 * Get the argument name of the file that needs to be generated
 	 * If settings exist, remove the postfix from the file
-	 *
-	 * @return array|mixed|string
 	 */
-	protected function getArgumentName()
+	protected function argumentName()
 	{
 		if ($this->settings)
 		{
@@ -22,41 +21,41 @@ trait ArgumentsOptionsAccessors
 
 	/**
 	 * Get the value for the force option
-	 *
-	 * @return array|string
 	 */
-	protected function getOptionForce()
+	protected function optionForce()
 	{
 		return $this->option('force');
 	}
 
 	/**
 	 * Get the value for the plain option
-	 *
-	 * @return array|string
 	 */
-	protected function getOptionPlain()
+	protected function optionPlain()
 	{
 		return $this->option('plain');
 	}
 
 	/**
 	 * Get the value for the stub option
-	 *
-	 * @return array|string
 	 */
-	protected function getOptionStub()
+	protected function optionStub()
 	{
 		return $this->option('stub');
 	}
 
 	/**
 	 * Get the value for the model option
-	 *
-	 * @return array|string
 	 */
-	protected function getOptionModel()
+	protected function optionModel()
 	{
 		return $this->option('model');
+	}
+
+	/**
+	 * Get the value for the schema option
+	 */
+	protected function optionSchema()
+	{
+		return $this->option('schema');
 	}
 }
