@@ -1,0 +1,50 @@
+<?php
+
+namespace {{namespace}};
+use {{rootNamespace}}Models\{{model}};
+use Redirect;
+
+class {{class}} extends TitanAdminController
+{
+
+	/**
+	 * Display a listing of {{collection}}.
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+		return $this->view('{{view}}.index')->with('items', {{model}}::all());
+	}
+
+	/**
+	 * Show the form for creating a new {{resource}}.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		return $this->view('{{view}}.add_edit');
+	}
+
+	public function store(Request $request)
+	{
+		$this->validate($request, {{model}}::$rules, {{model}}::$messages);
+
+        ${{resource}} = $this->createEntry('App\Models\{{model}}', $request->all());
+
+        return Redirect::route('{{view}}.index');
+	}
+
+	/**
+	 * Display the specified {{resource}}.
+	 *
+	 * @param {{model}} ${{resource}}
+	 * @return Response
+	 */
+	public function show({{model}} ${{resource}})
+	{
+		return $this->view('{{view}}.show')->with('item', ${{resource}});
+	}
+
+}
