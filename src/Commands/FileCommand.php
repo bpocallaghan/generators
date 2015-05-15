@@ -29,44 +29,6 @@ class FileCommand extends GeneratorCommand
 	protected $type = 'File';
 
 	/**
-	 * Find the type's settings and set local var
-	 */
-	private function setSettings()
-	{
-		$type = $this->option('type');
-		$options = config('generators.settings');
-
-		$found = false;
-		// loop through the settings and find the type key
-		foreach ($options as $key => $settings)
-		{
-			if ($type == $key)
-			{
-				$found = true;
-				break;
-			}
-		}
-
-		if ($found === false)
-		{
-			$this->error('Oops!, we could not find the type in the settings to generate from');
-			exit;
-		}
-
-		// set the default keys and values if they do not exist
-		$defaults = config('generators.defaults');
-		foreach ($defaults as $key => $value)
-		{
-			if (!isset($settings[$key]))
-			{
-				$settings[$key] = $defaults[$key];
-			}
-		}
-
-		$this->settings = $settings;
-	}
-
-	/**
 	 * Get the filename of the file to generate
 	 *
 	 * @return string
@@ -81,7 +43,7 @@ class FileCommand extends GeneratorCommand
 				$name = ($this->option('view-name') ? $this->option('view-name') : $name);
 				break;
 			case 'model':
-				$name = $this->getModelName($this->url);
+				$name = $this->getModelName();
 				break;
 			case 'controller':
 				$name = $this->getControllerName($name);
@@ -95,63 +57,61 @@ class FileCommand extends GeneratorCommand
 	}
 
 	/**
-	 * Get the full namespace name for a given class.
-	 *
-	 * @param  string $name
-	 * @param bool    $withApp
-	 * @return string
-	 */
-	protected function getNamespace($name, $withApp = true)
-	{
-		$path = str_replace('/', '\\', $this->getArgumentPath()) . $this->settings['namespace'];
-
-		$pieces = array_map('ucfirst', explode('/', $path));
-
-		$namespace = ($withApp === true ? $this->getAppNamespace() : '') . implode('\\', $pieces);
-
-		$namespace = rtrim(ltrim(str_replace('\\\\', '\\', $namespace), '\\'), '\\');
-
-		return $namespace;
-	}
-
-	protected function getClassName()
-	{
-		return str_replace([$this->settings['file_type']], [''], $this->getFileName());
-	}
-
-	protected function getUrl()
-	{
-		return '/' . rtrim(implode('/', array_map('strtolower', explode('/', $this->getArgumentPath(true)))), '/');
-	}
-
-	/**
 	 * Execute the console command.
 	 *
 	 * @return void
 	 */
 	public function fire()
 	{
+		// setup
 		$this->setSettings();
-		$this->url = $this->getUrl();
-//		$this->resource = $this->getResourceName();
+		$this->resource = $this->getResourceName($this->getUrl());
 
+		// check the path where to create and save file
 		$path = $this->getPath('');
 		if ($this->files->exists($path) && $this->option('force') === false)
 		{
 			return $this->error($this->type . ' already exists!');
 		}
 
+		// make all the directories
 		$this->makeDirectory($path);
 
+		// build file and save it at location
 		$this->files->put($path, $this->buildClass($this->argumentName()));
 
+		// output to console
 		$this->info(ucfirst($this->option('type')) . ' created successfully.');
 		$this->info('- ' . $path);
 
+		// if we need to run "composer dump-autoload"
 		if ($this->settings['dump_autoload'] === true)
 		{
 			$this->composer->dumpAutoloads();
 		}
+	}
+
+	/**
+	 * Get the destination class path.
+	 *
+	 * @param  string $name
+	 * @return string
+	 */
+	protected function getPath($name)
+	{
+		$name = $this->getFileName();
+
+		$withName = boolval($this->option('view-name'));
+
+		$path = $this->settings['path'];
+		if($this->settingsDirectoryNamespace() === true)
+		{
+			$path .= $this->getArgumentPath($withName);
+		}
+
+		$path .= $name;
+
+		return $path;
 	}
 
 	/**
@@ -179,19 +139,19 @@ class FileCommand extends GeneratorCommand
 		$stub = str_replace('{{url}}', $this->getUrl(), $stub);
 
 		// posts
-		$stub = str_replace('{{collection}}', $this->getCollectionName($url), $stub);
+		$stub = str_replace('{{collection}}', $this->getCollectionName(), $stub);
 
 		// Post
-		$stub = str_replace('{{model}}', $this->getModelName($url), $stub);
+		$stub = str_replace('{{model}}', $this->getModelName(), $stub);
 
 		// post
-		$stub = str_replace('{{resource}}', $this->getResourceName($url), $stub);
+		$stub = str_replace('{{resource}}', $this->resource, $stub);
 
 		// Posts
-		$stub = str_replace('{{collectionUpper}}', ucwords($this->getCollectionName($url)), $stub);
+		$stub = str_replace('{{collectionUpper}}', ucwords($this->getCollectionName()), $stub);
 
 		// Posts
-		$stub = str_replace('{{path}}', ucwords($this->getPath($url)), $stub);
+		$stub = str_replace('{{path}}', ucwords($this->getPath('')), $stub);
 
 		// posts || posts.comments
 		$stub = str_replace('{{view}}', $this->getViewPath($url), $stub);
@@ -203,20 +163,42 @@ class FileCommand extends GeneratorCommand
 	}
 
 	/**
-	 * Get the destination class path.
+	 * Get the full namespace name for a given class.
 	 *
 	 * @param  string $name
+	 * @param bool    $withApp
 	 * @return string
 	 */
-	protected function getPath($name)
+	protected function getNamespace($name, $withApp = true)
 	{
-		$name = $this->getFileName();
+		$path = str_replace('/', '\\', $this->getArgumentPath()) . $this->settings['namespace'];
 
-		$withName = boolval($this->option('view-name'));
+		$pieces = array_map('ucfirst', explode('/', $path));
 
-		$path = $this->settings['path'] . $this->getArgumentPath($withName) . $name;
+		$namespace = ($withApp === true ? $this->getAppNamespace() : '') . implode('\\', $pieces);
 
-		return $path;
+		$namespace = rtrim(ltrim(str_replace('\\\\', '\\', $namespace), '\\'), '\\');
+
+		return $namespace;
+	}
+
+	/**
+	 * Get the url for the given name
+	 *
+	 * @return string
+	 */
+	protected function getUrl()
+	{
+		return '/' . rtrim(implode('/', array_map('strtolower', explode('/', $this->getArgumentPath(true)))), '/');
+	}
+
+	/**
+	 * Get the class name
+	 * @return mixed
+	 */
+	protected function getClassName()
+	{
+		return str_replace([$this->settings['file_type']], [''], $this->getFileName());
 	}
 
 	/**

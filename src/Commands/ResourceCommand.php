@@ -49,7 +49,7 @@ class ResourceCommand extends GeneratorCommand
 		$this->info('All Done!');
 		$this->info('Remember to add ' .
 			"`Route::resource('" . $this->getCollectionName() . "', '" .
-			$this->getControllerName() . "');`" .
+			$this->getResourceControllerName() . "');`" .
 			' in the `app\\Http\\routes.php`');
 	}
 
@@ -86,7 +86,7 @@ class ResourceCommand extends GeneratorCommand
 	 */
 	private function callController()
 	{
-		$name = $this->getControllerName(str_plural($this->resource), false) . config('generators.settings.controller.postfix');
+		$name = $this->getResourceControllerName();
 
 		if ($this->confirm("Create a controller ($name) for the $this->resource resource? [yes|no]"))
 		{
@@ -182,6 +182,11 @@ class ResourceCommand extends GeneratorCommand
 		}
 
 		return strtolower(str_singular(substr($name, strpos($name, '.') + 1)));
+	}
+
+	private function getResourceControllerName()
+	{
+		return $this->getControllerName(str_plural($this->resource), false) . config('generators.settings.controller.postfix');
 	}
 
 	/**

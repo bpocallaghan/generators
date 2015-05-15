@@ -3,6 +3,7 @@
 namespace Bpocallaghan\Generators\Commands;
 
 use Bpocallaghan\Generators\Traits\ArgumentsOptionsAccessors;
+use Bpocallaghan\Generators\Traits\SettingsAccessors;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Composer;
 use Symfony\Component\Console\Input\InputOption;
@@ -11,7 +12,7 @@ use Illuminate\Console\GeneratorCommand as LaravelGeneratorCommand;
 
 abstract class GeneratorCommand extends LaravelGeneratorCommand
 {
-	use ArgumentsOptionsAccessors;
+	use ArgumentsOptionsAccessors, SettingsAccessors;
 
 	/**
 	 * @var Composer
@@ -24,13 +25,6 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	 * @var string
 	 */
 	protected $resource = "";
-
-	/**
-	 * Settings of the file to be generated
-	 *
-	 * @var array
-	 */
-	protected $settings = [];
 
 	/**
 	 * The url for the new generated file
@@ -113,7 +107,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 		$name = implode('/', array_map('ucfirst', explode('/', $name)));
 
 		// if we need to keep lowercase
-		if ($this->settings['path_format'] === 'strtolower')
+		if ($this->settingsDirectoryFormat() === 'strtolower')
 		{
 			$name = implode('/', array_map('strtolower', explode('/', $name)));
 		}
