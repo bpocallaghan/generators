@@ -9,13 +9,14 @@ return [
     */
 
 	'defaults' => [
-		'namespace'     => '',
-		'path'          => '.app/',
-		'path_format'   => '',
-		'prefix'        => '',
-		'postfix'       => '',
-		'file_type'     => '.php',
-		'dump_autoload' => false,
+		'namespace'           => '',
+		'path'                => '.app/',
+		'prefix'              => '',
+		'postfix'             => '',
+		'file_type'           => '.php',
+		'dump_autoload'       => false,
+		'directory_format'    => '',
+		'directory_namespace' => false,
 	],
 
 	/*
@@ -25,9 +26,9 @@ return [
     */
 
 	'settings' => [
-		'view'       => ['path' => './resources/views/', 'path_format' => 'strtolower', 'file_type' => '.blade.php'],
+		'view'       => ['path' => './resources/views/', 'file_type' => '.blade.php', 'directory_format' => 'strtolower', 'directory_namespace' => true],
 		'model'      => ['namespace' => '\Models', 'path' => './app/Models/'],
-		'controller' => ['namespace' => '\Http\Controllers', 'path' => './app/Http/Controllers/', 'postfix' => 'Controller', 'dump_autoload' => true],
+		'controller' => ['namespace' => '\Http\Controllers', 'path' => './app/Http/Controllers/', 'postfix' => 'Controller', 'directory_namespace' => true, 'dump_autoload' => true],
 		'seed'       => ['path' => './database/seeds/', 'postfix' => 'TableSeeder'],
 		'migration'  => ['path' => './database/migrations/'],
 	],
