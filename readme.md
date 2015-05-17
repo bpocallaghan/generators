@@ -1,6 +1,7 @@
 # Laravel 5 File Generators
 
 Custom Laravel 5 File Generators with a config file and publishable stubs.
+You can add new stubs in the config.
 This package can be used by anyone, but keep in mind that it is optimized for my personal custom workflow.
 It may not suit your workflow, but please let me know about any issues or new features.
 
@@ -9,18 +10,45 @@ It may not suit your workflow, but please let me know about any issues or new fe
 php artisan generate:publish-stubs
 php artisan generate:model
 php artisan generate:view
-php artisan generate:view:index
-php artisan generate:view:add_edit
-php artisan generate:view:show
 php artisan generate:controller
 php artisan generate:migration
 php artisan generate:migration:pivot
 php artisan generate:seed
 php artisan generate:resource
+php artisan generate:file
 ```
 
 ### Option for all the commands
 `--force` This will overide the existing file, if it exist.
+
+### Option for all the commands, except `views` and `migration:pivot`
+`--plain` This will use the .plain stub of the command (generate an empty controller)
+
+### Customization
+This is for all except the `migration` and `migration:pivot` commands
+
+```
+php artisan generate:file foo.bar --type=controller
+php artisan generate:view foo.bar --stub=view_show --name=baz_show
+php artisan generate:file foo.bar --type=controller --stub=constroller_custom --name=BazzzController --plain --force
+```
+
+You can specify a custom name of the file to be generated.
+You can add the --plain or --force options.
+You can override the default stub to be used.
+You can create your own stubs with the available placeholders.
+You can create new settings' types, for example: 
+- 'exception' => ['namespace' => '\Exceptions', 'path' => './app/Exceptions/', 'postfix' => 'Exception'],
+
+[Available placeholders](https://github.com/bpocallaghan/generators/blob/master/resources/stubs/example.stub)
+
+## Views Custom Stubs
+
+```
+php artisan generate:view posts
+php artisan generate:view admin.posts --stub=custom
+php artisan generate:view admin.posts --stub=another_file
+```
 
 ## Installation
 
@@ -28,7 +56,7 @@ Update your project's `composer.json` file.
 
 ```js
 "require-dev": {
-	"bpocallaghan/generators": "1.0.*"
+	"bpocallaghan/generators": "2.0.*"
 }
 ```
 
@@ -61,66 +89,37 @@ php artisan
 - [Pivot Tables](#pivot-tables)
 - [Database Seeders](#database-seeders)
 - [Resource](#resource)
+- [File](#file)
 - [Configuration](#configuration)
 
 ### Models
 
 ```
-php artisan generate:model Country
-php artisan generate:model Country --plain
-php artisan generate:model Country --force
-php artisan generate:model Country --migration --schema="title:string, body:text"
+php artisan generate:model bar
+php artisan generate:model foo.bar --plain
+php artisan generate:model bar --force
+php artisan generate:model bar --migration --schema="title:string, body:text"
 ```
 
 ### Views
 
 ```
-php artisan generate:view posts
-php artisan generate:view posts.comments
-php artisan generate:view:index posts
-php artisan generate:view:add_edit posts
-php artisan generate:view:show posts
+php artisan generate:view foo
+php artisan generate:view foo.bar
+php artisan generate:view foo.bar --stub=view_show
+php artisan generate:view foo.bar --name=foo_bar
 ```
-
-The `.` will be used as a folder seperator, `posts.comments` will be `/resources/views/posts/comments/`
-
-`generate:views`
- - This will generate an empty view file.
-
-`generate:views:index`
- - This will generate an `index.blade.php` file with the index boilerplate code.
-
-`generate:views:add_edit`
- - This will generate an `add_edit.blade.php` file with the create and edit form boilerplate code.
-
-`generate:views:show`
-- This will generate a `show.blade.php` file with the show resource boilerplate code.
-
-## Views Custom Stubs
-
-```
-php artisan generate:view posts
-php artisan generate:view admin.posts --stub=custom
-php artisan generate:view admin.posts --stub=another_file
-```
-
-You can create your own custom `--stub` options.
-- Publish the config file.
-- Add your own view stub, eg. `'view_custom_stub' => [path_to_stubs] . 'view.custom.stub'
-- Then this will generate a view file from that stub.
-- For now, please refer to the [buildClass() in ViewCommand](https://github.com/bpocallaghan/generators/blob/master/src/Commands/ViewCommand.php) for the available placeholders.
 
 ### Controllers
 
 ```
 php artisan generate:controller foo
-php artisan generate:controller Foo
-php artisan generate:controller CommentsController --plain
-php artisan generate:controller Posts\CommentsController --plain --force
+php artisan generate:controller foo.bar
+php artisan generate:controller bar --plain
+php artisan generate:controller BarController --plain
 ```
 
-- The `\` will be used for the folder and namespace seperator
-- The `Controller` postfix will be added automatically.
+- The `Controller` postfix will be added if needed.
 
 
 ### Migrations
@@ -149,22 +148,22 @@ php artisan generate:migration:pivot tags posts
 ### Database Seeders
 
 ```
-php artisan generate:seed users
-php artisan generate:seed users --plain
-php artisan generate:seed users --force
+php artisan generate:seed bar
+php artisan generate:seed BarTableSeeder
 ```
 
-- The `TableSeeder` will be added automatically
+- The `TableSeeder` will be added if needed.
 
 ### Resource
 
 ```
-php artisan generate:resource post
-php artisan generate:resource posts.comment
+php artisan generate:resource bar
+php artisan generate:resource foo.bar
+php artisan generate:resource bar --schema="title:string, body:text, slug:string:unique, published_at:date"
 ```
 
-- This will generate a Post model, PostsController, index / add_edit / show views, create_posts_table migration, PostTableSeeder
-- This will generate a Comment model, Posts\Controller, index / add_edit / show views, create_comments_table migration, CommentTableSeeder
+- This will generate a Bar model, BarsController, resources views (in config), create_bars_table migration, BarTableSeeder
+- In the config there is a `resource_views` array, you can specify the views that you want to generate there, just make sure the stub exist.
 
 ### Configuration
 
@@ -173,10 +172,27 @@ php artisan generate:publish-stubs
 ```
 
 This will copy the config file to `/config/generators.php`.
-Here you can change the model and controller namespace as well as the location for the stubs.
+Here you can change the defaults for the settings of each `type`, like model, view, controller, seed.
+You can also change the namespace, path where to create the file, the pre/post fix, and more.
+You can also add new stubs.
 
 This will also copy all the stubs to `/resources/stubs/`.
 Here you can make changes to the current stubs, add your own boilerplate / comments to the files.
+You can also add your own stubs here.
+
+
+### File
+
+This is the base command for the view, model, controller, seed commands. 
+The migration and migration:pivot uses Jeffrey's classes.
+In the config there is a `settings` array, this is the 'types' and their settings. You can add more, for example, if you use repositories, you can add it here.
+
+```
+php artisan generate:file foo.bar --type=view
+php artisan generate:file foo.bar --type=controller
+php artisan generate:file foo.bar --type=model
+php artisan generate:file foo.bar --type=model --stub=model_custom
+```
 
 ## Shortcuts
 
@@ -196,9 +212,5 @@ resource=php artisan generate:resource
 
 ## Tank you
 
-- Thank you [Jeffrey Way](https://github.com/JeffreyWay) for the awesome resources at [Laracasts](https://laracasts.com/).
 - Thank you [Taylor Ottwell](https://github.com/taylorotwell) for [Laravel](http://laravel.com/).
-
-
-### License
-- MIT © 2015
+- Thank you [Jeffrey Way](https://github.com/JeffreyWay) for the awesome resources at [Laracasts](https://laracasts.com/).
