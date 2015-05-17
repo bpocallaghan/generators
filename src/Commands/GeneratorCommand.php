@@ -12,6 +12,7 @@ use Illuminate\Console\GeneratorCommand as LaravelGeneratorCommand;
 
 abstract class GeneratorCommand extends LaravelGeneratorCommand
 {
+
 	use ArgumentsOptionsAccessors, SettingsAccessors;
 
 	/**
@@ -25,13 +26,6 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	 * @var string
 	 */
 	protected $resource = "";
-
-	/**
-	 * The url for the new generated file
-	 *
-	 * @var string
-	 */
-	protected $url = "";
 
 	function __construct(Filesystem $files, Composer $composer)
 	{
@@ -51,7 +45,8 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 			'name'    => $this->argumentName(),
 			'--type'  => strtolower($this->type),
 			'--stub'  => $this->optionStub(),
-			'--plain' => $this->optionPlain()
+			'--plain' => $this->optionPlain(),
+			'--name'  => $this->optionName(),
 		]);
 	}
 
@@ -137,7 +132,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	protected function getResourceName($name, $format = true)
 	{
 		// we assume its already formatted to resource name
-		if($name && $format === false)
+		if ($name && $format === false)
 		{
 			return $name;
 		}
@@ -301,6 +296,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 			['plain', null, InputOption::VALUE_NONE, 'Generate an empty class.'],
 			['force', null, InputOption::VALUE_NONE, 'Warning: Overide file if it already exist'],
 			['stub', null, InputOption::VALUE_OPTIONAL, 'The name of the view stub you would like to generate.'],
+			['name', null, InputOption::VALUE_OPTIONAL, 'If you want to overide the name of the file that will be generated'],
 		];
 	}
 }

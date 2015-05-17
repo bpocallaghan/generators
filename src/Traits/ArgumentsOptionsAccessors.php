@@ -58,4 +58,12 @@ trait ArgumentsOptionsAccessors
 	{
 		return $this->option('schema');
 	}
+
+	/**
+	 * Get the value for the name option
+	 */
+	protected function optionName()
+	{
+		return $this->option('name');
+	}
 }

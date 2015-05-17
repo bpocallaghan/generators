@@ -40,7 +40,7 @@ class FileCommand extends GeneratorCommand
 		switch ($this->option('type'))
 		{
 			case 'view':
-				$name = ($this->option('view-name') ? $this->option('view-name') : $name);
+
 				break;
 			case 'model':
 				$name = $this->getModelName();
@@ -51,6 +51,12 @@ class FileCommand extends GeneratorCommand
 			case 'seed':
 				$name = $this->getSeedName($name);
 				break;
+		}
+
+		// overide the name
+		if($this->option('name'))
+		{
+			return $this->option('name') . $this->settings['file_type'];
 		}
 
 		return $this->settings['prefix'] . $name . $this->settings['postfix'] . $this->settings['file_type'];
@@ -101,7 +107,7 @@ class FileCommand extends GeneratorCommand
 	{
 		$name = $this->getFileName();
 
-		$withName = boolval($this->option('view-name'));
+		$withName = boolval($this->option('name'));
 
 		$path = $this->settings['path'];
 		if($this->settingsDirectoryNamespace() === true)
@@ -210,7 +216,6 @@ class FileCommand extends GeneratorCommand
 	{
 		return array_merge([
 			['type', null, InputOption::VALUE_OPTIONAL, 'The type of file: model, view, controller, migration, seed', 'view'],
-			['view-name', null, InputOption::VALUE_NONE, 'If you want a custom name for the view files'],
 		], parent::getOptions());
 	}
 }
