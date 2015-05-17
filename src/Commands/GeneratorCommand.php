@@ -43,10 +43,11 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	{
 		$this->call('generate:file', [
 			'name'    => $this->argumentName(),
-			'--type'  => strtolower($this->type),
-			'--stub'  => $this->optionStub(),
-			'--plain' => $this->optionPlain(),
-			'--name'  => $this->optionName(),
+			'--type'  => strtolower($this->type), // settings type
+			'--plain' => $this->optionPlain(), // if plain stub
+			'--force' => $this->optionForce(), // force override
+			'--stub'  => $this->optionStub(), // custom stub name
+			'--name'  => $this->optionName(), // custom name for file
 		]);
 	}
 
@@ -294,9 +295,9 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	{
 		return [
 			['plain', null, InputOption::VALUE_NONE, 'Generate an empty class.'],
-			['force', null, InputOption::VALUE_NONE, 'Warning: Overide file if it already exist'],
+			['force', null, InputOption::VALUE_NONE, 'Warning: Override file if it already exist'],
 			['stub', null, InputOption::VALUE_OPTIONAL, 'The name of the view stub you would like to generate.'],
-			['name', null, InputOption::VALUE_OPTIONAL, 'If you want to overide the name of the file that will be generated'],
+			['name', null, InputOption::VALUE_OPTIONAL, 'If you want to override the name of the file that will be generated'],
 		];
 	}
 }
