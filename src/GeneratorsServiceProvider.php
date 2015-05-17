@@ -33,12 +33,15 @@ class GeneratorsServiceProvider extends ServiceProvider
 
 		// register all the artisan commands
 		$this->registerCommand('PublishCommand', 'publish');
-		$this->registerCommand('ControllerCommand', 'controller');
+
 		$this->registerCommand('ModelCommand', 'model');
+		$this->registerCommand('ViewCommand', 'view');
+		$this->registerCommand('ControllerCommand', 'controller');
+
 		$this->registerCommand('MigrationCommand', 'migration');
 		$this->registerCommand('MigrationPivotCommand', 'migrate.pivot');
 		$this->registerCommand('SeedCommand', 'seed');
-		$this->registerCommand('ViewCommand', 'view');
+
 		$this->registerCommand('ResourceCommand', 'resource');
 		$this->registerCommand('FileCommand', 'file');
 	}

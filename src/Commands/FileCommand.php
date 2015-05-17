@@ -75,7 +75,7 @@ class FileCommand extends GeneratorCommand
 
 		// check the path where to create and save file
 		$path = $this->getPath('');
-		if ($this->files->exists($path) && $this->option('force') === false)
+		if ($this->files->exists($path) && $this->optionForce() === false)
 		{
 			return $this->error($this->type . ' already exists!');
 		}

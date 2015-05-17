@@ -1,24 +1,35 @@
 <?php
 
+// App\Foo
 namespace {{namespace}};
 
+// App\
 use {{rootNamespace}};
 
+// Bar
 class {{class}}
 {
-	$protected $url = {{url}};
+	// /foo/bar
+	protected $url = '{{url}}';
 
-	$protected $collection = {{collection}};
+	// bars
+	protected $collection = '{{collection}}';
 
-	$protected $collectionUpper = {{collectionUpper}};
+	// Bars
+	protected $collectionUpper = '{{collectionUpper}}';
 
-	$protected $model = {{model}};
+	// Bar
+	protected $model = '{{model}}';
 
-	$protected $resource = {{resource}};
+	// bar
+	protected $resource = '{{resource}}';
 
-	$protected $path = {{path}};
+	// ./resources/views/foo/bar.blade.php
+	protected $path = '{{path}}';
 
-	$protected $view = {{view}};
+	// foos.bars
+	protected $view = '{{view}}';
 
-	$protected $table = {{table}};
+	// bars
+	protected $table = '{{table}}';
 }

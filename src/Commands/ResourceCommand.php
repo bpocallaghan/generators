@@ -76,7 +76,7 @@ class ResourceCommand extends GeneratorCommand
 			$views = config('generators.resource_views');
 			foreach ($views as $key => $name)
 			{
-				$this->callCommandFile('view', $key, ['--view-name' => $name]);
+				$this->callCommandFile('view', $key, ['--name' => $name]);
 			}
 		}
 	}
