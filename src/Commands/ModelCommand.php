@@ -39,7 +39,7 @@ class ModelCommand extends GeneratorCommand
 
 		if($this->option('migration'))
 		{
-			$name = $this->getMigrationName($this->getTableName($this->getNameInput()));
+			$name = $this->getMigrationName();
 
 			$this->call('generate:migration', [
 				'name' => $name,
@@ -47,6 +47,16 @@ class ModelCommand extends GeneratorCommand
 				'--schema' => $this->option('schema')
 			]);
 		}
+	}
+
+	/**
+	 * Get the name for the migration
+	 *
+	 * @return string
+	 */
+	private function getMigrationName()
+	{
+		return 'create_' . str_plural(strtolower($this->getArgumentNameOnly())) . '_table';
 	}
 
 	/**

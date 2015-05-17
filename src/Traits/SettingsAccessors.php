@@ -57,7 +57,7 @@ trait SettingsAccessors
 	 */
 	public function settingsKey($key)
 	{
-		if (is_array($this->settings) == false && isset($this->settings[$key]) == false)
+		if (is_array($this->settings) == false || isset($this->settings[$key]) == false)
 		{
 			return false;
 		}
@@ -70,7 +70,7 @@ trait SettingsAccessors
 	 */
 	protected function settingsDirectoryFormat()
 	{
-		return $this->settings['directory_format'];
+		return $this->settingsKey('directory_format') ? $this->settings['directory_format'] : false;
 	}
 
 	/**
