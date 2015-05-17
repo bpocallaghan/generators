@@ -30,7 +30,7 @@ This is for all except the `migration` and `migration:pivot` commands
 ```
 php artisan generate:file foo.bar --type=controller
 php artisan generate:view foo.bar --stub=view_show --name=baz_show
-php artisan generate:file foo.bar --type=controller --stub=constroller_custom --name=BazzzController --plain --force
+php artisan generate:file foo.bar --type=controller --stub=controller_custom --name=BazzzController --plain --force
 ```
 
 You can specify a custom name of the file to be generated.
