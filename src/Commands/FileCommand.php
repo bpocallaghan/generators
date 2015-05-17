@@ -179,7 +179,13 @@ class FileCommand extends GeneratorCommand
 	 */
 	protected function getNamespace($name, $withApp = true)
 	{
-		$path = str_replace('/', '\\', $this->getArgumentPath()) . $this->settings['namespace'];
+		$path = (strlen($this->settings['namespace']) >= 2? $this->settings['namespace'] . '\\' : '');
+
+		// dont add the default namespace if specified not to in config
+		if($this->settingsDirectoryNamespace() === true)
+		{
+			$path .= str_replace('/', '\\', $this->getArgumentPath());
+		}
 
 		$pieces = array_map('ucfirst', explode('/', $path));
 

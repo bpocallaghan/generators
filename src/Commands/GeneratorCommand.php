@@ -116,7 +116,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 
 		if (str_contains($name, '/'))
 		{
-			return substr($name, 0, strrpos($name, '/') + 1);
+			return substr($name, 0, strripos($name, '/') + 1);
 		}
 
 		return '';
@@ -158,12 +158,11 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 	 * Get the name for the controller
 	 *
 	 * @param null $name
-	 * @param bool $format
 	 * @return string
 	 */
-	protected function getControllerName($name = null, $format = true)
+	protected function getControllerName($name = null)
 	{
-		return ucwords(camel_case(str_replace($this->settings['postfix'], '', $this->getResourceName($name, $format))));
+		return ucwords(camel_case(str_replace($this->settings['postfix'], '', strtolower($name))));
 	}
 
 	/**
