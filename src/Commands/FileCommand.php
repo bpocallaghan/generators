@@ -130,39 +130,41 @@ class FileCommand extends GeneratorCommand
 	{
 		$stub = $this->files->get($this->getStub());
 
-		// foo.bar = App\Foo
+		// examples used for the placeholders is for 'foo.bar'
+
+		// App\Foo
 		$stub = str_replace('{{namespace}}', $this->getNamespace($name), $stub);
 
 		// App\
 		$stub = str_replace('{{rootNamespace}}', $this->getAppNamespace(), $stub);
 
-		// foo.bar = bar
+		// Bar
 		$stub = str_replace('{{class}}', $this->getClassName(), $stub);
 
-		$url = $this->getUrl();
+		$url = $this->getUrl(); // /foo/bar
 
 		// /foo/bar
 		$stub = str_replace('{{url}}', $this->getUrl(), $stub);
 
-		// posts
+		// bars
 		$stub = str_replace('{{collection}}', $this->getCollectionName(), $stub);
 
-		// Post
-		$stub = str_replace('{{model}}', $this->getModelName(), $stub);
-
-		// post
-		$stub = str_replace('{{resource}}', $this->resource, $stub);
-
-		// Posts
+		// Bars
 		$stub = str_replace('{{collectionUpper}}', ucwords($this->getCollectionName()), $stub);
 
-		// Posts
-		$stub = str_replace('{{path}}', ucwords($this->getPath('')), $stub);
+		// Bar
+		$stub = str_replace('{{model}}', $this->getModelName(), $stub);
 
-		// posts || posts.comments
+		// bar
+		$stub = str_replace('{{resource}}', $this->resource, $stub);
+
+		// ./resources/views/foo/bar.blade.php
+		$stub = str_replace('{{path}}', $this->getPath(''), $stub);
+
+		// foos.bars
 		$stub = str_replace('{{view}}', $this->getViewPath($url), $stub);
 
-		// posts
+		// bars
 		$stub = str_replace('{{table}}', $this->getTableName($url), $stub);
 
 		return $stub;
@@ -204,7 +206,7 @@ class FileCommand extends GeneratorCommand
 	 */
 	protected function getClassName()
 	{
-		return str_replace([$this->settings['file_type']], [''], $this->getFileName());
+		return ucwords(camel_case(str_replace([$this->settings['file_type']], [''], $this->getFileName())));
 	}
 
 	/**

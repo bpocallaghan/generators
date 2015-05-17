@@ -10,13 +10,15 @@ class {{class}}
 
 	$protected $collection = {{collection}};
 
+	$protected $collectionUpper = {{collectionUpper}};
+
 	$protected $model = {{model}};
 
 	$protected $resource = {{resource}};
 
-	$protected $collectionUpper = {{collectionUpper}};
-
 	$protected $path = {{path}};
 
 	$protected $view = {{view}};
+
+	$protected $table = {{table}};
 }
