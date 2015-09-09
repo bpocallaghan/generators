@@ -7,6 +7,8 @@ use Symfony\Component\Console\Input\InputOption;
 class FileCommand extends GeneratorCommand
 {
 
+  use \Illuminate\Console\AppNamespaceDetectorTrait;
+
 	/**
 	 * The console command name.
 	 *
