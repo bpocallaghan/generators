@@ -78,4 +78,8 @@ return [
 	'view_add_edit_stub'    => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/view.add_edit.stub',
 
 	'view_show_stub'        => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/view.show.stub',
+
+	'schema_create_stub'    => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/schema-create.stub',
+
+	'schema_change_stub'    => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/schema-change.stub',
 ];
