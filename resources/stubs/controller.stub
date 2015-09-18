@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 
 class {{class}} extends TitanAdminController
 {
-
 	/**
 	 * Display a listing of {{collection}}.
 	 *
@@ -99,5 +98,4 @@ class {{class}} extends TitanAdminController
 
         return Redirect::route('{{view}}.index');
 	}
-
 }

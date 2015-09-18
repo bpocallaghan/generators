@@ -6,10 +6,8 @@ use {{rootNamespace}}Http\Requests;
 
 class {{class}} extends Controller
 {
-
 	public function index()
 	{
 
 	}
-
 }

@@ -1,12 +1,12 @@
 <?php
 
 namespace {{namespace}};
+
 use {{rootNamespace}}Models\{{model}};
 use Redirect;
 
 class {{class}} extends TitanAdminController
 {
-
 	/**
 	 * Display a listing of {{collection}}.
 	 *
@@ -46,5 +46,4 @@ class {{class}} extends TitanAdminController
 	{
 		return $this->view('{{view}}.show')->with('item', ${{resource}});
 	}
-
 }
