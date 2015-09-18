@@ -1,9 +1,9 @@
-# Laravel 5 File Generators
+# Laravel 5.1 File Generators
 
 Custom Laravel 5 File Generators with a config file and publishable stubs.
 You can add new stubs in the config.
-This package can be used by anyone, but keep in mind that it is optimized for my personal custom workflow.
-It may not suit your workflow, but please let me know about any issues or new features.
+This package can be used by anyone, but keep in mind that it is optimized for my personal workflow.
+Please let me know about any issues or new features you would like to have.
 
 ## Commands
 ```bash
@@ -54,31 +54,23 @@ php artisan generate:view admin.posts --stub=another_file
 
 Update your project's `composer.json` file.
 
-```js
-"require-dev": {
-	"bpocallaghan/generators": "2.0.*"
+```
+composer require bpocallaghan/generators --dev
+```
+
+App the Service Provider
+You'll only want to use these generators for local development, add the provider in `app/Providers/AppServiceProvider.php`:
+
+```php
+public function register()
+{
+	if ($this->app->environment() == 'local') {
+		$this->app->register('Bpocallaghan\Generators\GeneratorsServiceProvider');
+	}
 }
 ```
 
-Download latest code from github via `composer update`
-
-```batch
-composer update --dev
-```
-
-Include the service provider within `app/config/app.php`.
-
-```php
-'providers' => [
-    'Bpocallaghan\Generators\GeneratorsServiceProvider',
-];
-```
-
-Run `artisan` command to see the new commands.
-
-```bash
-php artisan
-```
+Run `php artisan` command to see the new commands in the `generate:*` section
 
 ## Usage
 
