@@ -210,7 +210,7 @@ seed=php artisan generate:seed
 resource=php artisan generate:resource
 ```
 
-## Tank you
+## Thank you
 
 - Thank you [Taylor Ottwell](https://github.com/taylorotwell) for [Laravel](http://laravel.com/).
 - Thank you [Jeffrey Way](https://github.com/JeffreyWay) for the awesome resources at [Laracasts](https://laracasts.com/).
