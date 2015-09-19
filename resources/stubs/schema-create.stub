@@ -1,10 +1,9 @@
-Schema::create('{{table}}', function(Blueprint $table)
-		{
-			$table->increments('id')->index();
-			{{schema_up}}
-			$table->timestamps();
-			$table->softDeletes();
-			$table->integer('created_by')->unsigned();
-			$table->integer('updated_by')->unsigned()->nullable();
-			$table->integer('deleted_by')->unsigned()->nullable();
-		});
+Schema::create('{{table}}', function (Blueprint $table) {
+            $table->increments('id')->unique()->index();
+            {{schema_up}}
+            $table->timestamps();
+            $table->softDeletes();
+            $table->integer('created_by')->unsigned();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->integer('deleted_by')->unsigned()->nullable();
+        });

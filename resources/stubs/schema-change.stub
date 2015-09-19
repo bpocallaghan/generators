@@ -1,4 +1,3 @@
-Schema::table('{{table}}', function(Blueprint $table)
-		{
-			{{schema_up}}
-		});
+Schema::table('{{table}}', function(Blueprint $table) {
+            {{schema_up}}
+        });

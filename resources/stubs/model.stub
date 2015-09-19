@@ -5,26 +5,11 @@ namespace {{namespace}};
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use Titan\Models\Traits\ModifyBy;
-use Titan\Models\Traits\LogsActivity;
-
 class {{class}} extends Model
 {
-	use LogsActivity, ModifyBy, SoftDeletes;
+    use SoftDeletes;
 
-	protected $table = '{{table}}';
+    protected $table = '{{table}}';
 
-	protected $guarded = ['id'];
-
-	/**
-     * Validation rules for this model
-     */
-    static public $rules = [
-        'title' => 'required|min:3:max:255',
-    ];
-
-	/**
-	 * Validation custom messages for this model
-	 */
-	static public $messages = [];
+    protected $guarded = ['id'];
 }
