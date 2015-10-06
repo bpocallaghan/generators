@@ -42,7 +42,7 @@ class {{class}} extends TitanAdminController
 	{
 		$this->validate($request, {{model}}::$rules, {{model}}::$messages);
 
-        ${{resource}} = $this->createEntry('App\Models\{{model}}', $request->all());
+        ${{resource}} = $this->createEntry({{model}}::class, $request->all());
 
         return Redirect::route('{{view}}.index');
 	}
