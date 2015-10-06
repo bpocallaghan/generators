@@ -140,7 +140,9 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected function getModelName($name = null)
     {
-        return ucwords(camel_case($this->getResourceName($name)));
+        //return ucwords(camel_case($this->getResourceName($name)));
+
+        return str_singular(ucwords(camel_case($this->argumentName())));
     }
 
     /**

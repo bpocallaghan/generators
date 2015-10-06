@@ -148,7 +148,15 @@ class MigrationCommand extends GeneratorCommand
      */
     protected function getModelName($name = null)
     {
-        return ucwords(str_singular(camel_case($this->meta['table'])));
+        $name = str_singular($this->meta['table']);
+
+        $model = '';
+        $pieces = explode('_', $name);
+        foreach ($pieces as $k => $str) {
+            $model = $model . ucwords($str);
+        }
+
+        return $model;
     }
 
     /**
