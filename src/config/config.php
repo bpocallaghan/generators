@@ -4,11 +4,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | The singular resource words that will not be pluralized
+    | For Example: $ php artisan generate:resource admin.bar
+    | The url will be /admin/bars and not /admins/bars
+    |--------------------------------------------------------------------------
+    */
+
+    'reserve_words' => ['app', 'website', 'admin'],
+
+    /*
+    |--------------------------------------------------------------------------
     | The default keys and values for the settings of each type to be generated
     |--------------------------------------------------------------------------
     */
 
-    'defaults'              => [
+    'defaults' => [
         'namespace'           => '',
         'path'                => '.app/',
         'prefix'              => '',
@@ -25,7 +35,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'settings'              => [
+    'settings' => [
         'view'       => ['path' => './resources/views/', 'file_type' => '.blade.php', 'directory_format' => 'strtolower', 'directory_namespace' => true],
         'model'      => ['namespace' => '\Models', 'path' => './app/Models/'],
         'controller' => [
@@ -45,7 +55,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'resource_views'        => [
+    'resource_views' => [
         'view_index'    => 'index',
         'view_add_edit' => 'add_edit',
         'view_show'     => 'show',

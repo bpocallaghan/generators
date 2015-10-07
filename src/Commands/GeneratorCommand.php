@@ -188,7 +188,17 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected function getViewPath($name)
     {
-        $name = implode('.', array_map('str_plural', explode('/', $name)));
+        $pieces = explode('/', $name);
+
+        // dont plural if reserve word
+        foreach ($pieces as $k => $value) {
+            if (!in_array($value, config('generators.reserve_words'))) {
+                $pieces[$k] = str_plural($pieces[$k]);
+            }
+        }
+
+        $name = implode('.', $pieces);
+        //$name = implode('.', array_map('str_plural', explode('/', $name)));
 
         return strtolower(rtrim(ltrim($name, '.'), '.'));
     }
