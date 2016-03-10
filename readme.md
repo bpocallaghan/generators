@@ -1,4 +1,4 @@
-# Laravel 5.1 File Generators
+# Laravel 5.2 File Generators
 
 Custom Laravel 5 File Generators with a config file and publishable stubs.
 You can add new stubs in the config.
@@ -65,7 +65,7 @@ You'll only want to use these generators for local development, add the provider
 public function register()
 {
 	if ($this->app->environment() == 'local') {
-		$this->app->register('Bpocallaghan\Generators\GeneratorsServiceProvider');
+		$this->app->register(\Bpocallaghan\Generators\GeneratorsServiceProvider::class);
 	}
 }
 ```
