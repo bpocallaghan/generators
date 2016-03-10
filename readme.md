@@ -1,4 +1,7 @@
-# Laravel 5.2 File Generators
+# Laravel 5 File Generators
+
+Laravel 5.1, use tag 2.1.3
+Laravel 5.2, use tag 2.1.4+
 
 Custom Laravel 5 File Generators with a config file and publishable stubs.
 You can add new stubs in the config.
