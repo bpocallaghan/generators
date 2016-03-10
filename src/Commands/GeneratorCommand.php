@@ -5,7 +5,7 @@ namespace Bpocallaghan\Generators\Commands;
 use Bpocallaghan\Generators\Traits\ArgumentsOptionsAccessors;
 use Bpocallaghan\Generators\Traits\SettingsAccessors;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Foundation\Composer;
+use Illuminate\Support\Composer;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Console\GeneratorCommand as LaravelGeneratorCommand;
