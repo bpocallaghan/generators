@@ -1,42 +1,51 @@
-@extends('admin.master')
+@extends('layouts.admin')
 
 @section('content')
-	<section id="widget-grid">
-		<div class="row">
-			<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			    <div class="jarviswidget jarviswidget-color-darken" id="wid-{{resource}}-show" data-widget-editbutton="false" data-widget-deletebutton="false">
-					<header>
-						<span class="widget-icon"><i class="fa fa-eye"></i></span>
-						<h2>View {{ $item->title }}</h2>
-					</header>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <span><i class="fa fa-eye"></i></span>
+                        <span>{{collectionUpper}} - {{ $item->title }}</span>
+                    </h3>
+                </div>
 
-					<div>
-						<div class="widget-body no-padding">
-                            <form class="smart-form">
-                                <fieldset>
-                                    <section>
-                                        <label class="label">Title</label>
-                                        <label class="input"><input readonly type="text" value="{{ $item->title }}"></label>
-                                    </section>
+                <div class="box-body no-padding">
 
-                                    <section>
-                                        <label class="label">Description</label>
-                                        <label class="input">
-                                            <div class="well well-light well-form-description">
-                                                {!! $item->description !!}
-                                            </div>
-                                        </label>
-                                    </section>
-                                </fieldset>
-                            </form>
-						</div>
-					</div>
-				</div>
-			</article>
-		</div>
-	</section>
+                    @include('admin.partials.info')
 
-	<div class="well well-sm">
-		<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
+                    <form>
+						<fieldset>
+							<div class="row">
+								<section class="col col-6">
+									<section class="form-group">
+										<label>Title</label>
+										<input type="text" class="form-control" value="{{ $item->title }}" readonly>
+									</section>
+								</section>
+
+								<section class="col col-6">
+									<section class="form-group">
+										<label>Slug</label>
+										<input type="text" class="form-control" value="{{ $item->slug }}" readonly>
+									</section>
+								</section>
+							</div>
+
+							<section class="form-group">
+								<label>Description</label>
+								<div class="well well-light well-form-description">
+									{!! $item->description !!}
+								</div>
+							</section>
+						</fieldset>
+
+                    	@include('admin.partials.form_footer', ['submit' => false])
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

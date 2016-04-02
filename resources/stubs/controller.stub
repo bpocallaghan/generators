@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class {{class}} extends TitanAdminController
 {
 	/**
-	 * Display a listing of {{collection}}.
+	 * Display a listing of {{resource}}.
 	 *
 	 * @return Response
 	 */
@@ -42,7 +42,7 @@ class {{class}} extends TitanAdminController
 	{
 		$this->validate($request, {{model}}::$rules, {{model}}::$messages);
 
-        ${{resource}} = $this->createEntry({{model}}::class, $request->all());
+        $this->createEntry({{model}}::class, $request->all());
 
         return Redirect::route('{{view}}.index');
 	}
@@ -50,37 +50,37 @@ class {{class}} extends TitanAdminController
 	/**
 	 * Display the specified {{resource}}.
 	 *
-	 * @param {{model}} ${{resource}}
+	 * @param {{model}} ${{collection}}
 	 * @return Response
 	 */
-	public function show({{model}} ${{resource}})
+	public function show({{model}} ${{collection}})
 	{
-		return $this->view('{{view}}.show')->with('item', ${{resource}});
+		return $this->view('{{view}}.show')->with('item', ${{collection}});
 	}
 
 	/**
 	 * Show the form for editing the specified {{resource}}.
 	 *
-	 * @param {{model}} ${{resource}}
+	 * @param {{model}} ${{collection}}
      * @return Response
      */
-    public function edit({{model}} ${{resource}})
+    public function edit({{model}} ${{collection}})
 	{
-		return $this->view('{{view}}.add_edit')->with('item', ${{resource}});
+		return $this->view('{{view}}.add_edit')->with('item', ${{collection}});
 	}
 
 	/**
 	 * Update the specified {{resource}} in storage.
 	 *
-	 * @param {{model}}  ${{resource}}
+	 * @param {{model}}  ${{collection}}
      * @param Request    $request
      * @return Response
      */
-    public function update({{model}} ${{resource}}, Request $request)
+    public function update({{model}} ${{collection}}, Request $request)
 	{
 		$this->validate($request, {{model}}::$rules, {{model}}::$messages);
 
-        ${{resource}} = $this->updateEntry(${{resource}}, $request->all());
+        $this->updateEntry(${{collection}}, $request->all());
 
         return Redirect::route('{{view}}.index');
 	}
@@ -88,13 +88,13 @@ class {{class}} extends TitanAdminController
 	/**
 	 * Remove the specified {{resource}} from storage.
 	 *
-	 * @param {{model}}  ${{resource}}
+	 * @param {{model}}  ${{collection}}
      * @param Request    $request
 	 * @return Response
 	 */
-	public function destroy({{model}} ${{resource}}, Request $request)
+	public function destroy({{model}} ${{collection}}, Request $request)
 	{
-		$this->deleteEntry(${{resource}}, $request);
+		$this->deleteEntry(${{collection}}, $request);
 
         return Redirect::route('{{view}}.index');
 	}

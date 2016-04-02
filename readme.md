@@ -1,12 +1,13 @@
 # Laravel 5 File Generators
 
 Laravel 5.1, use tag 2.1.3
-Laravel 5.2, use tag 2.1.4+
+Laravel 5.2, use tag 3+
 
 Custom Laravel 5 File Generators with a config file and publishable stubs.
 You can add new stubs in the config.
 This package can be used by anyone, but keep in mind that it is optimized for my personal workflow.
 Please let me know about any issues or new features you would like to have.
+Tag 3+ uses Admin LTE stubs (starter project with the traits / partials is coming soon).
 
 ## Commands
 ```bash
@@ -209,3 +210,12 @@ resource=php artisan generate:resource
 
 - Thank you [Taylor Ottwell](https://github.com/taylorotwell) for [Laravel](http://laravel.com/).
 - Thank you [Jeffrey Way](https://github.com/JeffreyWay) for the awesome resources at [Laracasts](https://laracasts.com/).
+
+## TODO
+
+- Provide an example
+
+## My other Packages
+
+- [Laravel 5 Flash a bootstrap alert](https://github.com/bpocallaghan/alert)
+- [Laravel 5 Flash Notifications with icons and animations and with a timeout](https://github.com/bpocallaghan/notify)

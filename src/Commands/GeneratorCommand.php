@@ -155,7 +155,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected function getControllerName($name = null)
     {
-        return ucwords(camel_case(str_replace($this->settings['postfix'], '', strtolower($name))));
+        return ucwords(camel_case(str_replace($this->settings['postfix'], '', ($name))));
     }
 
     /**

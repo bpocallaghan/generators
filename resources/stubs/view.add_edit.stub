@@ -1,67 +1,56 @@
-@extends('admin.master')
+@extends('layouts.admin')
 
 @section('content')
-	<section id="widget-grid">
-		<div class="row">
-			<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="jarviswidget jarviswidget-color-darken" id="wid-id-add-edit-form" data-widget-editbutton="true" data-widget-deletebutton="false">
-					<header>
-						<span class="widget-icon"><i class="fa fa-edit"></i></span>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <span><i class="fa fa-edit"></i></span>
+                        <span>{{ isset($item)? 'Edit the ' . $item->title . ' entry': 'Create a new {{model}}' }}</span>
+                    </h3>
+                </div>
 
-						<h2>{{ isset($item)? 'Edit ' . $item->title : 'Add new {{model}}' }}</h2>
-					</header>
+                <div class="box-body no-padding">
 
-					<div>
-						<div class="widget-body no-padding">
-							{!! Form::open(['method' => isset($item)? 'put':'post', 'class' => 'smart-form', 'id' => 'form-edit-{{resource}}',
-									'url' => url('{{url}}' . (isset($item)? '/' . $item->id : ''))])
-							!!}
+                    @include('admin.partials.info')
 
-							<header>
-								{{ isset($item)? 'Edit ' . $item->title : 'Add new {{model}}' }}
-							</header>
+                    {!! Form::open(['method' => isset($item)? 'put':'post', 'url' => $selectedNavigation->url . (isset($item)? $item->id : '')]) !!}
 
-							<fieldset>
-								<section>
-									<label class="label">Icon</label>
-									<label class="input {{ form_error_class('icon', $errors) }}">
-										<i class="icon-append fa fa-desktop"></i>
-										<input type="text" name="icon" placeholder="Icon" value="{{ isset($item)? ($errors && $errors->any()? old('icon'):$item->icon) : old('icon') }}">
-										<b class="tooltip tooltip-top-right">Icon of {{model}}</b>
-									</label>
-									{!! form_error_message('icon', $errors) !!}
-								</section>
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-6">
+                                <section class="form-group {{ form_error_class('title', $errors) }}">
+                                    <label for="id-title">Title</label>
+                                    <input type="text" class="form-control input-generate-slug" id="id-title" name="title" placeholder="Please insert the Title" value="{{ ($errors && $errors->any()? old('title') : (isset($item)? $item->title : '')) }}">
+                                    {!! form_error_message('title', $errors) !!}
+                                </section>
+                            </section>
 
-								<section>
-									<label class="label">Title</label>
-									<label class="input {{ form_error_class('title', $errors) }}">
-										<input type="text" name="title" placeholder="Title" value="{{ isset($item)? ($errors && $errors->any()? old('title'):$item->title) : old('title') }}">
-										<b class="tooltip tooltip-top-right">Title of {{model}}</b>
-									</label>
-									{!! form_error_message('title', $errors) !!}
-								</section>
-							</fieldset>
+                            <section class="col col-6">
+                                <section class="form-group {{ form_error_class('slug', $errors) }}">
+                                    <label for="id-slug">Slug</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="id-slug" name="slug" placeholder="Please insert the Slug" value="{{ ($errors && $errors->any()? old('slug') : (isset($item)? $item->slug : '')) }}">
+                                        <span class="input-group-addon"><i class="fa fa-link"></i></span>
+                                    </div>
+                                    {!! form_error_message('slug', $errors) !!}
+                                </section>
+                            </section>
+                        </div>
 
-							<footer>
-								<button type="submit" class="btn btn-primary btn-submit">Submit</button>
-								<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
-							</footer>
+                        <section class="form-group {{ form_error_class('description', $errors) }}">
+                            <label for="id-description">Description</label>
+                            <input type="text" class="form-control" id="id-description" name="description" placeholder="Please insert the Description" value="{{ ($errors && $errors->any()? old('description') : (isset($item)? $item->description : '')) }}">
+                            {!! form_error_message('description', $errors) !!}
+                        </section>
+                    </fieldset>
 
-							{!! Form::close() !!}
-						</div>
-					</div>
-				</div>
-			</article>
-		</div>
-	</section>
-@endsection
+                    @include('admin.partials.form_footer')
 
-@section('scripts')
-	@parent
-	<script type="text/javascript" charset="utf-8">
-		$(function ()
-		{
-			initFormValidation('form-edit-{{resource}}', ['title']);
-		})
-	</script>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
