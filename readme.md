@@ -7,7 +7,10 @@ Custom Laravel 5 File Generators with a config file and publishable stubs.
 You can add new stubs in the config.
 This package can be used by anyone, but keep in mind that it is optimized for my personal workflow.
 Please let me know about any issues or new features you would like to have.
-Tag 3+ uses Admin LTE stubs (starter project with the traits / partials is coming soon).
+Tag 3+ uses Admin LTE stubs.
+
+###Interested in a starter project where the current stubs are being used.
+###[Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
 
 ## Commands
 ```bash
