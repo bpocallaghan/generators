@@ -90,6 +90,13 @@ class ResourceCommand extends GeneratorCommand
             $arg = $this->getArgumentResource();
             $name = substr_replace($arg, str_plural($this->resource), strrpos($arg, $this->resource), strlen($this->resource));
 
+            // foo.bar_baz == foo.barBaz
+            $pieces = explode('_', $name);
+            $name = "";
+            foreach ($pieces as $k => $str) {
+                $name .= ucfirst($str);
+            }
+
             $this->callCommandFile('controller', $name);
         }
     }

@@ -70,7 +70,7 @@ class FileCommand extends GeneratorCommand
     {
         // setup
         $this->setSettings();
-        $this->resource = $this->getResourceName($this->getUrl());
+        $this->getResourceName($this->getUrl(false));
 
         // check the path where to create and save file
         $path = $this->getPath('');
@@ -151,14 +151,17 @@ class FileCommand extends GeneratorCommand
         // Bar
         $stub = str_replace('{{model}}', $this->getModelName(), $stub);
 
-        // bar
+        // Bar
         $stub = str_replace('{{resource}}', $this->resource, $stub);
+
+        // bar
+        $stub = str_replace('{{resourceLowercase}}', $this->resourceLowerCase, $stub);
 
         // ./resources/views/foo/bar.blade.php
         $stub = str_replace('{{path}}', $this->getPath(''), $stub);
 
         // foos.bars
-        $stub = str_replace('{{view}}', $this->getViewPath($url), $stub);
+        $stub = str_replace('{{view}}', $this->getViewPath($this->getUrl(false)), $stub);
 
         // bars
         $stub = str_replace('{{table}}', $this->getTableName($url), $stub);
@@ -194,11 +197,18 @@ class FileCommand extends GeneratorCommand
     /**
      * Get the url for the given name
      *
+     * @param bool $lowercase
      * @return string
      */
-    protected function getUrl()
+    protected function getUrl($lowercase = true)
     {
-        return '/' . rtrim(implode('/', array_map('strtolower', explode('/', $this->getArgumentPath(true)))), '/');
+        if ($lowercase) {
+            $url = '/' . rtrim(implode('/', array_map('snake_case', explode('/', $this->getArgumentPath(true)))), '/');
+            $url = (implode('/', array_map('str_slug', explode('/', $url))));
+            return $url;
+        }
+
+        return '/' . rtrim(implode('/', explode('/', $this->getArgumentPath(true))), '/');
     }
 
     /**
@@ -207,7 +217,8 @@ class FileCommand extends GeneratorCommand
      */
     protected function getClassName()
     {
-        return ucwords(camel_case(str_replace([$this->settings['file_type']], [''], $this->getFileName())));
+        return ucwords(camel_case(str_replace([$this->settings['file_type']], [''],
+            $this->getFileName())));
     }
 
     /**
@@ -218,7 +229,13 @@ class FileCommand extends GeneratorCommand
     protected function getOptions()
     {
         return array_merge([
-            ['type', null, InputOption::VALUE_OPTIONAL, 'The type of file: model, view, controller, migration, seed', 'view'],
+            [
+                'type',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'The type of file: model, view, controller, migration, seed',
+                'view'
+            ],
         ], parent::getOptions());
     }
 }

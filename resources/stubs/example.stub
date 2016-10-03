@@ -21,8 +21,11 @@ class {{class}}
 	// Bar
 	protected $model = '{{model}}';
 
-	// bar
+	// Bar
 	protected $resource = '{{resource}}';
+
+	// bar
+    protected $resourceLowercase = '{{resourceLowercase}}';
 
 	// ./resources/views/foo/bar.blade.php
 	protected $path = '{{path}}';

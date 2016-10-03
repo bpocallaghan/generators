@@ -26,6 +26,13 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected $resource = "";
 
+    /**
+     * The lowercase resource argument
+     *
+     * @var string
+     */
+    protected $resourceLowerCase = "";
+
     function __construct(Filesystem $files, Composer $composer)
     {
         parent::__construct($files);
@@ -129,7 +136,10 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 
         $name = isset($name) ? $name : $this->resource;
 
-        return str_singular(strtolower(class_basename($name)));
+        $this->resource = lcfirst(str_singular(class_basename($name)));
+        $this->resourceLowerCase = strtolower($name);
+
+        return $this->resource;
     }
 
     /**
@@ -166,7 +176,8 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected function getSeedName($name = null)
     {
-        return ucwords(camel_case(str_replace($this->settings['postfix'], '', $this->getResourceName($name))));
+        return ucwords(camel_case(str_replace($this->settings['postfix'], '',
+            $this->getResourceName($name))));
     }
 
     /**
@@ -193,11 +204,13 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
         // dont plural if reserve word
         foreach ($pieces as $k => $value) {
             if (!in_array($value, config('generators.reserve_words'))) {
-                $pieces[$k] = str_plural($pieces[$k]);
+                $pieces[$k] = str_plural(snake_case($pieces[$k]));
             }
         }
 
+
         $name = implode('.', $pieces);
+
         //$name = implode('.', array_map('str_plural', explode('/', $name)));
 
         return strtolower(rtrim(ltrim($name, '.'), '.'));
@@ -211,7 +224,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected function getTableName($name)
     {
-        return str_plural(snake_case(class_basename($name)));
+        return str_replace("-", "_", str_plural(snake_case(class_basename($name))));
     }
 
     /**
@@ -296,8 +309,18 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
         return [
             ['plain', null, InputOption::VALUE_NONE, 'Generate an empty class.'],
             ['force', null, InputOption::VALUE_NONE, 'Warning: Override file if it already exist'],
-            ['stub', null, InputOption::VALUE_OPTIONAL, 'The name of the view stub you would like to generate.'],
-            ['name', null, InputOption::VALUE_OPTIONAL, 'If you want to override the name of the file that will be generated'],
+            [
+                'stub',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'The name of the view stub you would like to generate.'
+            ],
+            [
+                'name',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'If you want to override the name of the file that will be generated'
+            ],
         ];
     }
 }

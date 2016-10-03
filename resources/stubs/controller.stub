@@ -44,58 +44,58 @@ class {{class}} extends TitanAdminController
 
         $this->createEntry({{model}}::class, $request->all());
 
-        return Redirect::route('{{view}}.index');
+        return redirect("{{url}}");
 	}
 
 	/**
 	 * Display the specified {{resource}}.
 	 *
-	 * @param {{model}} ${{collection}}
+	 * @param {{model}} ${{resource}}
 	 * @return Response
 	 */
-	public function show({{model}} ${{collection}})
+	public function show({{model}} ${{resource}})
 	{
-		return $this->view('{{view}}.show')->with('item', ${{collection}});
+		return $this->view('{{view}}.show')->with('item', ${{resource}});
 	}
 
 	/**
 	 * Show the form for editing the specified {{resource}}.
 	 *
-	 * @param {{model}} ${{collection}}
+	 * @param {{model}} ${{resource}}
      * @return Response
      */
-    public function edit({{model}} ${{collection}})
+    public function edit({{model}} ${{resource}})
 	{
-		return $this->view('{{view}}.add_edit')->with('item', ${{collection}});
+		return $this->view('{{view}}.add_edit')->with('item', ${{resource}});
 	}
 
 	/**
 	 * Update the specified {{resource}} in storage.
 	 *
-	 * @param {{model}}  ${{collection}}
+	 * @param {{model}}  ${{resource}}
      * @param Request    $request
      * @return Response
      */
-    public function update({{model}} ${{collection}}, Request $request)
+    public function update({{model}} ${{resource}}, Request $request)
 	{
 		$this->validate($request, {{model}}::$rules, {{model}}::$messages);
 
-        $this->updateEntry(${{collection}}, $request->all());
+        $this->updateEntry(${{resource}}, $request->all());
 
-        return Redirect::route('{{view}}.index');
+        return redirect("{{url}}");
 	}
 
 	/**
 	 * Remove the specified {{resource}} from storage.
 	 *
-	 * @param {{model}}  ${{collection}}
+	 * @param {{model}}  ${{resource}}
      * @param Request    $request
 	 * @return Response
 	 */
-	public function destroy({{model}} ${{collection}}, Request $request)
+	public function destroy({{model}} ${{resource}}, Request $request)
 	{
-		$this->deleteEntry(${{collection}}, $request);
+		$this->deleteEntry(${{resource}}, $request);
 
-        return Redirect::route('{{view}}.index');
+        return redirect("{{url}}");
 	}
 }
