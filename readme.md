@@ -1,7 +1,8 @@
 # Laravel 5 File Generators
 
-Laravel 5.1, use tag 2.1.3
-Laravel 5.2, use tag 3+
+Laravel 5.1, use tag 2.1.3,
+Laravel 5.2, use tag 3+,
+Laravel 5.3, use tag 3+
 
 Custom Laravel 5 File Generators with a config file and publishable stubs.
 You can add new stubs in the config.
@@ -114,6 +115,7 @@ php artisan generate:view foo.bar --name=foo_bar
 ```
 php artisan generate:controller foo
 php artisan generate:controller foo.bar
+php artisan generate:controller fooBar
 php artisan generate:controller bar --plain
 php artisan generate:controller BarController --plain
 ```
@@ -158,6 +160,7 @@ php artisan generate:seed BarTableSeeder
 ```
 php artisan generate:resource bar
 php artisan generate:resource foo.bar
+php artisan generate:resource foo.bar_baz
 php artisan generate:resource bar --schema="title:string, body:text, slug:string:unique, published_at:date"
 ```
 
