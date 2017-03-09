@@ -3,10 +3,11 @@
 namespace Bpocallaghan\Generators\Commands;
 
 use Symfony\Component\Console\Input\InputOption;
+use Illuminate\Console\DetectsApplicationNamespace;
 
 class FileCommand extends GeneratorCommand
 {
-    use \Illuminate\Console\AppNamespaceDetectorTrait;
+    use DetectsApplicationNamespace;
 
     /**
      * The console command name.

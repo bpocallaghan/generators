@@ -34,7 +34,7 @@ class MigrationPivotCommand extends GeneratorCommand
      */
     public function fire()
     {
-        $name = $this->parseName($this->getNameInput());
+        $name = $this->qualifyClass($this->getNameInput());
         $path = $this->getPath($name);
 
         if ($this->files->exists($path) && $this->optionForce() === false) {
