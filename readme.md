@@ -3,6 +3,7 @@
 Laravel 5.1, use tag 2.1.3,
 Laravel 5.2, use tag 3+,
 Laravel 5.3, use tag 3+
+Laravel 5.4, use branch 4
 
 Custom Laravel 5 File Generators with a config file and publishable stubs.
 You can add new stubs in the config.
