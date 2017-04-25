@@ -46,7 +46,7 @@ class ResourceCommand extends GeneratorCommand
         $this->callMigrate();
 
         $this->info('All Done!');
-        $this->info('Remember to add ' . "`Route::resource('" . $this->getCollectionName() . "', '" . $this->getResourceControllerName() . "');`" . ' in the `app\\Http\\routes.php`');
+        $this->info('Remember to add ' . "`Route::resource('" . $this->getCollectionName() . "', '" . $this->getResourceControllerName() . "');`" . ' in `routes\\web.php`');
     }
 
     /**
