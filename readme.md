@@ -24,6 +24,7 @@ php artisan generate:migration
 php artisan generate:migration:pivot
 php artisan generate:seed
 php artisan generate:resource
+php artisan generate:notification
 php artisan generate:file
 ```
 
@@ -167,6 +168,14 @@ php artisan generate:resource bar --schema="title:string, body:text, slug:string
 
 - This will generate a Bar model, BarsController, resources views (in config), create_bars_table migration, BarTableSeeder
 - In the config there is a `resource_views` array, you can specify the views that you want to generate there, just make sure the stub exist.
+
+### Notifications
+```
+php artisan generate:notification UserRegistered
+```
+
+This will generate a UserRegistered notification.
+Laravel provides support for sending notifications across a variety of delivery channels, including mail, SMS (via Nexmo), and Slack. Notifications may also be stored in a database so they may be displayed in your web interface.
 
 ### Configuration
 
