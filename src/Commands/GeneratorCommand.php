@@ -192,6 +192,24 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
     }
 
     /**
+     * Get the plural uppercase name of the resouce
+     * @param null $name
+     * @return null|string
+     */
+    protected function getCollectionUpperName($name = null)
+    {
+        $name = str_plural($this->getResourceName($name));
+
+        $pieces = explode('_', $name);
+        $name = "";
+        foreach ($pieces as $k => $str) {
+            $name .= ucfirst($str);
+        }
+
+        return $name;
+    }
+
+    /**
      * Get the path to the view file
      *
      * @param $name

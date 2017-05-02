@@ -46,7 +46,7 @@ class ResourceCommand extends GeneratorCommand
         $this->callMigrate();
 
         $this->info('All Done!');
-        $this->info('Remember to add ' . "`Route::resource('" . $this->getCollectionName() . "', '" . $this->getResourceControllerName() . "');`" . ' in `routes\\web.php`');
+        $this->info('Remember to add ' . "`Route::resource('" . str_replace('_', '-', $this->getCollectionName()) . "', '" . $this->getResourceControllerName() . "');`" . ' in `routes\\web.php`');
     }
 
     /**
@@ -89,13 +89,6 @@ class ResourceCommand extends GeneratorCommand
         if ($this->confirm("Create a controller ($name) for the $this->resource resource? [yes|no]")) {
             $arg = $this->getArgumentResource();
             $name = substr_replace($arg, str_plural($this->resource), strrpos($arg, $this->resource), strlen($this->resource));
-
-            // foo.bar_baz == foo.barBaz
-            $pieces = explode('_', $name);
-            $name = "";
-            foreach ($pieces as $k => $str) {
-                $name .= ucfirst($str);
-            }
 
             $this->callCommandFile('controller', $name);
         }

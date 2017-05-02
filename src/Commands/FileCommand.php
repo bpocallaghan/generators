@@ -147,7 +147,7 @@ class FileCommand extends GeneratorCommand
         $stub = str_replace('{{collection}}', $this->getCollectionName(), $stub);
 
         // Bars
-        $stub = str_replace('{{collectionUpper}}', ucwords($this->getCollectionName()), $stub);
+        $stub = str_replace('{{collectionUpper}}', $this->getCollectionUpperName(), $stub);
 
         // Bar
         $stub = str_replace('{{model}}', $this->getModelName(), $stub);
