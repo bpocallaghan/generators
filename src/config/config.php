@@ -36,17 +36,26 @@ return [
     */
 
     'settings' => [
-        'view'       => ['path' => './resources/views/', 'file_type' => '.blade.php', 'directory_format' => 'strtolower', 'directory_namespace' => true],
-        'model'      => ['namespace' => '\Models', 'path' => './app/Models/'],
-        'controller' => [
+        'view'         => [
+            'path'                => './resources/views/',
+            'file_type'           => '.blade.php',
+            'directory_format'    => 'strtolower',
+            'directory_namespace' => true
+        ],
+        'model'        => ['namespace' => '\Models', 'path' => './app/Models/'],
+        'controller'   => [
             'namespace'           => '\Http\Controllers',
             'path'                => './app/Http/Controllers/',
             'postfix'             => 'Controller',
             'directory_namespace' => true,
             'dump_autoload'       => true
         ],
-        'seed'       => ['path' => './database/seeds/', 'postfix' => 'TableSeeder'],
-        'migration'  => ['path' => './database/migrations/'],
+        'seed'         => ['path' => './database/seeds/', 'postfix' => 'TableSeeder'],
+        'migration'    => ['path' => './database/migrations/'],
+        'notification' => [
+            'namespace' => '\App\Notifications',
+            'path'      => './app/Notifications/'
+        ],
     ],
 
     /*
@@ -83,4 +92,5 @@ return [
     'view_show_stub'        => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/view.show.stub',
     'schema_create_stub'    => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/schema-create.stub',
     'schema_change_stub'    => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/schema-change.stub',
+    'notification_stub'     => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/notification.stub',
 ];
