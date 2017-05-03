@@ -11,8 +11,8 @@ This package can be used by anyone, but keep in mind that it is optimized for my
 Please let me know about any issues or new features you would like to have.
 Tag 3+ uses Admin LTE stubs.
 
-###Interested in a starter project where the current stubs are being used.
-###[Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
+#Interested in a starter project where the current stubs are being used.
+#[Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
 
 ## Commands
 ```bash
@@ -27,6 +27,7 @@ php artisan generate:resource
 php artisan generate:notification
 php artisan generate:event
 php artisan generate:listener
+php artisan generate:event-listener
 php artisan generate:file
 ```
 
@@ -97,7 +98,6 @@ Run `php artisan` command to see the new commands in the `generate:*` section
 - [Events and Listeners](#events-and-listeners)
 - [File](#file)
 - [Configuration](#configuration)
-- 
 
 ### Models
 
@@ -188,9 +188,13 @@ Laravel provides support for sending notifications across a variety of delivery 
 ```
 php artisan generate:event InvoiceWasPaid
 php artisan generate:listener NotifyUserAboutPayment --event=InvoiceWasPaid
+php artisan generate:event-listener
 ```
 This will generate the event and listener.
 Laravel's events provides a simple observer implementation, allowing you to subscribe and listen for various events that occur in your application
+
+`php artisan generate:event-listener `
+Will generate all the missing events and listeners defined in your EventServiceProvider.
 
 ### Configuration
 
