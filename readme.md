@@ -25,6 +25,8 @@ php artisan generate:migration:pivot
 php artisan generate:seed
 php artisan generate:resource
 php artisan generate:notification
+php artisan generate:event
+php artisan generate:listener
 php artisan generate:file
 ```
 
@@ -91,8 +93,11 @@ Run `php artisan` command to see the new commands in the `generate:*` section
 - [Pivot Tables](#pivot-tables)
 - [Database Seeders](#database-seeders)
 - [Resource](#resource)
+- [Notifications](#notifications)
+- [Events and Listeners](#events-and-listeners)
 - [File](#file)
 - [Configuration](#configuration)
+- 
 
 ### Models
 
@@ -170,12 +175,22 @@ php artisan generate:resource bar --schema="title:string, body:text, slug:string
 - In the config there is a `resource_views` array, you can specify the views that you want to generate there, just make sure the stub exist.
 
 ### Notifications
+
 ```
 php artisan generate:notification UserRegistered
 ```
 
 This will generate a UserRegistered notification.
 Laravel provides support for sending notifications across a variety of delivery channels, including mail, SMS (via Nexmo), and Slack. Notifications may also be stored in a database so they may be displayed in your web interface.
+
+### Events and Listeners
+
+```
+php artisan generate:event InvoiceWasPaid
+php artisan generate:listener NotifyUserAboutPayment --event=InvoiceWasPaid
+```
+This will generate the event and listener.
+Laravel's events provides a simple observer implementation, allowing you to subscribe and listen for various events that occur in your application
 
 ### Configuration
 
@@ -227,9 +242,6 @@ resource=php artisan generate:resource
 - Thank you [Taylor Ottwell](https://github.com/taylorotwell) for [Laravel](http://laravel.com/).
 - Thank you [Jeffrey Way](https://github.com/JeffreyWay) for the awesome resources at [Laracasts](https://laracasts.com/).
 
-## TODO
-
-- Provide an example
 
 ## My other Packages
 
