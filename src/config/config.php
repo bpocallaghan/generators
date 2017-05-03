@@ -56,6 +56,14 @@ return [
             'namespace' => '\App\Notifications',
             'path'      => './app/Notifications/'
         ],
+        'event'        => [
+            'namespace' => '\App\Events',
+            'path'      => './app/Events/'
+        ],
+        'listener'     => [
+            'namespace' => '\App\Listeners',
+            'path'      => './app/Listeners/'
+        ],
     ],
 
     /*
@@ -93,4 +101,6 @@ return [
     'schema_create_stub'    => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/schema-create.stub',
     'schema_change_stub'    => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/schema-change.stub',
     'notification_stub'     => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/notification.stub',
+    'event_stub'            => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/event.stub',
+    'listener_stub'         => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/listener.stub',
 ];

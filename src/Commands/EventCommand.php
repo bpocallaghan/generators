@@ -2,26 +2,26 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
-class NotificationCommand extends GeneratorCommand
+class EventCommand extends GeneratorCommand
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'generate:notification';
+    protected $name = 'generate:event';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new notification class';
+    protected $description = 'Create a new event class';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Notification';
+    protected $type = 'Event';
 }
