@@ -68,6 +68,8 @@ class MigrationPivotCommand extends GeneratorCommand
     {
         $tables = array_map('str_singular', $this->getSortedTableNames());
         $name = implode('', array_map('ucwords', $tables));
+        $pieces = explode('_', $name);
+        $name = implode('', array_map('ucwords', $pieces));
 
         return "Create{$name}PivotTable";
     }
