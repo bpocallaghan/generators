@@ -41,6 +41,13 @@ class MigrationPivotCommand extends GeneratorCommand
             return $this->error($this->type . ' already exists!');
         }
 
+        // if we need to append the parent models
+        $modelOne = $this->getModelName($this->argument('tableOne'));
+        $modelTwo = $this->getModelName($this->argument('tableTwo'));
+        if ($this->confirm("Add Many To Many Relationship in '{$modelOne}' and '{$modelTwo}' Models? [yes|no]")) {
+            $this->addRelationshipsInParents();
+        }
+
         $this->makeDirectory($path);
         $this->files->put($path, $this->buildClass($name));
 
@@ -95,7 +102,9 @@ class MigrationPivotCommand extends GeneratorCommand
     {
         $stub = $this->files->get($this->getStub());
 
-        return $this->replacePivotTableName($stub)->replaceSchema($stub)->replaceClass($stub, $name);
+        return $this->replacePivotTableName($stub)
+            ->replaceSchema($stub)
+            ->replaceClass($stub, $name);
     }
 
     /**
@@ -121,9 +130,11 @@ class MigrationPivotCommand extends GeneratorCommand
     {
         $tables = $this->getSortedTableNames();
 
-        $stub = str_replace(['{{columnOne}}', '{{columnTwo}}'], array_merge(array_map('str_singular', $tables), $tables), $stub);
+        $stub = str_replace(['{{columnOne}}', '{{columnTwo}}'],
+            array_merge(array_map('str_singular', $tables), $tables), $stub);
 
-        $stub = str_replace(['{{tableOne}}', '{{tableTwo}}'], array_merge(array_map('str_plural', $tables), $tables), $stub);
+        $stub = str_replace(['{{tableOne}}', '{{tableTwo}}'],
+            array_merge(array_map('str_plural', $tables), $tables), $stub);
 
         return $this;
     }
@@ -131,13 +142,13 @@ class MigrationPivotCommand extends GeneratorCommand
     /**
      * Replace the class name for the given stub.
      *
-     * @param  string  $stub
-     * @param  string  $name
+     * @param  string $stub
+     * @param  string $name
      * @return string
      */
     protected function replaceClass($stub, $name)
     {
-        $class = str_replace($this->getNamespace($name).'\\', '', $name);
+        $class = str_replace($this->getNamespace($name) . '\\', '', $name);
 
         return str_replace('{{class}}', $class, $stub);
     }
@@ -167,6 +178,59 @@ class MigrationPivotCommand extends GeneratorCommand
         sort($tables);
 
         return $tables;
+    }
+
+    /**
+     * Append Many to Many Relationships in Parent Models
+     */
+    public function addRelationshipsInParents()
+    {
+        $options = config('generators.settings');
+        if (!$options['model']) {
+            $this->info('Model files not found.');
+
+            return;
+        }
+
+        $modelSettings = $options['model'];
+
+        // model names
+        $modelOne = $this->getModelName($this->argument('tableOne'));
+        $modelTwo = $this->getModelName($this->argument('tableTwo'));
+
+        // model path
+        $modelOnePath = $modelSettings['path'] . $modelOne . '.php';
+        $modelTwoPath = $modelSettings['path'] . $modelTwo . '.php';
+
+        $this->addRelationshipInModel($modelOnePath, $modelTwo);
+        $this->addRelationshipInModel($modelTwoPath, $modelOne);
+    }
+
+    /**
+     * Insert the many to many relationship in model
+     * @param $modelPath
+     * @param $relationshipModel
+     */
+    private function addRelationshipInModel($modelPath, $relationshipModel)
+    {
+        // load model
+        $model = $this->files->get($modelPath);
+
+        // get the position where to insert into file
+        $index = strlen($model) - strpos(strrev($model), '}') - 1;
+
+        // load many to many stub
+        $stub = $this->files->get(config('generators.' . 'many_many_relationship_stub'));
+        $stub = str_replace('{{model}}', $relationshipModel, $stub);
+        $stub = str_replace('{{relationship}}', strtolower(str_plural($relationshipModel)), $stub);
+
+        // insert many many stub in model
+        $model = substr_replace($model, $stub, $index, 0);
+
+        // save model file
+        $this->files->put($modelPath, $model);
+
+        $this->info("{$relationshipModel} many to many Relationship added in {$modelPath}");
     }
 
     /**
