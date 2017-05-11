@@ -56,6 +56,17 @@ class ResourceCommand extends GeneratorCommand
     {
         $name = $this->getModelName();
 
+        $resourceString = $this->getResourceOnly();
+        $resourceStringLength = strlen($this->getResourceOnly());
+
+        if ($resourceStringLength > 18) {
+            $ans = $this->confirm("Your resource {$resourceString} may have too many characters to use for many to many relationships. The length is {$resourceStringLength}. Continue? [yes|no]");
+            if ($ans === false) {
+                echo "generate:resource cancelled!";
+                die;
+            }
+        }
+
         if ($this->confirm("Create a $name model? [yes|no]")) {
             $this->callCommandFile('model');
         }
