@@ -1,0 +1,8 @@
+
+	/**
+	 * Get the {{model}} many to many
+	 */
+	public function {{relationship}}()
+	{
+		return $this->belongsToMany({{model}}::class);
+	}
