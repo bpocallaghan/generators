@@ -202,16 +202,17 @@ class MigrationPivotCommand extends GeneratorCommand
         $modelOnePath = $modelSettings['path'] . $modelOne . '.php';
         $modelTwoPath = $modelSettings['path'] . $modelTwo . '.php';
 
-        $this->addRelationshipInModel($modelOnePath, $modelTwo);
-        $this->addRelationshipInModel($modelTwoPath, $modelOne);
+        $this->addRelationshipInModel($modelOnePath, $modelTwo, $this->argument('tableOne'));
+        $this->addRelationshipInModel($modelTwoPath, $modelOne, $this->argument('tableTwo'));
     }
 
     /**
      * Insert the many to many relationship in model
      * @param $modelPath
      * @param $relationshipModel
+     * @param $tableName
      */
-    private function addRelationshipInModel($modelPath, $relationshipModel)
+    private function addRelationshipInModel($modelPath, $relationshipModel, $tableName)
     {
         // load model
         $model = $this->files->get($modelPath);
@@ -222,7 +223,8 @@ class MigrationPivotCommand extends GeneratorCommand
         // load many to many stub
         $stub = $this->files->get(config('generators.' . 'many_many_relationship_stub'));
         $stub = str_replace('{{model}}', $relationshipModel, $stub);
-        $stub = str_replace('{{relationship}}', strtolower(str_plural($relationshipModel)), $stub);
+        $stub = str_replace('{{relationship}}', $tableName, $stub);
+        //$stub = str_replace('{{relationship}}', strtolower(str_plural($relationshipModel)), $stub);
 
         // insert many many stub in model
         $model = substr_replace($model, $stub, $index, 0);
