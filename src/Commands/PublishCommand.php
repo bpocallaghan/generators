@@ -40,7 +40,15 @@ class PublishCommand extends GeneratorCommand
      */
     private function copyConfigFile()
     {
-        File::copy(__DIR__ . '/../config/config.php', $this->getConfigPath());
+        $path = $this->getConfigPath();
+
+        // if generatords config already exist
+        if ($this->files->exists($path) && $this->option('force') === false) {
+            $this->error("{$path} already exists! Run 'generate:publish-stubs --force' to override the config file.");
+            die;
+        }
+
+        File::copy(__DIR__ . '/../config/config.php', $path);
     }
 
     /**
@@ -48,7 +56,15 @@ class PublishCommand extends GeneratorCommand
      */
     private function copyStubsDirectory()
     {
-        File::copyDirectory(__DIR__ . '/../../resources/stubs', $this->option('path'));
+        $path = $this->option('path');
+
+        // if controller stub already exist
+        if ($this->files->exists($path . DIRECTORY_SEPARATOR . 'controller.stub') && $this->option('force') === false) {
+            $this->error("Stubs already exists! Run 'generate:publish-stubs --force' to override the stubs.");
+            die;
+        }
+
+        File::copyDirectory(__DIR__ . '/../../resources/stubs', $path);
     }
 
     /**
@@ -56,7 +72,8 @@ class PublishCommand extends GeneratorCommand
      */
     private function updateStubsPathsInConfigFile()
     {
-        $updated = str_replace('vendor/bpocallaghan/generators/', '', File::get($this->getConfigPath()));
+        $updated = str_replace('vendor/bpocallaghan/generators/', '',
+            File::get($this->getConfigPath()));
         File::put($this->getConfigPath(), $updated);
     }
 
@@ -88,7 +105,14 @@ class PublishCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
-            ['path', null, InputOption::VALUE_OPTIONAL, 'Which directory should the templates be copied to?', 'resources/stubs']
+            [
+                'path',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Which directory should the templates be copied to?',
+                'resources/stubs'
+            ],
+            ['force', null, InputOption::VALUE_NONE, 'Warning: Override files if it already exist']
         ];
     }
 
