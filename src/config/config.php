@@ -53,15 +53,15 @@ return [
         'seed'         => ['path' => './database/seeds/', 'postfix' => 'TableSeeder'],
         'migration'    => ['path' => './database/migrations/'],
         'notification' => [
-            'namespace' => '\App\Notifications',
+            'namespace' => '\Notifications',
             'path'      => './app/Notifications/'
         ],
         'event'        => [
-            'namespace' => '\App\Events',
+            'namespace' => '\Events',
             'path'      => './app/Events/'
         ],
         'listener'     => [
-            'namespace' => '\App\Listeners',
+            'namespace' => '\Listeners',
             'path'      => './app/Listeners/'
         ],
     ],
