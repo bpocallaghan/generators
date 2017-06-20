@@ -33,6 +33,9 @@ class {{class}}
 	// foos.bars
 	protected $view = '{{view}}';
 
+	// foos.bars (if admin or website is first - it gets removed)
+	protected $view = '{{viewPath}}';
+
 	// bars
 	protected $table = '{{table}}';
 }

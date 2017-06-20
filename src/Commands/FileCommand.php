@@ -164,6 +164,9 @@ class FileCommand extends GeneratorCommand
         // foos.bars
         $stub = str_replace('{{view}}', $this->getViewPath($this->getUrl(false)), $stub);
 
+        // foos.bars (remove admin or website if first word)
+        $stub = str_replace('{{viewPath}}', $this->getViewPathFormatted($this->getUrl(false)), $stub);
+
         // bars
         $stub = str_replace('{{table}}', $this->getTableName($url), $stub);
 

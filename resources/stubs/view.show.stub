@@ -42,7 +42,6 @@
 						</fieldset>
 
                     	@include('admin.partials.form_footer', ['submit' => false])
-
                     </form>
                 </div>
             </div>

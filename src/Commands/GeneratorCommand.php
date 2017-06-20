@@ -226,12 +226,41 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
             }
         }
 
-
         $name = implode('.', $pieces);
 
         //$name = implode('.', array_map('str_plural', explode('/', $name)));
 
         return strtolower(rtrim(ltrim($name, '.'), '.'));
+    }
+
+    /**
+     * Remove 'admin' and 'webiste' if first in path
+     * The Base Controller has it as a 'prefix path'
+     *
+     * @param $name
+     * @return string
+     */
+    protected function getViewPathFormatted($name)
+    {
+        $path = $this->getViewPath($name);
+
+        if (strpos($path, 'admin.') === 0) {
+            $path = substr($path, 6);
+        }
+
+        if (strpos($path, 'admins.') === 0) {
+            $path = substr($path, 7);
+        }
+
+        if (strpos($path, 'website.') === 0) {
+            $path = substr($path, 8);
+        }
+
+        if (strpos($path, 'websites.') === 0) {
+            $path = substr($path, 9);
+        }
+
+        return $path;
     }
 
     /**

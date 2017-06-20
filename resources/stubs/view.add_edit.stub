@@ -15,8 +15,7 @@
 
                     @include('admin.partials.info')
 
-					<form method="POST" action="{{$selectedNavigation->url . (isset($item)? $item->id : '')}}" accept-charset="UTF-8">
-
+					<form method="POST" action="{{$selectedNavigation->url . (isset($item)? "/{$item->id}" : '')}}" accept-charset="UTF-8">
                         <input name="_token" type="hidden" value="{{ csrf_token() }}">
                         <input name="_method" type="hidden" value="{{isset($item)? 'PUT':'POST'}}">
 
@@ -50,7 +49,6 @@
 						</fieldset>
 
 						@include('admin.partials.form_footer')
-
                     </form>
                 </div>
             </div>
