@@ -202,8 +202,8 @@ class MigrationPivotCommand extends GeneratorCommand
         $modelOnePath = $modelSettings['path'] . $modelOne . '.php';
         $modelTwoPath = $modelSettings['path'] . $modelTwo . '.php';
 
-        $this->addRelationshipInModel($modelOnePath, $modelTwo, $this->argument('tableOne'));
-        $this->addRelationshipInModel($modelTwoPath, $modelOne, $this->argument('tableTwo'));
+        $this->addRelationshipInModel($modelOnePath, $modelTwo, $this->argument('tableTwo'));
+        $this->addRelationshipInModel($modelTwoPath, $modelOne, $this->argument('tableOne'));
     }
 
     /**
