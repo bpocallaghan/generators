@@ -223,7 +223,7 @@ class MigrationPivotCommand extends GeneratorCommand
         // load many to many stub
         $stub = $this->files->get(config('generators.' . 'many_many_relationship_stub'));
         $stub = str_replace('{{model}}', $relationshipModel, $stub);
-        $stub = str_replace('{{relationship}}', $tableName, $stub);
+        $stub = str_replace('{{relationship}}', camel_case($tableName), $stub);
         //$stub = str_replace('{{relationship}}', strtolower(str_plural($relationshipModel)), $stub);
 
         // insert many many stub in model
