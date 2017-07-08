@@ -1,18 +1,9 @@
 # Laravel 5 File Generators
 
-Laravel 5.1, use tag 2.1.3,
-Laravel 5.2, use tag 3+,
-Laravel 5.3, use tag 3+
-Laravel 5.4, use branch 4
-
 Custom Laravel 5 File Generators with a config file and publishable stubs.
-You can add new stubs in the config.
-This package can be used by anyone, but keep in mind that it is optimized for my personal workflow.
-Please let me know about any issues or new features you would like to have.
-Tag 3+ uses Admin LTE stubs.
+You can publish the stubs. You can add your own stubs to generate.
 
-#Interested in a starter project where the current stubs are being used.
-#[Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
+Interested in a laravel admin starter project where the package is being used. [Admin Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
 
 ## Commands
 ```bash
@@ -77,9 +68,9 @@ You'll only want to use these generators for local development, add the provider
 ```php
 public function register()
 {
-	if ($this->app->environment() == 'local') {
-		$this->app->register(\Bpocallaghan\Generators\GeneratorsServiceProvider::class);
-	}
+    if ($this->app->environment() == 'local') {
+        $this->app->register(\Bpocallaghan\Generators\GeneratorsServiceProvider::class);
+    }
 }
 ```
 
@@ -132,7 +123,7 @@ php artisan generate:controller BarController --plain
 
 ### Migrations
 
-This is the same as [Jeffrey Way's](https://github.com/laracasts/Laravel-5-Generators-Extended)
+This is very similar as [Jeffrey Way's](https://github.com/laracasts/Laravel-5-Generators-Extended)
 
 ```
 php artisan generate:migration create_users_table
@@ -141,17 +132,13 @@ php artisan generate:migration create_users_table --force
 php artisan generate:migration create_posts_table --schema="title:string, body:text, slug:string:unique, published_at:date"
 ```
 
-- [Documentation in detail](https://github.com/laracasts/Laravel-5-Generators-Extended#migrations-with-schema)
-
 ### Pivot Tables
 
-This is the same as [Jeffrey Way's](https://github.com/laracasts/Laravel-5-Generators-Extended)
+This is very similar as [Jeffrey Way's](https://github.com/laracasts/Laravel-5-Generators-Extended)
 
 ```
 php artisan generate:migration:pivot tags posts
 ```
-
-- [Documentation in detail](https://github.com/laracasts/Laravel-5-Generators-Extended#pivot-tables)
 
 ### Database Seeders
 
@@ -160,7 +147,7 @@ php artisan generate:seed bar
 php artisan generate:seed BarTableSeeder
 ```
 
-- The `TableSeeder` will be added if needed.
+- The `TableSeeder` suffix will be added if needed.
 
 ### Resource
 
@@ -209,8 +196,7 @@ You can also add new stubs.
 
 This will also copy all the stubs to `/resources/stubs/`.
 Here you can make changes to the current stubs, add your own boilerplate / comments to the files.
-You can also add your own stubs here.
-
+You can also add your own stubs here and specify it in the config to be used.
 
 ### File
 
@@ -232,7 +218,7 @@ art=php artisan
 model=php artisan generate:model
 view=php artisan generate:view
 view:index=php artisan generate:view:index
-view:add_edit=php artisan generate:view:add_edit
+view:create_edit=php artisan generate:view:create_edit
 view:show=php artisan generate:view:show
 controller=php artisan generate:controller
 migration=php artisan generate:migration
@@ -246,8 +232,9 @@ resource=php artisan generate:resource
 - Thank you [Taylor Ottwell](https://github.com/taylorotwell) for [Laravel](http://laravel.com/).
 - Thank you [Jeffrey Way](https://github.com/JeffreyWay) for the awesome resources at [Laracasts](https://laracasts.com/).
 
-
 ## My other Packages
 
-- [Laravel 5 Flash a bootstrap alert](https://github.com/bpocallaghan/alert)
-- [Laravel 5 Flash Notifications with icons and animations and with a timeout](https://github.com/bpocallaghan/notify)
+- [Notify](https://github.com/bpocallaghan/notify) Laravel 5 Flash Notifications with icons and animations and with a timeout
+- [Alert](https://github.com/bpocallaghan/alert) A helper package to flash a bootstrap alert to the browser via a Facade or a helper function.
+- [Impersonate User](https://github.com/bpocallaghan/impersonate) This allows you to authenticate as any of your customers.
+- [Sluggable](https://github.com/bpocallaghan/sluggable) Provides a HasSlug trait that will generate a unique slug when saving your Laravel Eloquent model.
