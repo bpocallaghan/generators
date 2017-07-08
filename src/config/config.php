@@ -73,9 +73,11 @@ return [
     */
 
     'resource_views' => [
-        'view_index'    => 'index',
-        'view_add_edit' => 'add_edit',
-        'view_show'     => 'show',
+        'view_index'       => 'index',
+        //'view_create'      => 'create',
+        //'view_edit'        => 'edit',
+        'view_show'        => 'show',
+        'view_create_edit' => 'create_edit',
     ],
 
     /*
@@ -96,8 +98,10 @@ return [
     'seed_plain_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/seed.plain.stub',
     'view_stub'                   => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/view.stub',
     'view_index_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/view.index.stub',
-    'view_add_edit_stub'          => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/view.add_edit.stub',
     'view_show_stub'              => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/view.show.stub',
+    //'view_create_stub'            => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/view.create.stub',
+    //'view_edit_stub'              => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/view.edit.stub',
+    'view_create_edit_stub'       => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/view.create_edit.stub',
     'schema_create_stub'          => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/schema-create.stub',
     'schema_change_stub'          => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/schema-change.stub',
     'notification_stub'           => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/notification.stub',
