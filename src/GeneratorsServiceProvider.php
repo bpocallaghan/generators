@@ -48,6 +48,8 @@ class GeneratorsServiceProvider extends ServiceProvider
         $this->registerCommand('ListenerCommand', 'listener');
         $this->registerCommand('EventGenerateCommand', 'event.generate');
 
+        $this->registerCommand('TraitCommand', 'trait');
+
         $this->registerCommand('ResourceCommand', 'resource');
         $this->registerCommand('FileCommand', 'file');
     }

@@ -19,6 +19,7 @@ php artisan generate:notification
 php artisan generate:event
 php artisan generate:listener
 php artisan generate:event-listener
+php artisan generate:trait
 php artisan generate:file
 ```
 
@@ -87,6 +88,7 @@ Run `php artisan` command to see the new commands in the `generate:*` section
 - [Resource](#resource)
 - [Notifications](#notifications)
 - [Events and Listeners](#events-and-listeners)
+- [Trait](#trait)
 - [File](#file)
 - [Configuration](#configuration)
 
@@ -183,6 +185,13 @@ Laravel's events provides a simple observer implementation, allowing you to subs
 `php artisan generate:event-listener `
 Will generate all the missing events and listeners defined in your EventServiceProvider.
 
+### Trait
+```
+php artisan generate:trait Http\Controllers\Traits\Bar
+```
+This will generate a FooBar Trait file. The command will use the name as your namespace.
+`generate:trait Foo` will create a file in `app/Foo.php`, `generate:trait Foo\Bar` will create a file in `app/Foo/Bar.php`.
+
 ### Configuration
 
 ```
@@ -197,6 +206,7 @@ You can also add new stubs.
 This will also copy all the stubs to `/resources/stubs/`.
 Here you can make changes to the current stubs, add your own boilerplate / comments to the files.
 You can also add your own stubs here and specify it in the config to be used.
+
 
 ### File
 
