@@ -2,13 +2,13 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
-use Illuminate\Console\DetectsApplicationNamespace;
 use Illuminate\Support\Str;
+use Illuminate\Console\AppNamespaceDetectorTrait;
 use Symfony\Component\Console\Input\InputOption;
 
 class ListenerCommand extends GeneratorCommand
 {
-    use DetectsApplicationNamespace;
+    use AppNamespaceDetectorTrait;
 
     /**
      * The console command name.

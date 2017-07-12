@@ -46,7 +46,7 @@ class MigrationCommand extends GeneratorCommand
     {
         $this->meta = (new NameParser)->parse($this->argumentName());
 
-        $name = $this->qualifyClass($this->getNameInput());
+        $name = $this->parseName($this->getNameInput());
         $path = $this->getPath($name);
 
         if ($this->files->exists($path) && $this->optionForce() === false) {

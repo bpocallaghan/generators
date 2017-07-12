@@ -1,11 +1,11 @@
-# Laravel 5 File Generators
+# Laravel 5.2 and Laravel 5.3 File Generators
 
 Custom Laravel 5 File Generators with a config file and publishable stubs.
 You can publish the stubs. You can add your own stubs to generate.
 
 Interested in a laravel admin starter project where the package is being used. [Admin Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
 
-Laravel 5.1, use tag 2.1.3, Laravel 5.2 or Laravel 5.3, use branch 3, Laravel 5.4 use latest
+Laravel 5.1, use tag 2.1.3, Laravel 5.4 use the latest version.
 
 ## Commands
 ```bash
@@ -62,7 +62,7 @@ php artisan generate:view admin.posts --stub=another_file
 Update your project's `composer.json` file.
 
 ```
-composer require bpocallaghan/generators --dev
+composer require bpocallaghan/generators --dev 3
 ```
 
 App the Service Provider
