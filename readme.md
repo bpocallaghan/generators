@@ -5,6 +5,8 @@ You can publish the stubs. You can add your own stubs to generate.
 
 Interested in a laravel admin starter project where the package is being used. [Admin Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
 
+Laravel 5.1, use tag 2.1.3, Laravel 5.2 or Laravel 5.3, use branch 3, Laravel 5.4 use latest
+
 ## Commands
 ```bash
 php artisan generate:publish-stubs
