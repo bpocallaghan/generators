@@ -70,6 +70,11 @@ return [
         'trait'        => [
             'directory_namespace' => true,
         ],
+        'job'          => [
+            'directory_namespace' => true,
+            'namespace'           => '\Jobs',
+            'path'                => './app/Jobs/'
+        ],
         'console'      => [
             'directory_namespace' => true,
             'namespace'           => '\Console\Commands',
@@ -120,5 +125,6 @@ return [
     'listener_stub'               => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/listener.stub',
     'many_many_relationship_stub' => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/many_many_relationship.stub',
     'trait_stub'                  => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/trait.stub',
+    'job_stub'                    => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/job.stub',
     'console_stub'                => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/console.stub',
 ];

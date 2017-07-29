@@ -22,6 +22,7 @@ php artisan generate:event
 php artisan generate:listener
 php artisan generate:event-listener
 php artisan generate:trait
+php artisan generate:job
 php artisan generate:console
 php artisan generate:file
 ```
@@ -194,6 +195,12 @@ php artisan generate:trait Http\Controllers\Traits\Bar
 ```
 This will generate a FooBar Trait file. The command will use the name as your namespace.
 `generate:trait Foo` will create a file in `app/Foo.php`, `generate:trait Foo\Bar` will create a file in `app/Foo/Bar.php`.
+
+### Job
+```
+php artisan generate:job SendReminderEmail
+```
+This will generate a SendReminderEmail Job file.
 
 ### Console (Artisan Command)
 ```

@@ -50,6 +50,7 @@ class GeneratorsServiceProvider extends ServiceProvider
 
         $this->registerCommand('TraitCommand', 'trait');
 
+        $this->registerCommand('JobCommand', 'job');
         $this->registerCommand('ConsoleCommand', 'console');
 
         $this->registerCommand('ResourceCommand', 'resource');
