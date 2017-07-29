@@ -19,7 +19,7 @@ class ResourceCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new resource (model, views, controller, migration, seed)';
+    protected $description = 'Create a new Resource (Model, Views, Controller, Migration, Seed)';
 
     /**
      * The type of class being generated.

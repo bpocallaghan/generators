@@ -22,7 +22,7 @@ class ListenerCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new event listener class';
+    protected $description = 'Create a new Event Listener class';
 
     /**
      * The type of class being generated.

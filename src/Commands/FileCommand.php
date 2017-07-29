@@ -170,6 +170,9 @@ class FileCommand extends GeneratorCommand
         // bars
         $stub = str_replace('{{table}}', $this->getTableName($url), $stub);
 
+        // console command name
+        $stub = str_replace('{{command}}', $this->option('command'), $stub);
+
         return $stub;
     }
 
@@ -207,8 +210,10 @@ class FileCommand extends GeneratorCommand
     protected function getUrl($lowercase = true)
     {
         if ($lowercase) {
-            $url = '/' . rtrim(implode('/', array_map('snake_case', explode('/', $this->getArgumentPath(true)))), '/');
+            $url = '/' . rtrim(implode('/',
+                    array_map('snake_case', explode('/', $this->getArgumentPath(true)))), '/');
             $url = (implode('/', array_map('str_slug', explode('/', $url))));
+
             return $url;
         }
 
@@ -239,6 +244,14 @@ class FileCommand extends GeneratorCommand
                 InputOption::VALUE_OPTIONAL,
                 'The type of file: model, view, controller, migration, seed',
                 'view'
+            ],
+            // optional for the generate:console
+            [
+                'command',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'The terminal command that should be assigned.',
+                'command:name'
             ],
         ], parent::getOptions());
     }

@@ -16,7 +16,7 @@ class SeedCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new database seed class';
+    protected $description = 'Create a new Database Seed class';
 
     /**
      * The type of class being generated.

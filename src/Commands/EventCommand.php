@@ -16,7 +16,7 @@ class EventCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new event class';
+    protected $description = 'Create a new Event class';
 
     /**
      * The type of class being generated.

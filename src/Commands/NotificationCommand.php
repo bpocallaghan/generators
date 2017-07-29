@@ -16,7 +16,7 @@ class NotificationCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new notification class';
+    protected $description = 'Create a new Notification class';
 
     /**
      * The type of class being generated.

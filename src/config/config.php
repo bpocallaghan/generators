@@ -54,21 +54,26 @@ return [
         'migration'    => ['path' => './database/migrations/'],
         'notification' => [
             'directory_namespace' => true,
-            'namespace' => '\Notifications',
-            'path'      => './app/Notifications/'
+            'namespace'           => '\Notifications',
+            'path'                => './app/Notifications/'
         ],
         'event'        => [
             'directory_namespace' => true,
-            'namespace' => '\Events',
-            'path'      => './app/Events/'
+            'namespace'           => '\Events',
+            'path'                => './app/Events/'
         ],
         'listener'     => [
             'directory_namespace' => true,
-            'namespace' => '\Listeners',
-            'path'      => './app/Listeners/'
+            'namespace'           => '\Listeners',
+            'path'                => './app/Listeners/'
         ],
         'trait'        => [
             'directory_namespace' => true,
+        ],
+        'console'      => [
+            'directory_namespace' => true,
+            'namespace'           => '\Console\Commands',
+            'path'                => './app/Console/Commands/'
         ],
     ],
 
@@ -115,4 +120,5 @@ return [
     'listener_stub'               => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/listener.stub',
     'many_many_relationship_stub' => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/many_many_relationship.stub',
     'trait_stub'                  => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/trait.stub',
+    'console_stub'                => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/console.stub',
 ];

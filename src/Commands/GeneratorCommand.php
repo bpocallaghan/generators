@@ -33,6 +33,11 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected $resourceLowerCase = "";
 
+    /**
+     * @var string
+     */
+    protected $extraOption = '';
+
     function __construct(Filesystem $files, Composer $composer)
     {
         parent::__construct($files);
@@ -47,14 +52,21 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     public function fire()
     {
-        $this->call('generate:file', [
+        $args = [
             'name'    => $this->argumentName(),
             '--type'  => strtolower($this->type), // settings type
             '--plain' => $this->optionPlain(), // if plain stub
             '--force' => $this->optionForce(), // force override
             '--stub'  => $this->optionStub(), // custom stub name
             '--name'  => $this->optionName(), // custom name for file
-        ]);
+        ];
+
+        // extra custom option
+        if ($this->extraOption) {
+            $args["--{$this->extraOption}"] = $this->optionExtra();
+        }
+
+        $this->call('generate:file', $args);
     }
 
     /**

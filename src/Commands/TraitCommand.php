@@ -16,7 +16,7 @@ class TraitCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new trait file';
+    protected $description = 'Create a new Trait file';
 
     /**
      * The type of class being generated.
