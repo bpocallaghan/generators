@@ -18,6 +18,7 @@ php artisan generate:migration:pivot
 php artisan generate:seed
 php artisan generate:resource
 php artisan generate:repository
+php artisan generate:contract
 php artisan generate:notification
 php artisan generate:event
 php artisan generate:listener
@@ -93,6 +94,7 @@ Run `php artisan` command to see the new commands in the `generate:*` section
 - [Database Seeders](#database-seeders)
 - [Resource](#resource)
 - [Repository](#repository)
+- [Contract](#contract)
 - [Notifications](#notifications)
 - [Events and Listeners](#events-and-listeners)
 - [Trait](#trait)
@@ -178,6 +180,12 @@ php artisan generate:resource bar --schema="title:string, body:text, slug:string
 php artisan generate:repository Posts
 ```
 This will generate a Posts Repository file to be used in your controller.
+
+### Contract
+```
+php artisan generate:contract Cache
+```
+This will generate a Cache Contract file to be used with your repositories.
 
 ### Notifications
 

@@ -91,6 +91,11 @@ return [
             'namespace'           => '\Repositories',
             'path'                => './app/Repositories/'
         ],
+        'contract'     => [
+            'directory_namespace' => true,
+            'namespace'           => '\Contracts',
+            'path'                => './app/Contracts/'
+        ],
     ],
 
     /*
@@ -140,4 +145,5 @@ return [
     'console_stub'                => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/console.stub',
     'middleware_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/middleware.stub',
     'repository_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/repository.stub',
+    'contract_stub'               => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/contract.stub',
 ];

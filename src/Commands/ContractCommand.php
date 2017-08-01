@@ -2,26 +2,26 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
-class RepositoryCommand extends GeneratorCommand
+class ContractCommand extends GeneratorCommand
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'generate:repository';
+    protected $name = 'generate:contracts';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new Repository class';
+    protected $description = 'Create a new Contract class';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Repository';
+    protected $type = 'Contract';
 }
