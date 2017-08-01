@@ -24,6 +24,7 @@ php artisan generate:event-listener
 php artisan generate:trait
 php artisan generate:job
 php artisan generate:console
+php artisan generate:middleware
 php artisan generate:file
 ```
 
@@ -208,6 +209,12 @@ php artisan generate:console SendEmails
 php artisan generate:console SendEmails --command=send:emails
 ```
 This will generate a SendEmails Artisan Command file. The --command option is optional.
+
+### Middleware
+```
+php artisan generate:middleware AuthenticateAdmin
+```
+This will generate a AuthenticateAdmin Middleware file.
 
 ### Configuration
 

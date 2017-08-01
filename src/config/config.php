@@ -80,6 +80,11 @@ return [
             'namespace'           => '\Console\Commands',
             'path'                => './app/Console/Commands/'
         ],
+        'middleware'   => [
+            'directory_namespace' => true,
+            'namespace'           => '\Http\Middleware',
+            'path'                => './app/Http/Middleware/'
+        ],
     ],
 
     /*
@@ -127,4 +132,5 @@ return [
     'trait_stub'                  => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/trait.stub',
     'job_stub'                    => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/job.stub',
     'console_stub'                => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/console.stub',
+    'middleware_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/middleware.stub',
 ];

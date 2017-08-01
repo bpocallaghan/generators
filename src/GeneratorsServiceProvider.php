@@ -53,6 +53,8 @@ class GeneratorsServiceProvider extends ServiceProvider
         $this->registerCommand('JobCommand', 'job');
         $this->registerCommand('ConsoleCommand', 'console');
 
+        $this->registerCommand('MiddlewareCommand', 'middleware');
+
         $this->registerCommand('ResourceCommand', 'resource');
         $this->registerCommand('FileCommand', 'file');
     }
