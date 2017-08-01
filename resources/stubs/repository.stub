@@ -1,0 +1,20 @@
+<?php
+
+namespace {{namespace}};
+
+use App\Models\{{model}};
+
+class {{class}}
+{
+    protected ${{resourceLowercase}};
+
+    public function __construct({{model}} ${{resourceLowercase}})
+    {
+        $this->{{resourceLowercase}} = ${{resourceLowercase}};
+    }
+
+    public function all()
+    {
+        return $this->{{resourceLowercase}}->all();
+    }
+}

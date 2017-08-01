@@ -17,6 +17,7 @@ php artisan generate:migration
 php artisan generate:migration:pivot
 php artisan generate:seed
 php artisan generate:resource
+php artisan generate:repository
 php artisan generate:notification
 php artisan generate:event
 php artisan generate:listener
@@ -91,9 +92,13 @@ Run `php artisan` command to see the new commands in the `generate:*` section
 - [Pivot Tables](#pivot-tables)
 - [Database Seeders](#database-seeders)
 - [Resource](#resource)
+- [Repository](#repository)
 - [Notifications](#notifications)
 - [Events and Listeners](#events-and-listeners)
 - [Trait](#trait)
+- [Job](#job)
+- [Console](#console)
+- [Middleware](#middleware)
 - [File](#file)
 - [Configuration](#configuration)
 
@@ -168,6 +173,12 @@ php artisan generate:resource bar --schema="title:string, body:text, slug:string
 - This will generate a Bar model, BarsController, resources views (in config), create_bars_table migration, BarTableSeeder
 - In the config there is a `resource_views` array, you can specify the views that you want to generate there, just make sure the stub exist.
 
+### Repository
+```
+php artisan generate:repository Posts
+```
+This will generate a Posts Repository file to be used in your controller.
+
 ### Notifications
 
 ```
@@ -214,7 +225,7 @@ This will generate a SendEmails Artisan Command file. The --command option is op
 ```
 php artisan generate:middleware AuthenticateAdmin
 ```
-This will generate a AuthenticateAdmin Middleware file.
+This will generate an AuthenticateAdmin Middleware file.
 
 ### Configuration
 

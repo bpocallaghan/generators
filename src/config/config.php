@@ -85,6 +85,12 @@ return [
             'namespace'           => '\Http\Middleware',
             'path'                => './app/Http/Middleware/'
         ],
+        'repository'   => [
+            'directory_namespace' => true,
+            //'postfix'             => 'Repository',
+            'namespace'           => '\Repositories',
+            'path'                => './app/Repositories/'
+        ],
     ],
 
     /*
@@ -133,4 +139,5 @@ return [
     'job_stub'                    => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/job.stub',
     'console_stub'                => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/console.stub',
     'middleware_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/middleware.stub',
+    'repository_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/repository.stub',
 ];
