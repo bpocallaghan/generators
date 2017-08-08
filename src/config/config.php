@@ -48,7 +48,8 @@ return [
             'path'                => './app/Http/Controllers/',
             'postfix'             => 'Controller',
             'directory_namespace' => true,
-            'dump_autoload'       => true
+            'dump_autoload'       => true,
+            'repository_contract' => false,
         ],
         'seed'         => ['path' => './database/seeds/', 'postfix' => 'TableSeeder'],
         'migration'    => ['path' => './database/migrations/'],
@@ -87,14 +88,15 @@ return [
         ],
         'repository'   => [
             'directory_namespace' => true,
-            //'postfix'             => 'Repository',
+            'postfix'             => 'Repository',
             'namespace'           => '\Repositories',
             'path'                => './app/Repositories/'
         ],
         'contract'     => [
             'directory_namespace' => true,
             'namespace'           => '\Contracts',
-            'path'                => './app/Contracts/'
+            'postfix'             => 'Repository',
+            'path'                => './app/Contracts/',
         ],
     ],
 
@@ -125,6 +127,7 @@ return [
     'migration_plain_stub'        => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/migration.plain.stub',
     'controller_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/controller.stub',
     'controller_plain_stub'       => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/controller.plain.stub',
+    'controller_repository_stub'  => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/controller_repository.stub',
     'pivot_stub'                  => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/pivot.stub',
     'seed_stub'                   => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/seed.stub',
     'seed_plain_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/seed.plain.stub',

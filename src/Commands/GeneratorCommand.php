@@ -222,6 +222,42 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
     }
 
     /**
+     * Get the name of the contract
+     * @param null $name
+     * @return string
+     */
+    protected function getContractName($name = null)
+    {
+        $name = isset($name) ? $name : $this->resource;
+
+        $name = str_singular(ucwords(camel_case(class_basename($name))));
+
+        return $name . config('generators.settings.contract.postfix');
+    }
+
+    /**
+     * Get the namespace of where contract was created
+     * @param bool $withApp
+     * @return string
+     */
+    protected function getContractNamespace($withApp = true)
+    {
+        // get path from settings
+        $path = config('generators.settings.contract.namespace') . '\\';
+
+        // dont add the default namespace if specified not to in config
+        $path .= str_replace('/', '\\', $this->getArgumentPath());
+
+        $pieces = array_map('ucfirst', explode('/', $path));
+
+        $namespace = ($withApp === true ? $this->getAppNamespace() : '') . implode('\\', $pieces);
+
+        $namespace = rtrim(ltrim(str_replace('\\\\', '\\', $namespace), '\\'), '\\');
+
+        return $namespace;
+    }
+
+    /**
      * Get the path to the view file
      *
      * @param $name

@@ -24,4 +24,28 @@ class RepositoryCommand extends GeneratorCommand
      * @var string
      */
     protected $type = 'Repository';
+
+    /**
+     * Add an extra option to use for generating the file
+     * @var string
+     */
+    //protected $extraOption = 'contract';
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    /*protected function getOptions()
+    {
+        return array_merge([
+            [
+                'contract',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'The name of the contract interface to implement.',
+                'Contract'
+            ],
+        ], parent::getOptions());
+    }*/
 }

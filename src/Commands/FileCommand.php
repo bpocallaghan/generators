@@ -173,6 +173,12 @@ class FileCommand extends GeneratorCommand
         // console command name
         $stub = str_replace('{{command}}', $this->option('command'), $stub);
 
+        // contract file name
+        $stub = str_replace('{{contract}}', $this->getContractName(), $stub);
+
+        // contract namespace
+        $stub = str_replace('{{contractNamespace}}', $this->getContractNamespace(), $stub);
+
         return $stub;
     }
 

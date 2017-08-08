@@ -28,6 +28,8 @@ class ResourceCommand extends GeneratorCommand
      */
     protected $type = 'Resource';
 
+    private $repositoryContract = false;
+
     /**
      * Execute the console command.
      *
@@ -40,13 +42,15 @@ class ResourceCommand extends GeneratorCommand
 
         $this->callModel();
         $this->callView();
+        $this->callRepository();
         $this->callController();
         $this->callMigration();
         $this->callSeed();
         $this->callMigrate();
 
         $this->info('All Done!');
-        $this->info('Remember to add ' . "`Route::resource('" . str_replace('_', '-', $this->getCollectionName()) . "', '" . $this->getResourceControllerName() . "');`" . ' in `routes\\web.php`');
+        $this->info('Remember to add ' . "`Route::resource('" . str_replace('_', '-',
+                $this->getCollectionName()) . "', '" . $this->getResourceControllerName() . "');`" . ' in `routes\\web.php`');
     }
 
     /**
@@ -60,14 +64,14 @@ class ResourceCommand extends GeneratorCommand
         $resourceStringLength = strlen($this->getResourceOnly());
 
         if ($resourceStringLength > 18) {
-            $ans = $this->confirm("Your resource {$resourceString} may have too many characters to use for many to many relationships. The length is {$resourceStringLength}. Continue? [yes|no]");
+            $ans = $this->confirm("Your resource {$resourceString} may have too many characters to use for many to many relationships. The length is {$resourceStringLength}. Continue?");
             if ($ans === false) {
                 echo "generate:resource cancelled!";
                 die;
             }
         }
 
-        if ($this->confirm("Create a $name model? [yes|no]")) {
+        if ($this->confirm("Create a $name model?")) {
             $this->callCommandFile('model');
         }
     }
@@ -77,7 +81,7 @@ class ResourceCommand extends GeneratorCommand
      */
     private function callView()
     {
-        if ($this->confirm("Create crud views for the $this->resource resource? [yes|no]")) {
+        if ($this->confirm("Create crud views for the $this->resource resource?")) {
             $views = config('generators.resource_views');
             foreach ($views as $key => $name) {
                 $resource = $this->argument('resource');
@@ -85,7 +89,29 @@ class ResourceCommand extends GeneratorCommand
                     $resource = str_replace('.', '/', $resource);
                 }
 
-                $this->callCommandFile('view', $this->getViewPath($resource), $key, ['--name' => $name]);
+                $this->callCommandFile('view', $this->getViewPath($resource), $key,
+                    ['--name' => $name]);
+            }
+        }
+    }
+
+    /**
+     * Generate the Repository / Contract Pattern files
+     */
+    private function callRepository()
+    {
+        // check the config
+        if (config('generators.settings.controller.repository_contract')) {
+            if ($this->confirm("Create a reposity and contract for the $this->resource resource?")) {
+                $name = $this->getModelName();
+
+                $this->repositoryContract = true;
+
+                $this->callCommandFile('contract', $name);
+                $this->callCommandFile('repository', $name);
+
+                //$contract = $name . config('generators.settings.contract.postfix');
+                //$this->callCommandFile('repository', $name, ['--contract' => $contract]);
             }
         }
     }
@@ -97,11 +123,17 @@ class ResourceCommand extends GeneratorCommand
     {
         $name = $this->getResourceControllerName();
 
-        if ($this->confirm("Create a controller ($name) for the $this->resource resource? [yes|no]")) {
+        if ($this->confirm("Create a controller ($name) for the $this->resource resource?")) {
             $arg = $this->getArgumentResource();
-            $name = substr_replace($arg, str_plural($this->resource), strrpos($arg, $this->resource), strlen($this->resource));
+            $name = substr_replace($arg, str_plural($this->resource),
+                strrpos($arg, $this->resource), strlen($this->resource));
 
-            $this->callCommandFile('controller', $name);
+            if (!$this->repositoryContract) {
+                $this->callCommandFile('controller', $name);
+            }
+            else {
+                $this->callCommandFile('controller', $name, 'controller_repository');
+            }
         }
     }
 
@@ -112,7 +144,7 @@ class ResourceCommand extends GeneratorCommand
     {
         $name = $this->getMigrationName($this->option('migration'));
 
-        if ($this->confirm("Create a migration ($name) for the $this->resource resource? [yes|no]")) {
+        if ($this->confirm("Create a migration ($name) for the $this->resource resource?")) {
             $this->callCommand('migration', $name, [
                 '--model'  => false,
                 '--schema' => $this->option('schema')
@@ -127,7 +159,7 @@ class ResourceCommand extends GeneratorCommand
     {
         $name = $this->getSeedName() . config('generators.settings.seed.postfix');
 
-        if ($this->confirm("Create a seed ($name) for the $this->resource resource? [yes|no]")) {
+        if ($this->confirm("Create a seed ($name) for the $this->resource resource?")) {
             $this->callCommandFile('seed');
         }
     }
@@ -137,7 +169,7 @@ class ResourceCommand extends GeneratorCommand
      */
     protected function callMigrate()
     {
-        if ($this->confirm('Migrate the database? [yes|no]')) {
+        if ($this->confirm('Migrate the database?')) {
             $this->call('migrate');
         }
     }
@@ -222,7 +254,8 @@ class ResourceCommand extends GeneratorCommand
      */
     private function getResourceControllerName()
     {
-        return $this->getControllerName(str_plural($this->resource), false) . config('generators.settings.controller.postfix');
+        return $this->getControllerName(str_plural($this->resource),
+                false) . config('generators.settings.controller.postfix');
     }
 
     /**
@@ -257,7 +290,13 @@ class ResourceCommand extends GeneratorCommand
     {
         return array_merge(parent::getOptions(), [
             ['migration', null, InputOption::VALUE_OPTIONAL, 'Optional migration name', null],
-            ['schema', 's', InputOption::VALUE_OPTIONAL, 'Optional schema to be attached to the migration', null],
+            [
+                'schema',
+                's',
+                InputOption::VALUE_OPTIONAL,
+                'Optional schema to be attached to the migration',
+                null
+            ],
         ]);
     }
 }
