@@ -33,6 +33,11 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected $resourceLowerCase = "";
 
+    /**
+     * @var string
+     */
+    protected $extraOption = '';
+
     function __construct(Filesystem $files, Composer $composer)
     {
         parent::__construct($files);
@@ -47,14 +52,21 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     public function fire()
     {
-        $this->call('generate:file', [
+        $args = [
             'name'    => $this->argumentName(),
             '--type'  => strtolower($this->type), // settings type
             '--plain' => $this->optionPlain(), // if plain stub
             '--force' => $this->optionForce(), // force override
             '--stub'  => $this->optionStub(), // custom stub name
             '--name'  => $this->optionName(), // custom name for file
-        ]);
+        ];
+
+        // extra custom option
+        if ($this->extraOption) {
+            $args["--{$this->extraOption}"] = $this->optionExtra();
+        }
+
+        $this->call('generate:file', $args);
     }
 
     /**
@@ -192,6 +204,60 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
     }
 
     /**
+     * Get the plural uppercase name of the resouce
+     * @param null $name
+     * @return null|string
+     */
+    protected function getCollectionUpperName($name = null)
+    {
+        $name = str_plural($this->getResourceName($name));
+
+        $pieces = explode('_', $name);
+        $name = "";
+        foreach ($pieces as $k => $str) {
+            $name .= ucfirst($str);
+        }
+
+        return $name;
+    }
+
+    /**
+     * Get the name of the contract
+     * @param null $name
+     * @return string
+     */
+    protected function getContractName($name = null)
+    {
+        $name = isset($name) ? $name : $this->resource;
+
+        $name = str_singular(ucwords(camel_case(class_basename($name))));
+
+        return $name . config('generators.settings.contract.postfix');
+    }
+
+    /**
+     * Get the namespace of where contract was created
+     * @param bool $withApp
+     * @return string
+     */
+    protected function getContractNamespace($withApp = true)
+    {
+        // get path from settings
+        $path = config('generators.settings.contract.namespace') . '\\';
+
+        // dont add the default namespace if specified not to in config
+        $path .= str_replace('/', '\\', $this->getArgumentPath());
+
+        $pieces = array_map('ucfirst', explode('/', $path));
+
+        $namespace = ($withApp === true ? $this->getAppNamespace() : '') . implode('\\', $pieces);
+
+        $namespace = rtrim(ltrim(str_replace('\\\\', '\\', $namespace), '\\'), '\\');
+
+        return $namespace;
+    }
+
+    /**
      * Get the path to the view file
      *
      * @param $name
@@ -208,12 +274,41 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
             }
         }
 
-
         $name = implode('.', $pieces);
 
         //$name = implode('.', array_map('str_plural', explode('/', $name)));
 
         return strtolower(rtrim(ltrim($name, '.'), '.'));
+    }
+
+    /**
+     * Remove 'admin' and 'webiste' if first in path
+     * The Base Controller has it as a 'prefix path'
+     *
+     * @param $name
+     * @return string
+     */
+    protected function getViewPathFormatted($name)
+    {
+        $path = $this->getViewPath($name);
+
+        if (strpos($path, 'admin.') === 0) {
+            $path = substr($path, 6);
+        }
+
+        if (strpos($path, 'admins.') === 0) {
+            $path = substr($path, 7);
+        }
+
+        if (strpos($path, 'website.') === 0) {
+            $path = substr($path, 8);
+        }
+
+        if (strpos($path, 'websites.') === 0) {
+            $path = substr($path, 9);
+        }
+
+        return $path;
     }
 
     /**

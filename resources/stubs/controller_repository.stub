@@ -6,10 +6,27 @@ use Redirect;
 use {{rootNamespace}}Http\Requests;
 use {{rootNamespace}}Models\{{model}};
 use Illuminate\Http\Request;
+use {{contractNamespace}}\{{contract}};
 use {{rootNamespace}}Http\Controllers\Admin\AdminController;
 
 class {{class}} extends AdminController
 {
+    /**
+     * The {{contract}} instance.
+     *
+     * @var {{contractNamespace}}\{{contract}}
+     */
+    protected ${{resourceLowercase}};
+
+    /**
+     * {{contract}} constructor.
+     * @param {{contract}} ${{resourceLowercase}}
+     */
+    public function __construct({{contract}} ${{resourceLowercase}})
+    {
+        $this->{{resourceLowercase}} = ${{resourceLowercase}};
+    }
+
 	/**
 	 * Display a listing of {{resource}}.
 	 *

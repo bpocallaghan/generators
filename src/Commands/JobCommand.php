@@ -2,26 +2,26 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
-class ControllerCommand extends GeneratorCommand
+class JobCommand extends GeneratorCommand
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'generate:controller';
+    protected $name = 'generate:job';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new resource Controller class';
+    protected $description = 'Create a new Job class';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Controller';
+    protected $type = 'Job';
 }

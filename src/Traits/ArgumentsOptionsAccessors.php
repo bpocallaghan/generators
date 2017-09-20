@@ -64,4 +64,12 @@ trait ArgumentsOptionsAccessors
     {
         return $this->option('name');
     }
+
+    /**
+     * Get the value for the extra option
+     */
+    protected function optionExtra()
+    {
+        return $this->option($this->extraOption);
+    }
 }

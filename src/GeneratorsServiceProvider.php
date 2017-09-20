@@ -42,6 +42,21 @@ class GeneratorsServiceProvider extends ServiceProvider
         $this->registerCommand('MigrationPivotCommand', 'migrate.pivot');
         $this->registerCommand('SeedCommand', 'seed');
 
+        $this->registerCommand('NotificationCommand', 'notification');
+
+        $this->registerCommand('EventCommand', 'event');
+        $this->registerCommand('ListenerCommand', 'listener');
+        $this->registerCommand('EventGenerateCommand', 'event.generate');
+
+        $this->registerCommand('TraitCommand', 'trait');
+        $this->registerCommand('RepositoryCommand', 'repository');
+        $this->registerCommand('ContractCommand', 'contract');
+
+        $this->registerCommand('JobCommand', 'job');
+        $this->registerCommand('ConsoleCommand', 'console');
+
+        $this->registerCommand('MiddlewareCommand', 'middleware');
+
         $this->registerCommand('ResourceCommand', 'resource');
         $this->registerCommand('FileCommand', 'file');
     }

@@ -2,10 +2,11 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
-use Symfony\Component\Console\Input\InputOption;
 use Illuminate\Console\DetectsApplicationNamespace;
+use Illuminate\Support\Str;
+use Symfony\Component\Console\Input\InputOption;
 
-class FileCommand extends GeneratorCommand
+class ListenerCommand extends GeneratorCommand
 {
     use DetectsApplicationNamespace;
 
@@ -14,21 +15,58 @@ class FileCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'generate:file';
+    protected $name = 'generate:listener';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a file from a stub in the config';
+    protected $description = 'Create a new Event Listener class';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'File';
+    protected $type = 'Listener';
+
+    /**
+     * Execute the console command.
+     *
+     * @return void
+     */
+    public function fire()
+    {
+        if (!$this->option('event')) {
+            return $this->error('Missing required option: --event=*NameOfEvent*');
+        }
+
+        // setup
+        $this->setSettings();
+        $this->getResourceName($this->getUrl(false));
+
+        // check the path where to create and save file
+        $path = $this->getPath('');
+        if ($this->files->exists($path) && $this->optionForce() === false) {
+            return $this->error($this->type . ' already exists!');
+        }
+
+        // make all the directories
+        $this->makeDirectory($path);
+
+        // build file and save it at location
+        $this->files->put($path, $this->buildClass($this->argumentName()));
+
+        // output to console
+        $this->info(ucfirst($this->option('type')) . ' created successfully.');
+        $this->info('- ' . $path);
+
+        // if we need to run "composer dump-autoload"
+        if ($this->settings['dump_autoload'] === true) {
+            $this->composer->dumpAutoloads();
+        }
+    }
 
     /**
      * Get the filename of the file to generate
@@ -60,39 +98,6 @@ class FileCommand extends GeneratorCommand
         }
 
         return $this->settings['prefix'] . $name . $this->settings['postfix'] . $this->settings['file_type'];
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function fire()
-    {
-        // setup
-        $this->setSettings();
-        $this->getResourceName($this->getUrl(false));
-
-        // check the path where to create and save file
-        $path = $this->getPath('');
-        if ($this->files->exists($path) && $this->optionForce() === false) {
-            return $this->error($this->type . ' already exists!');
-        }
-
-        // make all the directories
-        $this->makeDirectory($path);
-
-        // build file and save it at location
-        $this->files->put($path, $this->buildClass($this->argumentName()));
-
-        // output to console
-        $this->info(ucfirst($this->option('type')) . ' created successfully.');
-        $this->info('- ' . $path);
-
-        // if we need to run "composer dump-autoload"
-        if ($this->settings['dump_autoload'] === true) {
-            $this->composer->dumpAutoloads();
-        }
     }
 
     /**
@@ -164,20 +169,23 @@ class FileCommand extends GeneratorCommand
         // foos.bars
         $stub = str_replace('{{view}}', $this->getViewPath($this->getUrl(false)), $stub);
 
-        // foos.bars (remove admin or website if first word)
-        $stub = str_replace('{{viewPath}}', $this->getViewPathFormatted($this->getUrl(false)), $stub);
-
         // bars
         $stub = str_replace('{{table}}', $this->getTableName($url), $stub);
 
-        // console command name
-        $stub = str_replace('{{command}}', $this->option('command'), $stub);
+        // event - listeners
+        $event = $this->option('event');
 
-        // contract file name
-        $stub = str_replace('{{contract}}', $this->getContractName(), $stub);
+        if (!Str::startsWith($event, $this->laravel->getNamespace()) && !Str::startsWith($event,
+                'Illuminate')
+        ) {
+            $event = $this->laravel->getNamespace() . 'Events\\' . $event;
+        }
 
-        // contract namespace
-        $stub = str_replace('{{contractNamespace}}', $this->getContractNamespace(), $stub);
+        // event class name
+        $stub = str_replace('{{event}}', class_basename($event), $stub);
+
+        // event with namespace
+        $stub = str_replace('{{eventAndNamespace}}', $event, $stub);
 
         return $stub;
     }
@@ -244,21 +252,14 @@ class FileCommand extends GeneratorCommand
     protected function getOptions()
     {
         return array_merge([
+            ['event', 'e', InputOption::VALUE_REQUIRED, 'The event class being listened for.'],
             [
                 'type',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'The type of file: model, view, controller, migration, seed',
-                'view'
-            ],
-            // optional for the generate:console
-            [
-                'command',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'The terminal command that should be assigned.',
-                'command:name'
-            ],
+                'Type is listner',
+                'listener'
+            ]
         ], parent::getOptions());
     }
 }

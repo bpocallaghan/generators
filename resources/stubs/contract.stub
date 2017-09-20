@@ -1,0 +1,36 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Http\Request;
+
+/**
+* Interface {{class}}
+*/
+interface {{class}}
+{
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getColumn(Request $request);
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getList(Request $request);
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function create(Request $request);
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     */
+    public function update(Request $request, $id);
+}

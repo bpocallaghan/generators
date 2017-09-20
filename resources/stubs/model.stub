@@ -5,6 +5,10 @@ namespace {{namespace}};
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class {{class}}
+ * @mixin \Eloquent
+ */
 class {{class}} extends Model
 {
     use SoftDeletes;

@@ -21,7 +21,7 @@ class MigrationCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new migration class, and apply schema at the same time';
+    protected $description = 'Create a new Migration class, and apply schema at the same time';
 
     /**
      * The type of class being generated.

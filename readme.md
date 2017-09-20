@@ -1,17 +1,11 @@
 # Laravel 5 File Generators
 
-Laravel 5.1, use tag 2.1.3,
-Laravel 5.2, use tag 3+,
-Laravel 5.3, use tag 3+
-
 Custom Laravel 5 File Generators with a config file and publishable stubs.
-You can add new stubs in the config.
-This package can be used by anyone, but keep in mind that it is optimized for my personal workflow.
-Please let me know about any issues or new features you would like to have.
-Tag 3+ uses Admin LTE stubs.
+You can publish the stubs. You can add your own stubs to generate.
 
-###Interested in a starter project where the current stubs are being used.
-###[Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
+Interested in a laravel admin starter project where the package is being used. [Admin Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
+
+Laravel 5.1, use tag 2.1.3, Laravel 5.2 or Laravel 5.3, use branch 3, Laravel 5.4 use latest
 
 ## Commands
 ```bash
@@ -23,6 +17,16 @@ php artisan generate:migration
 php artisan generate:migration:pivot
 php artisan generate:seed
 php artisan generate:resource
+php artisan generate:repository
+php artisan generate:contract
+php artisan generate:notification
+php artisan generate:event
+php artisan generate:listener
+php artisan generate:event-listener
+php artisan generate:trait
+php artisan generate:job
+php artisan generate:console
+php artisan generate:middleware
 php artisan generate:file
 ```
 
@@ -72,9 +76,9 @@ You'll only want to use these generators for local development, add the provider
 ```php
 public function register()
 {
-	if ($this->app->environment() == 'local') {
-		$this->app->register(\Bpocallaghan\Generators\GeneratorsServiceProvider::class);
-	}
+    if ($this->app->environment() == 'local') {
+        $this->app->register(\Bpocallaghan\Generators\GeneratorsServiceProvider::class);
+    }
 }
 ```
 
@@ -89,6 +93,14 @@ Run `php artisan` command to see the new commands in the `generate:*` section
 - [Pivot Tables](#pivot-tables)
 - [Database Seeders](#database-seeders)
 - [Resource](#resource)
+- [Repository](#repository)
+- [Contract](#contract)
+- [Notifications](#notifications)
+- [Events and Listeners](#events-and-listeners)
+- [Trait](#trait)
+- [Job](#job)
+- [Console](#console)
+- [Middleware](#middleware)
 - [File](#file)
 - [Configuration](#configuration)
 
@@ -125,7 +137,7 @@ php artisan generate:controller BarController --plain
 
 ### Migrations
 
-This is the same as [Jeffrey Way's](https://github.com/laracasts/Laravel-5-Generators-Extended)
+This is very similar as [Jeffrey Way's](https://github.com/laracasts/Laravel-5-Generators-Extended)
 
 ```
 php artisan generate:migration create_users_table
@@ -134,17 +146,13 @@ php artisan generate:migration create_users_table --force
 php artisan generate:migration create_posts_table --schema="title:string, body:text, slug:string:unique, published_at:date"
 ```
 
-- [Documentation in detail](https://github.com/laracasts/Laravel-5-Generators-Extended#migrations-with-schema)
-
 ### Pivot Tables
 
-This is the same as [Jeffrey Way's](https://github.com/laracasts/Laravel-5-Generators-Extended)
+This is very similar as [Jeffrey Way's](https://github.com/laracasts/Laravel-5-Generators-Extended)
 
 ```
 php artisan generate:migration:pivot tags posts
 ```
-
-- [Documentation in detail](https://github.com/laracasts/Laravel-5-Generators-Extended#pivot-tables)
 
 ### Database Seeders
 
@@ -153,7 +161,7 @@ php artisan generate:seed bar
 php artisan generate:seed BarTableSeeder
 ```
 
-- The `TableSeeder` will be added if needed.
+- The `TableSeeder` suffix will be added if needed.
 
 ### Resource
 
@@ -166,6 +174,67 @@ php artisan generate:resource bar --schema="title:string, body:text, slug:string
 
 - This will generate a Bar model, BarsController, resources views (in config), create_bars_table migration, BarTableSeeder
 - In the config there is a `resource_views` array, you can specify the views that you want to generate there, just make sure the stub exist.
+- This will also ask you to generate the 'repository - contract pattern' files.
+
+### Repository
+```
+php artisan generate:repository Posts
+```
+This will generate a Posts Repository file to be used in your controller.
+
+### Contract
+```
+php artisan generate:contract Cache
+```
+This will generate a Cache Contract file to be used with your repositories.
+
+### Notifications
+
+```
+php artisan generate:notification UserRegistered
+```
+
+This will generate a UserRegistered notification.
+Laravel provides support for sending notifications across a variety of delivery channels, including mail, SMS (via Nexmo), and Slack. Notifications may also be stored in a database so they may be displayed in your web interface.
+
+### Events and Listeners
+
+```
+php artisan generate:event InvoiceWasPaid
+php artisan generate:listener NotifyUserAboutPayment --event=InvoiceWasPaid
+php artisan generate:event-listener
+```
+This will generate the event and listener.
+Laravel's events provides a simple observer implementation, allowing you to subscribe and listen for various events that occur in your application
+
+`php artisan generate:event-listener `
+Will generate all the missing events and listeners defined in your EventServiceProvider.
+
+### Trait
+```
+php artisan generate:trait Http\Controllers\Traits\Bar
+```
+This will generate a FooBar Trait file. The command will use the name as your namespace.
+`generate:trait Foo` will create a file in `app/Foo.php`, `generate:trait Foo\Bar` will create a file in `app/Foo/Bar.php`.
+
+### Job
+```
+php artisan generate:job SendReminderEmail
+```
+This will generate a SendReminderEmail Job file.
+
+### Console (Artisan Command)
+```
+php artisan generate:console SendEmails
+php artisan generate:console SendEmails --command=send:emails
+```
+This will generate a SendEmails Artisan Command file. The --command option is optional.
+
+### Middleware
+```
+php artisan generate:middleware AuthenticateAdmin
+```
+This will generate an AuthenticateAdmin Middleware file.
 
 ### Configuration
 
@@ -180,7 +249,7 @@ You can also add new stubs.
 
 This will also copy all the stubs to `/resources/stubs/`.
 Here you can make changes to the current stubs, add your own boilerplate / comments to the files.
-You can also add your own stubs here.
+You can also add your own stubs here and specify it in the config to be used.
 
 
 ### File
@@ -203,7 +272,7 @@ art=php artisan
 model=php artisan generate:model
 view=php artisan generate:view
 view:index=php artisan generate:view:index
-view:add_edit=php artisan generate:view:add_edit
+view:create_edit=php artisan generate:view:create_edit
 view:show=php artisan generate:view:show
 controller=php artisan generate:controller
 migration=php artisan generate:migration
@@ -217,11 +286,9 @@ resource=php artisan generate:resource
 - Thank you [Taylor Ottwell](https://github.com/taylorotwell) for [Laravel](http://laravel.com/).
 - Thank you [Jeffrey Way](https://github.com/JeffreyWay) for the awesome resources at [Laracasts](https://laracasts.com/).
 
-## TODO
-
-- Provide an example
-
 ## My other Packages
 
-- [Laravel 5 Flash a bootstrap alert](https://github.com/bpocallaghan/alert)
-- [Laravel 5 Flash Notifications with icons and animations and with a timeout](https://github.com/bpocallaghan/notify)
+- [Notify](https://github.com/bpocallaghan/notify) Laravel 5 Flash Notifications with icons and animations and with a timeout
+- [Alert](https://github.com/bpocallaghan/alert) A helper package to flash a bootstrap alert to the browser via a Facade or a helper function.
+- [Impersonate User](https://github.com/bpocallaghan/impersonate) This allows you to authenticate as any of your customers.
+- [Sluggable](https://github.com/bpocallaghan/sluggable) Provides a HasSlug trait that will generate a unique slug when saving your Laravel Eloquent model.
