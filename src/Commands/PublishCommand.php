@@ -25,7 +25,7 @@ class PublishCommand extends GeneratorCommand
     /**
      * Execute the command
      */
-    public function fire()
+    public function handle()
     {
         $this->copyConfigFile();
         $this->copyStubsDirectory();

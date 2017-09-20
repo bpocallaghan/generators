@@ -35,7 +35,7 @@ class ResourceCommand extends GeneratorCommand
      *
      * @return void
      */
-    public function fire()
+    public function handle()
     {
         $this->resource = $this->getResourceOnly();
         $this->settings = config('generators.defaults');

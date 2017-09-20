@@ -42,7 +42,7 @@ class MigrationCommand extends GeneratorCommand
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         $this->meta = (new NameParser)->parse($this->argumentName());
 

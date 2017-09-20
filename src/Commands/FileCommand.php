@@ -67,7 +67,7 @@ class FileCommand extends GeneratorCommand
      *
      * @return void
      */
-    public function fire()
+    public function handle()
     {
         // setup
         $this->setSettings();

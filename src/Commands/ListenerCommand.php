@@ -36,7 +36,7 @@ class ListenerCommand extends GeneratorCommand
      *
      * @return void
      */
-    public function fire()
+    public function handle()
     {
         if (!$this->option('event')) {
             return $this->error('Missing required option: --event=*NameOfEvent*');

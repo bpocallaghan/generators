@@ -32,9 +32,9 @@ class ModelCommand extends GeneratorCommand
      *
      * @return void
      */
-    public function fire()
+    public function handle()
     {
-        parent::fire();
+        parent::handle();
 
         if ($this->option('migration')) {
             $name = $this->getMigrationName();

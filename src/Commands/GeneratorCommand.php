@@ -50,7 +50,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      *
      * @return void
      */
-    public function fire()
+    public function handle()
     {
         $args = [
             'name'    => $this->argumentName(),

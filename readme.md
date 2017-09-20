@@ -5,7 +5,13 @@ You can publish the stubs. You can add your own stubs to generate.
 
 Interested in a laravel admin starter project where the package is being used. [Admin Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
 
-Laravel 5.1, use tag 2.1.3, Laravel 5.2 or Laravel 5.3, use branch 3, Laravel 5.4 use latest
+```
+Laravel 5.1 - v2.1.3
+Laravel 5.2 - v3.0.3
+Laravel 5.3 - v3.0.3
+Laravel 5.4 - v4.1.9
+Laravel 5.5 - v5.0.0+ 
+```
 
 ## Commands
 ```bash
@@ -70,7 +76,7 @@ Update your project's `composer.json` file.
 composer require bpocallaghan/generators --dev
 ```
 
-App the Service Provider
+Add the Service Provider (Laravel 5.5 has automatic discovery of packages)
 You'll only want to use these generators for local development, add the provider in `app/Providers/AppServiceProvider.php`:
 
 ```php

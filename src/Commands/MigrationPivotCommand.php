@@ -32,7 +32,7 @@ class MigrationPivotCommand extends GeneratorCommand
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         $name = $this->parseName($this->getNameInput());
         $path = $this->getPath($name);
