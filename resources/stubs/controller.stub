@@ -35,14 +35,13 @@ class {{class}} extends AdminController
 	/**
 	 * Store a newly created {{resource}} in storage.
 	 *
-	 * @param Request $request
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store()
 	{
-		$this->validate($request, {{model}}::$rules, {{model}}::$messages);
+		$attributes = request()->validate({{model}}::$rules, {{model}}::$messages);
 
-        $this->createEntry({{model}}::class, $request->all());
+        ${{resource}} = $this->createEntry({{model}}::class, $attributes);
 
         return redirect_to_resource();
 	}
@@ -73,14 +72,13 @@ class {{class}} extends AdminController
 	 * Update the specified {{resource}} in storage.
 	 *
 	 * @param {{model}}  ${{resource}}
-     * @param Request    $request
      * @return Response
      */
-    public function update({{model}} ${{resource}}, Request $request)
+    public function update({{model}} ${{resource}})
 	{
-		$this->validate($request, {{model}}::$rules, {{model}}::$messages);
+		$attributes = request()->validate({{model}}::$rules, {{model}}::$messages);
 
-        $this->updateEntry(${{resource}}, $request->all());
+        ${{resource}} = $this->updateEntry(${{resource}}, $attributes);
 
         return redirect_to_resource();
 	}
@@ -89,12 +87,11 @@ class {{class}} extends AdminController
 	 * Remove the specified {{resource}} from storage.
 	 *
 	 * @param {{model}}  ${{resource}}
-     * @param Request    $request
 	 * @return Response
 	 */
-	public function destroy({{model}} ${{resource}}, Request $request)
+	public function destroy({{model}} ${{resource}})
 	{
-		$this->deleteEntry(${{resource}}, $request);
+		$this->deleteEntry(${{resource}}, request());
 
         return redirect_to_resource();
 	}
