@@ -20,10 +20,8 @@
 					<table id="tbl-list" data-server="false" class="dt-table table table-striped table-bordered" cellspacing="0" width="100%">
 						<thead>
 						<tr>
-							<th>Title</th>
+							<th>{{model}}</th>
 							<th class="desktop">Description</th>
-							<th>Link</th>
-							<th>Image</th>
 							<th>Created</th>
 							<th>Action</th>
 						</tr>
@@ -31,12 +29,10 @@
 						<tbody>
 						@foreach ($items as $item)
 							<tr>
-								<td>{{ $item->title }}</td>
-								<td>{!! $item->description !!}</td>
-								<td>{{ link_to($item->action_link, $item->action_title, ['target' => '_blank']) }}</td>
-								<td>{!! image_row_link($item->image) !!}</td>
-								<td>{{ format_date($item->created_at) }}</td>
-								<td>{!! action_row($selectedNavigation->url, $item->id, $item->title, ['show', 'edit', 'delete']) !!}</td>
+								<td>{{ $item->name }}</td>
+								<td>{!! $item->content !!}</td>
+								<td>{{ $item->created_at->format('d M Y') }}</td>
+								<td>{!! action_row($selectedNavigation->url, $item->id, $item->name, ['show', 'edit', 'delete']) !!}</td>
 							</tr>
 						@endforeach
 						</tbody>

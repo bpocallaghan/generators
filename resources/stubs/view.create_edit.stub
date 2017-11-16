@@ -7,7 +7,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">
                         <span><i class="fa fa-edit"></i></span>
-                        <span>{{ isset($item)? 'Edit the ' . $item->title . ' entry': 'Create a new {{model}}' }}</span>
+                        <span>{{ isset($item)? 'Edit the ' . $item->name . ' entry': 'Create a new {{model}}' }}</span>
                     </h3>
                 </div>
 

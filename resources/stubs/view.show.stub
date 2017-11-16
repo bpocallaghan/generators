@@ -7,7 +7,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">
                         <span><i class="fa fa-eye"></i></span>
-                        <span>{{collectionUpper}} - {{ $item->title }}</span>
+                        <span>{{collectionUpper}} - {{ $item->name }}</span>
                     </h3>
                 </div>
 
@@ -20,8 +20,8 @@
 							<div class="row">
 								<section class="col col-6">
 									<section class="form-group">
-										<label>Title</label>
-										<input type="text" class="form-control" value="{{ $item->title }}" readonly>
+										<label>{{model}}</label>
+										<input type="text" class="form-control" value="{{ $item->name }}" readonly>
 									</section>
 								</section>
 
