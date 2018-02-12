@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Traits;
 
-trait ArgumentsOptionsAccessors
+trait ArgumentsOptions
 {
     /**
      * Get the argument name of the file that needs to be generated

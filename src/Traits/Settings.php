@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Traits;
 
-trait SettingsAccessors
+trait Settings
 {
     /**
      * Settings of the file type to be generated

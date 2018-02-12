@@ -2,17 +2,17 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
-use Bpocallaghan\Generators\Traits\ArgumentsOptionsAccessors;
-use Bpocallaghan\Generators\Traits\SettingsAccessors;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Composer;
+use Illuminate\Filesystem\Filesystem;
+use Bpocallaghan\Generators\Traits\Settings;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Bpocallaghan\Generators\Traits\ArgumentsOptions;
 use Illuminate\Console\GeneratorCommand as LaravelGeneratorCommand;
 
 abstract class GeneratorCommand extends LaravelGeneratorCommand
 {
-    use ArgumentsOptionsAccessors, SettingsAccessors;
+    use ArgumentsOptions, Settings;
 
     /**
      * @var Composer

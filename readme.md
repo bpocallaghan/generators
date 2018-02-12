@@ -3,7 +3,8 @@
 Custom Laravel 5 File Generators with a config file and publishable stubs.
 You can publish the stubs. You can add your own stubs to generate.
 
-Interested in a laravel admin starter project where the package is being used. [Admin Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
+This package is being used in the [Admin Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
+(Page Builder, Roles, Impersonation, Analytics, Blog, News, Banners, FAQ, Testimonials and more)
 
 ```
 Laravel 5.1 - v2.1.3

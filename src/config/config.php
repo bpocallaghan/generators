@@ -127,6 +127,7 @@ return [
     'migration_plain_stub'        => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/migration.plain.stub',
     'controller_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/controller.stub',
     'controller_plain_stub'       => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/controller.plain.stub',
+    'controller_admin_stub'       => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/controller_admin.stub',
     'controller_repository_stub'  => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/controller_repository.stub',
     'pivot_stub'                  => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/pivot.stub',
     'seed_stub'                   => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/seed.stub',

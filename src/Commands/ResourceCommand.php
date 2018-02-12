@@ -128,11 +128,17 @@ class ResourceCommand extends GeneratorCommand
             $name = substr_replace($arg, str_plural($this->resource),
                 strrpos($arg, $this->resource), strlen($this->resource));
 
-            if (!$this->repositoryContract) {
-                $this->callCommandFile('controller', $name);
+            if ($this->repositoryContract) {
+                $this->callCommandFile('controller', $name, 'controller_repository');
             }
             else {
-                $this->callCommandFile('controller', $name, 'controller_repository');
+                // if admin - update stub
+                if (!str_contains($name, 'admin.')) {
+                    $this->callCommandFile('controller', $name, 'controller');
+                }
+                else {
+                    $this->callCommandFile('controller', $name, 'controller_admin');
+                }
             }
         }
     }
