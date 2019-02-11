@@ -91,7 +91,9 @@ class FileCommand extends GeneratorCommand
 
         // if we need to run "composer dump-autoload"
         if ($this->settings['dump_autoload'] === true) {
-            $this->composer->dumpAutoloads();
+            if ($this->confirm("Run 'composer dump-autoload'?")) {
+                $this->composer->dumpAutoloads();
+            }
         }
     }
 

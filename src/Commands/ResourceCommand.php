@@ -48,6 +48,11 @@ class ResourceCommand extends GeneratorCommand
         $this->callSeed();
         $this->callMigrate();
 
+        // confirm dump autoload
+        if ($this->confirm("Run 'composer dump-autoload'?")) {
+            $this->composer->dumpAutoloads();
+        }
+
         $this->info('All Done!');
         $this->info('Remember to add ' . "`Route::resource('" . str_replace('_', '-',
                 $this->getCollectionName()) . "', '" . $this->getResourceControllerName() . "');`" . ' in `routes\\web.php`');
