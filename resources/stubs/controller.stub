@@ -2,7 +2,6 @@
 
 namespace {{namespace}};
 
-use {{rootNamespace}}Http\Requests;
 use {{rootNamespace}}Models\{{model}};
 use Illuminate\Http\Request;
 use {{rootNamespace}}Http\Controllers\Controller;

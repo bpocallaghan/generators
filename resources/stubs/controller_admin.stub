@@ -2,9 +2,7 @@
 
 namespace {{namespace}};
 
-use {{rootNamespace}}Http\Requests;
 use {{rootNamespace}}Models\{{model}};
-use Illuminate\Http\Request;
 use Bpocallaghan\Titan\Http\Controllers\Admin\AdminController;
 
 class {{class}} extends AdminController

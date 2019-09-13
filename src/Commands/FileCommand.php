@@ -2,6 +2,7 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 use Illuminate\Console\DetectsApplicationNamespace;
 
@@ -219,8 +220,8 @@ class FileCommand extends GeneratorCommand
     {
         if ($lowercase) {
             $url = '/' . rtrim(implode('/',
-                    array_map('snake_case', explode('/', $this->getArgumentPath(true)))), '/');
-            $url = (implode('/', array_map('str_slug', explode('/', $url))));
+                    array_map('Str::snake', explode('/', $this->getArgumentPath(true)))), '/');
+            $url = (implode('/', array_map('Str::slug', explode('/', $url))));
 
             return $url;
         }
@@ -234,7 +235,7 @@ class FileCommand extends GeneratorCommand
      */
     protected function getClassName()
     {
-        return ucwords(camel_case(str_replace([$this->settings['file_type']], [''],
+        return ucwords(Str::camel(str_replace([$this->settings['file_type']], [''],
             $this->getFileName())));
     }
 

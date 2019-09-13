@@ -2,6 +2,7 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
 class ModelCommand extends GeneratorCommand
@@ -54,7 +55,7 @@ class ModelCommand extends GeneratorCommand
      */
     private function getMigrationName()
     {
-        return 'create_' . str_plural(strtolower($this->getArgumentNameOnly())) . '_table';
+        return 'create_' . Str::plural(strtolower($this->getArgumentNameOnly())) . '_table';
     }
 
     /**

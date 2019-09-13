@@ -2,6 +2,7 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 
 class MigrationPivotCommand extends GeneratorCommand
@@ -73,7 +74,7 @@ class MigrationPivotCommand extends GeneratorCommand
      */
     protected function parseName($name)
     {
-        $tables = array_map('str_singular', $this->getSortedTableNames());
+        $tables = array_map('Str::singular', $this->getSortedTableNames());
         $name = implode('', array_map('ucwords', $tables));
         $pieces = explode('_', $name);
         $name = implode('', array_map('ucwords', $pieces));
@@ -131,10 +132,10 @@ class MigrationPivotCommand extends GeneratorCommand
         $tables = $this->getSortedTableNames();
 
         $stub = str_replace(['{{columnOne}}', '{{columnTwo}}'],
-            array_merge(array_map('str_singular', $tables), $tables), $stub);
+            array_merge(array_map('Str::singular', $tables), $tables), $stub);
 
         $stub = str_replace(['{{tableOne}}', '{{tableTwo}}'],
-            array_merge(array_map('str_plural', $tables), $tables), $stub);
+            array_merge(array_map('Str::plural', $tables), $tables), $stub);
 
         return $this;
     }
@@ -160,7 +161,7 @@ class MigrationPivotCommand extends GeneratorCommand
      */
     protected function getPivotTableName()
     {
-        return implode('_', array_map('str_singular', $this->getSortedTableNames()));
+        return implode('_', array_map('Str::singular', $this->getSortedTableNames()));
     }
 
     /**
@@ -223,8 +224,8 @@ class MigrationPivotCommand extends GeneratorCommand
         // load many to many stub
         $stub = $this->files->get(config('generators.' . 'many_many_relationship_stub'));
         $stub = str_replace('{{model}}', $relationshipModel, $stub);
-        $stub = str_replace('{{relationship}}', camel_case($tableName), $stub);
-        //$stub = str_replace('{{relationship}}', strtolower(str_plural($relationshipModel)), $stub);
+        $stub = str_replace('{{relationship}}', Str::camel($tableName), $stub);
+        //$stub = str_replace('{{relationship}}', strtolower(Str::plural($relationshipModel)), $stub);
 
         // insert many many stub in model
         $model = substr_replace($model, $stub, $index, 0);

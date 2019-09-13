@@ -2,6 +2,7 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
+use Illuminate\Support\Str;
 use Bpocallaghan\Generators\Migrations\NameParser;
 use Bpocallaghan\Generators\Migrations\SchemaParser;
 use Bpocallaghan\Generators\Migrations\SyntaxBuilder;
@@ -96,7 +97,7 @@ class MigrationCommand extends GeneratorCommand
      */
     protected function replaceClassName(&$stub)
     {
-        $className = ucwords(camel_case($this->argumentName()));
+        $className = ucwords(Str::camel($this->argumentName()));
 
         $stub = str_replace('{{class}}', $className, $stub);
 
@@ -148,7 +149,7 @@ class MigrationCommand extends GeneratorCommand
      */
     protected function getModelName($name = null)
     {
-        $name = str_singular($this->meta['table']);
+        $name = Str::singular($this->meta['table']);
 
         $model = '';
         $pieces = explode('_', $name);

@@ -2,6 +2,7 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Composer;
 use Illuminate\Filesystem\Filesystem;
 use Bpocallaghan\Generators\Traits\Settings;
@@ -79,15 +80,15 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
     {
         $name = $this->argumentName();
 
-        if (str_contains($name, '/')) {
+        if (Str::contains($name, '/')) {
             $name = str_replace('/', '.', $name);
         }
 
-        if (str_contains($name, '\\')) {
+        if (Str::contains($name, '\\')) {
             $name = str_replace('\\', '.', $name);
         }
 
-        if (str_contains($name, '.')) {
+        if (Str::contains($name, '.')) {
             return substr($name, strrpos($name, '.') + 1);
         }
 
@@ -104,11 +105,11 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
     {
         $name = $this->argumentName();
 
-        if (str_contains($name, '.')) {
+        if (Str::contains($name, '.')) {
             $name = str_replace('.', '/', $name);
         }
 
-        if (str_contains($name, '\\')) {
+        if (Str::contains($name, '\\')) {
             $name = str_replace('\\', '/', $name);
         }
 
@@ -125,7 +126,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
             return $name . '/';
         }
 
-        if (str_contains($name, '/')) {
+        if (Str::contains($name, '/')) {
             return substr($name, 0, strripos($name, '/') + 1);
         }
 
@@ -148,7 +149,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 
         $name = isset($name) ? $name : $this->resource;
 
-        $this->resource = lcfirst(str_singular(class_basename($name)));
+        $this->resource = lcfirst(Str::singular(class_basename($name)));
         $this->resourceLowerCase = strtolower($name);
 
         return $this->resource;
@@ -164,9 +165,9 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
     {
         $name = isset($name) ? $name : $this->resource;
 
-        //return ucwords(camel_case($this->getResourceName($name)));
+        //return ucwords(Str::camel($this->getResourceName($name)));
 
-        return str_singular(ucwords(camel_case(class_basename($name))));
+        return Str::singular(ucwords(Str::camel(class_basename($name))));
     }
 
     /**
@@ -177,7 +178,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected function getControllerName($name = null)
     {
-        return ucwords(camel_case(str_replace($this->settings['postfix'], '', ($name))));
+        return ucwords(Str::camel(str_replace($this->settings['postfix'], '', ($name))));
     }
 
     /**
@@ -188,8 +189,8 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected function getSeedName($name = null)
     {
-        return ucwords(camel_case(str_replace($this->settings['postfix'], '',
-            $this->getResourceName($name))));
+        return ucwords(Str::camel(str_replace($this->settings['postfix'], '',
+            $this->getCollectionName($name))));
     }
 
     /**
@@ -200,7 +201,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected function getCollectionName($name = null)
     {
-        return str_plural($this->getResourceName($name));
+        return Str::plural($this->getResourceName($name));
     }
 
     /**
@@ -210,7 +211,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected function getCollectionUpperName($name = null)
     {
-        $name = str_plural($this->getResourceName($name));
+        $name = Str::plural($this->getResourceName($name));
 
         $pieces = explode('_', $name);
         $name = "";
@@ -230,7 +231,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
     {
         $name = isset($name) ? $name : $this->resource;
 
-        $name = str_singular(ucwords(camel_case(class_basename($name))));
+        $name = Str::singular(ucwords(Str::camel(class_basename($name))));
 
         return $name . config('generators.settings.contract.postfix');
     }
@@ -270,13 +271,11 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
         // dont plural if reserve word
         foreach ($pieces as $k => $value) {
             if (!in_array($value, config('generators.reserve_words'))) {
-                $pieces[$k] = str_plural(snake_case($pieces[$k]));
+                $pieces[$k] = Str::plural(Str::snake($pieces[$k]));
             }
         }
 
         $name = implode('.', $pieces);
-
-        //$name = implode('.', array_map('str_plural', explode('/', $name)));
 
         return strtolower(rtrim(ltrim($name, '.'), '.'));
     }
@@ -319,7 +318,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      */
     protected function getTableName($name)
     {
-        return str_replace("-", "_", str_plural(snake_case(class_basename($name))));
+        return str_replace("-", "_", Str::plural(Str::snake(class_basename($name))));
     }
 
     /**

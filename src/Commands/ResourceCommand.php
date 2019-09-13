@@ -2,6 +2,7 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -90,7 +91,7 @@ class ResourceCommand extends GeneratorCommand
             $views = config('generators.resource_views');
             foreach ($views as $key => $name) {
                 $resource = $this->argument('resource');
-                if (str_contains($resource, '.')) {
+                if (Str::contains($resource, '.')) {
                     $resource = str_replace('.', '/', $resource);
                 }
 
@@ -130,7 +131,7 @@ class ResourceCommand extends GeneratorCommand
 
         if ($this->confirm("Create a controller ($name) for the $this->resource resource?")) {
             $arg = $this->getArgumentResource();
-            $name = substr_replace($arg, str_plural($this->resource),
+            $name = substr_replace($arg, Str::plural($this->resource),
                 strrpos($arg, $this->resource), strlen($this->resource));
 
             if ($this->repositoryContract) {
@@ -138,7 +139,7 @@ class ResourceCommand extends GeneratorCommand
             }
             else {
                 // if admin - update stub
-                if (!str_contains($name, 'admin.')) {
+                if (!Str::contains($name, 'admin.')) {
                     $this->callCommandFile('controller', $name, 'controller');
                 }
                 else {
@@ -229,16 +230,16 @@ class ResourceCommand extends GeneratorCommand
     private function getArgumentResource()
     {
         $name = $this->argument('resource');
-        if (str_contains($name, '/')) {
+        if (Str::contains($name, '/')) {
             $name = str_replace('/', '.', $name);
         }
 
-        if (str_contains($name, '\\')) {
+        if (Str::contains($name, '\\')) {
             $name = str_replace('\\', '.', $name);
         }
 
         // lowecase and singular
-        $name = strtolower(str_singular($name));
+        $name = strtolower(Str::singular($name));
 
         return $name;
     }
@@ -251,7 +252,7 @@ class ResourceCommand extends GeneratorCommand
     private function getResourceOnly()
     {
         $name = $this->getArgumentResource();
-        if (!str_contains($name, '.')) {
+        if (!Str::contains($name, '.')) {
             return $name;
         }
 
@@ -265,7 +266,7 @@ class ResourceCommand extends GeneratorCommand
      */
     private function getResourceControllerName()
     {
-        return $this->getControllerName(str_plural($this->resource),
+        return $this->getControllerName(Str::plural($this->resource),
                 false) . config('generators.settings.controller.postfix');
     }
 
@@ -277,7 +278,7 @@ class ResourceCommand extends GeneratorCommand
      */
     private function getMigrationName($name = null)
     {
-        return 'create_' . str_plural($this->getResourceName($name)) . '_table';
+        return 'create_' . Str::plural($this->getResourceName($name)) . '_table';
     }
 
     /**
