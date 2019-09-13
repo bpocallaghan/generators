@@ -1,0 +1,26 @@
+@extends('layouts.website')
+
+@section('content')
+    <div class="row">
+        <div class="body col-md-8 col-lg-8">
+            @include('website.pages.page_header')
+
+            <section>
+
+            </section>
+        </div>
+
+        <div class="side rounded col-md-4 col-lg-4 d-none d-md-block">
+            @include('website.pages.page_side')
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    @parent
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+
+        })
+    </script>
+@endsection

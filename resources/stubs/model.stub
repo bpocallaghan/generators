@@ -2,18 +2,25 @@
 
 namespace {{namespace}};
 
-use Illuminate\Database\Eloquent\Model;
+use Bpocallaghan\Titan\Models\TitanCMSModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class {{class}}
  * @mixin \Eloquent
  */
-class {{class}} extends Model
+class {{class}} extends TitanCMSModel
 {
     use SoftDeletes;
 
     protected $table = '{{table}}';
 
     protected $guarded = ['id'];
+
+    /**
+     * Validation rules for this model
+     */
+    static public $rules = [
+        'name'         => 'required|min:3:max:255',
+    ];
 }
