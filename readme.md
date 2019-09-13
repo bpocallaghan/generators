@@ -1,17 +1,17 @@
-# Laravel 5 File Generators
+# Laravel File Generators
 
-Custom Laravel 5 File Generators with a config file and publishable stubs.
+Custom Laravel File Generators with a config file and publishable stubs.
 You can publish the stubs. You can add your own stubs to generate.
 
 This package is being used in the [Admin Starter Project](https://github.com/bpocallaghan/laravel-admin-starter)
 (Page Builder, Roles, Impersonation, Analytics, Blog, News, Banners, FAQ, Testimonials and more)
 
 ```
-Laravel 5.1 - v2.1.3
-Laravel 5.2 - v3.0.3
-Laravel 5.3 - v3.0.3
-Laravel 5.4 - v4.1.9
-Laravel 5.5 - v5.0.0+ 
+Laravel 5.1 : v2.1.3
+Laravel 5.2 - 5.3 : v3.0.3
+Laravel 5.4 : v4.1.9
+Laravel 5.5 - 5.8 : v5.0.0+
+Laravel 6.0 : v5.1.0+  
 ```
 
 ## Commands
@@ -77,7 +77,7 @@ Update your project's `composer.json` file.
 composer require bpocallaghan/generators --dev
 ```
 
-Add the Service Provider (Laravel 5.5 has automatic discovery of packages)
+Add the Service Provider (Laravel 5.5+ has automatic discovery of packages)
 You'll only want to use these generators for local development, add the provider in `app/Providers/AppServiceProvider.php`:
 
 ```php
@@ -295,7 +295,7 @@ resource=php artisan generate:resource
 
 ## My other Packages
 
-- [Notify](https://github.com/bpocallaghan/notify) Laravel 5 Flash Notifications with icons and animations and with a timeout
+- [Notify](https://github.com/bpocallaghan/notify) Laravel Flash Notifications with icons and animations and with a timeout
 - [Alert](https://github.com/bpocallaghan/alert) A helper package to flash a bootstrap alert to the browser via a Facade or a helper function.
 - [Impersonate User](https://github.com/bpocallaghan/impersonate) This allows you to authenticate as any of your customers.
 - [Sluggable](https://github.com/bpocallaghan/sluggable) Provides a HasSlug trait that will generate a unique slug when saving your Laravel Eloquent model.

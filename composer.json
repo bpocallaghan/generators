@@ -1,6 +1,6 @@
 {
     "name": "bpocallaghan/generators",
-    "description": "Custom Laravel 5 File Generators with config and publishable stubs.",
+    "description": "Custom Laravel File Generators with config and publishable stubs.",
     "keywords": [
         "laravel",
         "generators",
@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.2"
     },
     "autoload": {
         "psr-4": {
