@@ -34,6 +34,7 @@ php artisan generate:trait
 php artisan generate:job
 php artisan generate:console
 php artisan generate:middleware
+php artisan generate:factory
 php artisan generate:file
 ```
 
@@ -108,6 +109,7 @@ Run `php artisan` command to see the new commands in the `generate:*` section
 - [Job](#job)
 - [Console](#console)
 - [Middleware](#middleware)
+- [Factory](#factory)
 - [File](#file)
 - [Configuration](#configuration)
 
@@ -242,6 +244,13 @@ This will generate a SendEmails Artisan Command file. The --command option is op
 php artisan generate:middleware AuthenticateAdmin
 ```
 This will generate an AuthenticateAdmin Middleware file.
+
+### Factory
+```
+php artisan generate:factory Post
+php artisan generate:factory PostFactory
+```
+This will generate a PostFactory model file.
 
 ### Configuration
 
