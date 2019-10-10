@@ -2,6 +2,7 @@
 
 namespace Bpocallaghan\Generators;
 
+use Bpocallaghan\Generators\Commands\FactoryCommand;
 use Bpocallaghan\Generators\Commands\JobCommand;
 use Bpocallaghan\Generators\Commands\FileCommand;
 use Bpocallaghan\Generators\Commands\SeedCommand;
@@ -68,6 +69,7 @@ class GeneratorsServiceProvider extends ServiceProvider
         $this->registerCommand(TraitCommand::class, 'trait');
         $this->registerCommand(RepositoryCommand::class, 'repository');
         $this->registerCommand(ContractCommand::class, 'contract');
+        $this->registerCommand(FactoryCommand::class, 'factory');
 
         $this->registerCommand(JobCommand::class, 'job');
         $this->registerCommand(ConsoleCommand::class, 'console');

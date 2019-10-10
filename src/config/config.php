@@ -98,6 +98,10 @@ return [
             'postfix'             => 'Repository',
             'path'                => './app/Contracts/',
         ],
+        'factory'     => [
+            'postfix'             => 'Factory',
+            'path'                => './database/factories/',
+        ],
     ],
 
     /*
