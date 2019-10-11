@@ -35,6 +35,7 @@ php artisan generate:job
 php artisan generate:console
 php artisan generate:middleware
 php artisan generate:factory
+php artisan generate:test
 php artisan generate:file
 ```
 
@@ -110,6 +111,7 @@ Run `php artisan` command to see the new commands in the `generate:*` section
 - [Console](#console)
 - [Middleware](#middleware)
 - [Factory](#factory)
+- [Test](#test)
 - [File](#file)
 - [Configuration](#configuration)
 
@@ -251,6 +253,14 @@ php artisan generate:factory Post
 php artisan generate:factory PostFactory
 ```
 This will generate a PostFactory model file.
+
+### Test
+```
+php artisan generate:test Post
+php artisan generate:test PostTest
+php artisan generate:test Auth\LoginTest
+```
+This will generate Feature\PostTest and Feature\Auth\LoginTest files.
 
 ### Configuration
 
