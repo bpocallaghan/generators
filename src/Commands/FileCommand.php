@@ -135,6 +135,9 @@ class FileCommand extends GeneratorCommand
         // App\Foo
         $stub = str_replace('{{namespace}}', $this->getNamespace($name), $stub);
 
+        // Foo
+        $stub = str_replace('{{namespaceWithoutApp}}', $this->getNamespace($name, false), $stub);
+
         // App\
         $stub = str_replace('{{rootNamespace}}', $this->getAppNamespace(), $stub);
 

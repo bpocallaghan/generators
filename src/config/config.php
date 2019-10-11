@@ -102,6 +102,12 @@ return [
             'postfix'             => 'Factory',
             'path'                => './database/factories/',
         ],
+        'test'     => [
+            'directory_namespace' => true,
+            'namespace'           => '\Tests\Feature',
+            'postfix'             => 'Test',
+            'path'                => './tests/Feature/',
+        ],
     ],
 
     /*
@@ -154,4 +160,6 @@ return [
     'middleware_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/middleware.stub',
     'repository_stub'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/repository.stub',
     'contract_stub'               => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/contract.stub',
+    'factory_stub'                => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/factory.stub',
+    'test_stub'                   => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/test.stub',
 ];

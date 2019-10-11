@@ -2,7 +2,8 @@
 
 namespace Bpocallaghan\Generators;
 
-use Bpocallaghan\Generators\Commands\FactoryCommand;
+use Illuminate\Support\ServiceProvider;
+use Bpocallaghan\Generators\Commands\TestCommand;
 use Bpocallaghan\Generators\Commands\JobCommand;
 use Bpocallaghan\Generators\Commands\FileCommand;
 use Bpocallaghan\Generators\Commands\SeedCommand;
@@ -10,6 +11,7 @@ use Bpocallaghan\Generators\Commands\ViewCommand;
 use Bpocallaghan\Generators\Commands\EventCommand;
 use Bpocallaghan\Generators\Commands\ModelCommand;
 use Bpocallaghan\Generators\Commands\TraitCommand;
+use Bpocallaghan\Generators\Commands\FactoryCommand;
 use Bpocallaghan\Generators\Commands\ConsoleCommand;
 use Bpocallaghan\Generators\Commands\PublishCommand;
 use Bpocallaghan\Generators\Commands\ContractCommand;
@@ -22,7 +24,6 @@ use Bpocallaghan\Generators\Commands\MiddlewareCommand;
 use Bpocallaghan\Generators\Commands\NotificationCommand;
 use Bpocallaghan\Generators\Commands\MigrationPivotCommand;
 use Bpocallaghan\Generators\Commands\EventGenerateCommand;
-use Illuminate\Support\ServiceProvider;
 
 class GeneratorsServiceProvider extends ServiceProvider
 {
@@ -69,6 +70,8 @@ class GeneratorsServiceProvider extends ServiceProvider
         $this->registerCommand(TraitCommand::class, 'trait');
         $this->registerCommand(RepositoryCommand::class, 'repository');
         $this->registerCommand(ContractCommand::class, 'contract');
+
+        $this->registerCommand(TestCommand::class, 'test');
         $this->registerCommand(FactoryCommand::class, 'factory');
 
         $this->registerCommand(JobCommand::class, 'job');

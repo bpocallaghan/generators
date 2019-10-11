@@ -1,0 +1,16 @@
+<?php
+
+namespace {{namespaceWithoutApp}};
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class {{class}} extends TestCase
+{
+    /** @test */
+    public function {{resourceLowercase}}()
+    {
+
+    }
+}
