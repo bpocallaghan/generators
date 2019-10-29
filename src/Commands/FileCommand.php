@@ -108,7 +108,7 @@ class FileCommand extends GeneratorCommand
     {
         $name = $this->getFileName();
 
-        $withName = boolval($this->option('name'));
+        $withName = (bool) $this->option('name');
 
         $path = $this->settings['path'];
         if ($this->settingsDirectoryNamespace() === true) {

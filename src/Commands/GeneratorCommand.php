@@ -353,7 +353,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
         $key = $this->getOptionStubKey();
 
         // get the stub path
-        $stub = config('generators.' . $key);
+        $stub = config('generators.stubs.' . $key);
 
         if (is_null($stub)) {
             $this->error('The stub does not exist in the config file - "' . $key . '"');
@@ -371,11 +371,11 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
     protected function getOptionStubKey()
     {
         $plain = $this->option('plain');
-        $stub = $this->option('stub') . ($plain ? '_plain' : '') . '_stub';
+        $stub = $this->option('stub') . ($plain ? '_plain' : '');
 
         // if no stub, we assume its the same as the type
         if (is_null($this->option('stub'))) {
-            $stub = $this->option('type') . ($plain ? '_plain' : '') . '_stub';
+            $stub = $this->option('type') . ($plain ? '_plain' : '');
         }
 
         return $stub;
