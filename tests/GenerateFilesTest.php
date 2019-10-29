@@ -18,8 +18,16 @@ class GenerateFilesTest extends TestCase
     public function generate_view()
     {
         $this->artisan('generate:view view');
-
         $this->assertFileExists('resources/views/view.blade.php');
+
+        $this->artisan('generate:view foo.bar');
+        $this->assertFileExists('resources/views/foo/bar.blade.php');
+
+        $this->artisan('generate:view foo --stub=view_show');
+        $this->assertFileExists('resources/views/foo.blade.php');
+
+        $this->artisan('generate:view foo --name=foo_bar');
+        $this->assertFileExists('resources/views/foo/foo_bar.blade.php');
     }
 
     /** @test */
@@ -39,5 +47,24 @@ class GenerateFilesTest extends TestCase
 
         $this->artisan('generate:model foo --force');
         $this->assertFileExists('app/Models/Foo.php');
+    }
+
+    /** @test */
+    public function generate_controller()
+    {
+        $this->artisan('generate:controller test')->expectsQuestion('Run \'composer dump-autoload\'?', false)->assertExitCode(0);
+        $this->assertFileExists('app/Http/Controllers/TestController.php');
+
+        $this->artisan('generate:controller foo.bar')->expectsQuestion('Run \'composer dump-autoload\'?', false)->assertExitCode(0);
+        $this->assertFileExists('app/Http/Controllers/Foo/BarController.php');
+
+        $this->artisan('generate:controller fooBar')->expectsQuestion('Run \'composer dump-autoload\'?', false)->assertExitCode(0);
+        $this->assertFileExists('app/Http/Controllers/FooBarController.php');
+
+        $this->artisan('generate:controller plain --plain')->expectsQuestion('Run \'composer dump-autoload\'?', false)->assertExitCode(0);
+        $this->assertFileExists('app/Http/Controllers/PlainController.php');
+
+        $this->artisan('generate:controller SuffixController')->expectsQuestion('Run \'composer dump-autoload\'?', false)->assertExitCode(0);
+        $this->assertFileExists('app/Http/Controllers/SuffixController.php');
     }
 }
