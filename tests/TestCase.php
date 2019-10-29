@@ -24,6 +24,10 @@ abstract class TestCase extends Orchestra
         if (File::isDirectory('resources')) {
             File::deleteDirectories('resources');
         }
+
+        if (File::isDirectory('app')) {
+            File::deleteDirectories('app');
+        }
     }
 
     /**
@@ -54,17 +58,17 @@ abstract class TestCase extends Orchestra
 
         $app['config']->set('generators.stubs.example', "{$path}example.stub");
         $app['config']->set('generators.stubs.model', "{$path}model.stub");
-        $app['config']->set('generators.stubs.model_plain', "{$path}example.stub");
+        $app['config']->set('generators.stubs.model_plain', "{$path}model.plain.stub");
         $app['config']->set('generators.stubs.migration', "{$path}migration.stub");
-        $app['config']->set('generators.stubs.migration_plain', "{$path}migration_plain.stub");
+        $app['config']->set('generators.stubs.migration_plain', "{$path}migration.plain.stub");
         $app['config']->set('generators.stubs.controller', "{$path}controller.stub");
-        $app['config']->set('generators.stubs.controller_plain', "{$path}controller_plain.stub");
+        $app['config']->set('generators.stubs.controller_plain', "{$path}controller.plain.stub");
         $app['config']->set('generators.stubs.controller_admin', "{$path}controller_admin.stub");
         $app['config']->set('generators.stubs.controller_repository',
             "{$path}controller_repository.stub");
         $app['config']->set('generators.stubs.pivot', "{$path}pivot.stub");
         $app['config']->set('generators.stubs.seed', "{$path}seed.stub");
-        $app['config']->set('generators.stubs.seed_plain', "{$path}seed_plain.stub");
+        $app['config']->set('generators.stubs.seed_plain', "{$path}seed.plain.stub");
         $app['config']->set('generators.stubs.view', "{$path}view.stub");
         $app['config']->set('generators.stubs.view_index', "{$path}view_index.stub");
         $app['config']->set('generators.stubs.view_show', "{$path}view_show.stub");
