@@ -28,6 +28,10 @@ abstract class TestCase extends Orchestra
         if (File::isDirectory('app')) {
             File::deleteDirectories('app');
         }
+
+        if (File::isDirectory('database')) {
+            File::deleteDirectories('database');
+        }
     }
 
     /**

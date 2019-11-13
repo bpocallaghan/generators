@@ -16,10 +16,11 @@ class SyntaxBuilder
     /**
      * Create the PHP syntax for the given schema.
      *
-     * @param  array $schema
-     * @param  array $meta
+     * @param array $schema
+     * @param array $meta
      *
      * @return string
+     * @throws GeneratorException
      */
     public function create($schema, $meta)
     {
@@ -131,7 +132,7 @@ class SyntaxBuilder
      */
     private function getCreateSchemaWrapper()
     {
-        return file_get_contents(config('generators.schema_create_stub'));
+        return file_get_contents(config('generators.stubs.schema_create'));
     }
 
     /**
@@ -141,7 +142,7 @@ class SyntaxBuilder
      */
     private function getChangeSchemaWrapper()
     {
-        return file_get_contents(config('generators.schema_change_stub'));
+        return file_get_contents(config('generators.stubs.schema_change'));
     }
 
     /**

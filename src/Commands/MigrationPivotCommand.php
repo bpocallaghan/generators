@@ -222,7 +222,7 @@ class MigrationPivotCommand extends GeneratorCommand
         $index = strlen($model) - strpos(strrev($model), '}') - 1;
 
         // load many to many stub
-        $stub = $this->files->get(config('generators.' . 'many_many_relationship_stub'));
+        $stub = $this->files->get(config('generators.stubs.many_many_relationship'));
         $stub = str_replace('{{model}}', $relationshipModel, $stub);
         $stub = str_replace('{{relationship}}', Str::camel($tableName), $stub);
         //$stub = str_replace('{{relationship}}', strtolower(Str::plural($relationshipModel)), $stub);
@@ -243,7 +243,7 @@ class MigrationPivotCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return config('generators.' . strtolower($this->type) . '_stub');
+        return config('generators.stubs.' . strtolower($this->type));
     }
 
     /**

@@ -42,6 +42,8 @@ class MigrationCommand extends GeneratorCommand
      * Execute the console command.
      *
      * @return mixed
+     * @throws \Bpocallaghan\Generators\Exceptions\GeneratorException
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function handle()
     {
@@ -74,8 +76,10 @@ class MigrationCommand extends GeneratorCommand
     /**
      * Build the class with the given name.
      *
-     * @param  string $name
+     * @param string $name
      * @return string
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws \Bpocallaghan\Generators\Exceptions\GeneratorException
      */
     protected function buildClass($name)
     {
@@ -107,8 +111,9 @@ class MigrationCommand extends GeneratorCommand
     /**
      * Replace the schema for the stub.
      *
-     * @param  string $stub
+     * @param string $stub
      * @return $this
+     * @throws \Bpocallaghan\Generators\Exceptions\GeneratorException
      */
     protected function replaceSchema(&$stub)
     {
@@ -178,7 +183,7 @@ class MigrationCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return config('generators.' . strtolower($this->type) . ($this->input->hasOption('plain') && $this->option('plain') ? '_plain' : '') . '_stub');
+        return config('generators.stubs.' . strtolower($this->type) . ($this->input->hasOption('plain') && $this->option('plain') ? '_plain' : ''));
     }
 
     /**
