@@ -6,13 +6,7 @@ use Illuminate\Support\Str;
 
 class GenerateFilesTest extends TestCase
 {
-    /** @test */
-    public function generate_default()
-    {
-        $this->artisan('generate:file test');
 
-        $this->assertFileExists('resources/views/test.blade.php');
-    }
 
     /** @test */
     public function generate_model()
