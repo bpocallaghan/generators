@@ -15,4 +15,14 @@ class GenerateMigrationTest extends TestCase
         $this->assertFileExists('app/Models/Post.php');
         $this->assertFileExists('database/migrations/'. date('Y_m_d_His') .'_create_posts_table.php');
     }
+    
+    /** @test */
+    public function generate_migration_pivot()
+    {
+        $this->artisan('generate:migration create_tags_table');
+        $this->artisan('generate:migration create_posts_table');
+        $this->artisan('generate:migration:pivot tags posts')->expectsQuestion("Add Many To Many Relationship in 'Tag' and 'Post' Models? [yes|no]", 'yes')->assertExitCode(0);
+
+        $this->assertFileExists('database/migrations/'. date('Y_m_d_His') .'_create_post_tag_pivot_table.php');
+    }
 }

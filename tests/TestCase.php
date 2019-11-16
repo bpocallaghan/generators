@@ -15,7 +15,7 @@ abstract class TestCase extends Orchestra
         $this->cleanOutputDirectory();
     }
 
-    private function cleanOutputDirectory()
+    private function cleanOutputDirectory(): void
     {
         if (File::isDirectory('output')) {
             File::deleteDirectories('output');
@@ -40,7 +40,7 @@ abstract class TestCase extends Orchestra
      * @param \Illuminate\Foundation\Application $app
      * @return array
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             GeneratorsServiceProvider::class
@@ -54,7 +54,7 @@ abstract class TestCase extends Orchestra
      *
      * @return void
      */
-    protected function resolveApplicationConfiguration($app)
+    protected function resolveApplicationConfiguration($app): void
     {
         parent::resolveApplicationConfiguration($app);
 
