@@ -9,7 +9,7 @@ class ContractCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'generate:contracts';
+    protected $name = 'generate:contract';
 
     /**
      * The console command description.
