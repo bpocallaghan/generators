@@ -25,14 +25,14 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      *
      * @var string
      */
-    protected $resource = "";
+    protected $resource = '';
 
     /**
      * The lowercase resource argument
      *
      * @var string
      */
-    protected $resourceLowerCase = "";
+    protected $resourceLowerCase = '';
 
     /**
      * @var string

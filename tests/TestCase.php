@@ -21,9 +21,9 @@ abstract class TestCase extends Orchestra
             File::deleteDirectories('output');
         }
 
-        if (File::isDirectory('resources')) {
-            File::deleteDirectories('resources');
-        }
+        //if (File::isDirectory('resources')) {
+        //    File::deleteDirectories('resources');
+        //}
 
         if (File::isDirectory('app')) {
             File::deleteDirectories('app');

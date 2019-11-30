@@ -104,9 +104,9 @@ return [
         ],
         'test'         => [
             'directory_namespace' => true,
-            'namespace'           => '\Tests\Feature',
+            'namespace'           => '\Tests',
             'postfix'             => 'Test',
-            'path'                => './tests/Feature/',
+            'path'                => './tests/',
         ],
     ],
 

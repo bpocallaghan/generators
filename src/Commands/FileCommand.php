@@ -111,6 +111,14 @@ class FileCommand extends GeneratorCommand
         $withName = (bool) $this->option('name');
 
         $path = $this->settings['path'];
+
+        // if type Test -> see if Feature or Unit
+        if($this->option('type') === 'test') {
+            $folder = $this->option('unit') ?? 'Unit'; // Feature unless null -> Unit
+
+            $path .= $folder . DIRECTORY_SEPARATOR;
+        }
+
         if ($this->settingsDirectoryNamespace() === true) {
             $path .= $this->getArgumentPath($withName);
         }
@@ -264,6 +272,14 @@ class FileCommand extends GeneratorCommand
                 InputOption::VALUE_OPTIONAL,
                 'The terminal command that should be assigned.',
                 'command:name'
+            ],
+            // optional for the generate:test
+            [
+                'unit',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Create a unit test.',
+                'Feature'
             ],
         ], parent::getOptions());
     }
