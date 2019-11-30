@@ -48,7 +48,7 @@ return [
             'path'                => './app/Http/Controllers/',
             'postfix'             => 'Controller',
             'directory_namespace' => true,
-            'dump_autoload'       => true,
+            'dump_autoload'       => false,
             'repository_contract' => false,
         ],
         'seed'         => ['path' => './database/seeds/', 'postfix' => 'TableSeeder'],
