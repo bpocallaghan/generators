@@ -256,11 +256,11 @@ This will generate a PostFactory model file.
 
 ### Test
 ```
-php artisan generate:test Post
-php artisan generate:test PostTest
+php artisan generate:test UserCanLogin
+php artisan generate:test Post --unit
 php artisan generate:test Auth\LoginTest
 ```
-This will generate Feature\PostTest and Feature\Auth\LoginTest files.
+This will generate Feature\UserCanLogin and Unit\PostTest and Unit\Auth\LoginTest files.
 
 ### Configuration
 
