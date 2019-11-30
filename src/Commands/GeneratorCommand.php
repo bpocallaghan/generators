@@ -121,6 +121,13 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
             $name = implode('/', array_map('strtolower', explode('/', $name)));
         }
 
+        // if type Test -> see if Feature or Unit
+        if ($this->option('type') === 'test') {
+            $folder = $this->option('unit') ?? 'Unit'; // Feature unless null -> Unit
+
+            $name = $folder . DIRECTORY_SEPARATOR . $name;
+        }
+
         // if we want the path with name
         if ($withName) {
             return $name . '/';
@@ -128,6 +135,11 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 
         if (Str::contains($name, '/')) {
             return substr($name, 0, strripos($name, '/') + 1);
+        }
+
+        // if test - return the prefix folder
+        if ($this->option('type') === 'test') {
+            return ($this->option('unit') ?? 'Unit') . DIRECTORY_SEPARATOR;
         }
 
         return '';
@@ -335,7 +347,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
     /**
      * Get the default namespace for the class.
      *
-     * @param  string $rootNamespace
+     * @param string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)

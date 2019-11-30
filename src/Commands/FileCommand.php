@@ -112,13 +112,6 @@ class FileCommand extends GeneratorCommand
 
         $path = $this->settings['path'];
 
-        // if type Test -> see if Feature or Unit
-        if($this->option('type') === 'test') {
-            $folder = $this->option('unit') ?? 'Unit'; // Feature unless null -> Unit
-
-            $path .= $folder . DIRECTORY_SEPARATOR;
-        }
-
         if ($this->settingsDirectoryNamespace() === true) {
             $path .= $this->getArgumentPath($withName);
         }
