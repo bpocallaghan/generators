@@ -1,0 +1,31 @@
+<?php
+
+namespace Bpocallaghan\Generators\Tests;
+
+class GenerateResourceTest extends TestCase
+{
+    /** @test */
+    public function generate_resource()
+    {
+        $this->artisan('generate:resource post')
+            ->expectsQuestion('Create a Post model?', true)
+            ->expectsQuestion('Create crud views for the post resource?', true)
+            ->expectsQuestion('Create a controller (PostsController) for the post resource?', true)
+            ->expectsQuestion('Create a migration (create_posts_table) for the post resource?', true)
+            ->expectsQuestion('Create a seed (PostsTableSeeder) for the post resource?', true)
+            ->expectsQuestion('Create a test (PostTest) for the post resource?', true)
+            ->expectsQuestion('Migrate the database?', false)
+            ->expectsQuestion('Run \'composer dump-autoload\'?', false)
+            ->assertExitCode(0);
+
+        $this->assertFileExists('app/Models/Post.php');
+        $this->assertFileExists('resources/views/posts/create_edit.blade.php');
+        $this->assertFileExists('resources/views/posts/index.blade.php');
+        $this->assertFileExists('resources/views/posts/show.blade.php');
+        $this->assertFileExists('app/Http/Controllers/PostsController.php');
+        $this->assertFileExists('database/migrations/'. date('Y_m_d_His') .'_create_posts_table.php');
+        $this->assertFileExists('database/seeds/PostsTableSeeder.php');
+        $this->assertFileExists('tests/Feature/PostTest.php');
+        $this->assertFileExists('tests/Unit/PostTest.php');
+    }
+}

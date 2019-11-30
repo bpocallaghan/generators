@@ -47,6 +47,7 @@ class ResourceCommand extends GeneratorCommand
         $this->callController();
         $this->callMigration();
         $this->callSeed();
+        $this->callTest();
         $this->callMigrate();
 
         // confirm dump autoload
@@ -173,6 +174,26 @@ class ResourceCommand extends GeneratorCommand
 
         if ($this->confirm("Create a seed ($name) for the $this->resource resource?")) {
             $this->callCommandFile('seed');
+        }
+    }
+
+    /**
+     * Call the generate:test command
+     */
+    private function callTest()
+    {
+        $name = $this->getModelName() . 'Test';
+
+        if ($this->confirm("Create a test ($name) for the $this->resource resource?")) {
+            // feature test
+            $this->callCommandFile('test', $name);
+
+            // unit test
+            $this->call('generate:file', [
+                'name'    => $name,
+                '--type'  => 'test',
+                '--unit'  => 'Unit',
+            ]);
         }
     }
 
