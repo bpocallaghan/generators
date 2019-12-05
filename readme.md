@@ -181,11 +181,13 @@ php artisan generate:resource bar
 php artisan generate:resource foo.bar
 php artisan generate:resource foo.bar_baz
 php artisan generate:resource bar --schema="title:string, body:text, slug:string:unique, published_at:date"
+php artisan generate:resource articles --controller=admin
 ```
 
 - This will generate a Bar model, BarsController, resources views (in config), create_bars_table migration, BarTableSeeder
 - In the config there is a `resource_views` array, you can specify the views that you want to generate there, just make sure the stub exist.
 - This will also ask you to generate the 'repository - contract pattern' files.
+- The `--controller=admin` allows you to use the controller_admin stub when generating the controller.
 
 ### Repository
 ```

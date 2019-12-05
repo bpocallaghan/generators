@@ -367,7 +367,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
         // get the stub path
         $stub = config('generators.stubs.' . $key);
 
-        if (is_null($stub)) {
+        if ($stub === null) {
             $this->error('The stub does not exist in the config file - "' . $key . '"');
             exit;
         }

@@ -139,12 +139,13 @@ class ResourceCommand extends GeneratorCommand
                 $this->callCommandFile('controller', $name, 'controller_repository');
             }
             else {
+
                 // if admin - update stub
-                if (!Str::contains($name, 'admin.')) {
-                    $this->callCommandFile('controller', $name, 'controller');
+                if (Str::contains($name, 'admin.') || $this->option('controller') === 'admin') {
+                    $this->callCommandFile('controller', $name, 'controller_admin');
                 }
                 else {
-                    $this->callCommandFile('controller', $name, 'controller_admin');
+                    $this->callCommandFile('controller', $name, 'controller');
                 }
             }
         }
@@ -190,9 +191,9 @@ class ResourceCommand extends GeneratorCommand
 
             // unit test
             $this->call('generate:file', [
-                'name'    => $name,
-                '--type'  => 'test',
-                '--unit'  => 'Unit',
+                'name'   => $name,
+                '--type' => 'test',
+                '--unit' => 'Unit',
             ]);
         }
     }
@@ -238,7 +239,7 @@ class ResourceCommand extends GeneratorCommand
             '--type'  => $type,
             '--force' => $this->optionForce(),
             '--plain' => $this->optionPlain(),
-            '--stub'  => ($stub ? $stub : $this->optionStub()),
+            '--stub'  => ($stub ?: $this->optionStub()),
         ]));
     }
 
@@ -322,6 +323,13 @@ class ResourceCommand extends GeneratorCommand
     protected function getOptions()
     {
         return array_merge(parent::getOptions(), [
+            [
+                'controller',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Specify the stub for the controller',
+                null
+            ],
             ['migration', null, InputOption::VALUE_OPTIONAL, 'Optional migration name', null],
             [
                 'schema',
