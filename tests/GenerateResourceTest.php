@@ -53,4 +53,23 @@ class GenerateResourceTest extends TestCase
         $this->assertFileExists('tests/Feature/ArticleTest.php');
         $this->assertFileExists('tests/Unit/ArticleTest.php');
     }
+
+    /** @test */
+    public function generate_resource_with_bootstrap_4_stubs()
+    {
+        $this->artisan('generate:resource articles --view=b4')
+            ->expectsQuestion('Create a Article model?', false)
+            ->expectsQuestion('Create crud views for the article resource?', true)
+            ->expectsQuestion('Create a controller (ArticlesController) for the article resource?', false)
+            ->expectsQuestion('Create a migration (create_articles_table) for the article resource?', false)
+            ->expectsQuestion('Create a seed (ArticlesTableSeeder) for the article resource?', false)
+            ->expectsQuestion('Create a test (ArticleTest) for the article resource?', false)
+            ->expectsQuestion('Migrate the database?', false)
+            ->expectsQuestion('Run \'composer dump-autoload\'?', false)
+            ->assertExitCode(0);
+
+        $this->assertFileExists('resources/views/articles/create_edit.blade.php');
+        $this->assertFileExists('resources/views/articles/index.blade.php');
+        $this->assertFileExists('resources/views/articles/show.blade.php');
+    }
 }

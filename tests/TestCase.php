@@ -75,8 +75,11 @@ abstract class TestCase extends Orchestra
         $app['config']->set('generators.stubs.seed_plain', "{$path}seed.plain.stub");
         $app['config']->set('generators.stubs.view', "{$path}view.stub");
         $app['config']->set('generators.stubs.view_index', "{$path}view.index.stub");
+        $app['config']->set('generators.stubs.view_indexb4', "{$path}view.index.b4.stub");
         $app['config']->set('generators.stubs.view_show', "{$path}view.show.stub");
+        $app['config']->set('generators.stubs.view_showb4', "{$path}view.show.b4.stub");
         $app['config']->set('generators.stubs.view_create_edit', "{$path}view.create_edit.stub");
+        $app['config']->set('generators.stubs.view_create_editb4', "{$path}view.create_edit.b4.stub");
         $app['config']->set('generators.stubs.schema_create', "{$path}schema_create.stub");
         $app['config']->set('generators.stubs.schema_change', "{$path}schema_change.stub");
         $app['config']->set('generators.stubs.notification', "{$path}notification.stub");

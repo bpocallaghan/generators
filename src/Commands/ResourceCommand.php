@@ -96,8 +96,8 @@ class ResourceCommand extends GeneratorCommand
                     $resource = str_replace('.', '/', $resource);
                 }
 
-                $this->callCommandFile('view', $this->getViewPath($resource), $key,
-                    ['--name' => $name]);
+                $this->callCommandFile('view', $this->getViewPath($resource),
+                    $key . $this->option('view'), ['--name' => $name]);
             }
         }
     }
@@ -323,6 +323,13 @@ class ResourceCommand extends GeneratorCommand
     protected function getOptions()
     {
         return array_merge(parent::getOptions(), [
+            [
+                'view',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Specify the stub for the views',
+                null
+            ],
             [
                 'controller',
                 null,
