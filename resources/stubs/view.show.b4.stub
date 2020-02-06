@@ -1,4 +1,4 @@
-@extends('titan::layouts.admin')
+@extends('admin.admin')
 
 @section('content')
     <div class="card <!--card-outline--> card-secondary">
@@ -13,7 +13,7 @@
         </div>
 
         <div class="card-body">
-            @include('titan::admin.partials.info')
+            @include('admin.partials.info')
 
             <form>
                 <fieldset>
@@ -43,7 +43,7 @@
             </form>
         </div>
         <div class="card-footer">
-            @include('titan::admin.partials.form_footer', ['submit' => false])
+            @include('admin.partials.form.form_footer', ['submit' => false])
         </div>
     </div>
 @endsection
