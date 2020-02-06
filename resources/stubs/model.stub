@@ -2,14 +2,14 @@
 
 namespace {{namespace}};
 
-use Bpocallaghan\Titan\Models\TitanCMSModel;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class {{class}}
- * @mixin \Eloquent
+ * Class Client
+ * @mixin Builder
  */
-class {{class}} extends TitanCMSModel
+class {{class}} extends AdminModel
 {
     use SoftDeletes;
 
@@ -21,6 +21,6 @@ class {{class}} extends TitanCMSModel
      * Validation rules for this model
      */
     static public $rules = [
-        'name'         => 'required|min:3:max:255',
+        'name' => 'required|min:3:max:255',
     ];
 }
