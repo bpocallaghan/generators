@@ -24,8 +24,9 @@ class GenerateResourceTest extends TestCase
         $this->assertFileExists('resources/views/posts/show.blade.php');
         $this->assertFileExists('app/Http/Controllers/PostsController.php');
         $this->assertFileExists('database/migrations/'. date('Y_m_d_His') .'_create_posts_table.php');
+        $this->assertFileExists('database/factories/PostFactory.php');
         $this->assertFileExists('database/seeds/PostsTableSeeder.php');
-        $this->assertFileExists('tests/Feature/PostTest.php');
+        $this->assertFileExists('tests/Feature/PostsTest.php');
         $this->assertFileExists('tests/Unit/PostTest.php');
     }
 
@@ -49,8 +50,9 @@ class GenerateResourceTest extends TestCase
         $this->assertFileExists('resources/views/articles/show.blade.php');
         $this->assertFileExists('app/Http/Controllers/ArticlesController.php');
         $this->assertFileExists('database/migrations/'. date('Y_m_d_His') .'_create_articles_table.php');
+        $this->assertFileExists('database/factories/ArticleFactory.php');
         $this->assertFileExists('database/seeds/ArticlesTableSeeder.php');
-        $this->assertFileExists('tests/Feature/ArticleTest.php');
+        $this->assertFileExists('tests/Feature/ArticlesTest.php');
         $this->assertFileExists('tests/Unit/ArticleTest.php');
     }
 

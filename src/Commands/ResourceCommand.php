@@ -48,6 +48,7 @@ class ResourceCommand extends GeneratorCommand
         $this->callMigration();
         $this->callSeed();
         $this->callTest();
+        $this->callFactory();
         $this->callMigrate();
 
         // confirm dump autoload
@@ -187,7 +188,7 @@ class ResourceCommand extends GeneratorCommand
 
         if ($this->confirm("Create a test ($name) for the $this->resource resource?")) {
             // feature test
-            $this->callCommandFile('test', $name);
+            $this->callCommandFile('test', Str::plural($name));
 
             // unit test
             $this->call('generate:file', [
@@ -195,6 +196,19 @@ class ResourceCommand extends GeneratorCommand
                 '--type' => 'test',
                 '--unit' => 'Unit',
             ]);
+        }
+    }
+
+    /**
+     * Call the generate:factory command
+     */
+    private function callFactory()
+    {
+        $name = $this->getModelName() . 'Factory';
+
+        if ($this->confirm("Create a factory ($name) for the $this->resource resource?")) {
+
+            $this->callCommandFile('factory', $name);
         }
     }
 
