@@ -2,14 +2,11 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
-use Illuminate\Console\DetectsApplicationNamespace;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
 class ListenerCommand extends GeneratorCommand
 {
-    use DetectsApplicationNamespace;
-
     /**
      * The console command name.
      *
@@ -138,7 +135,7 @@ class ListenerCommand extends GeneratorCommand
         $stub = str_replace('{{namespace}}', $this->getNamespace($name), $stub);
 
         // App\
-        $stub = str_replace('{{rootNamespace}}', $this->getAppNamespace(), $stub);
+        $stub = str_replace('{{rootNamespace}}', $this->getLaravel()->getNamespace(), $stub);
 
         // Bar
         $stub = str_replace('{{class}}', $this->getClassName(), $stub);
@@ -208,7 +205,7 @@ class ListenerCommand extends GeneratorCommand
 
         $pieces = array_map('ucfirst', explode('/', $path));
 
-        $namespace = ($withApp === true ? $this->getAppNamespace() : '') . implode('\\', $pieces);
+        $namespace = ($withApp === true ? $this->getLaravel()->getNamespace() : '') . implode('\\', $pieces);
 
         $namespace = rtrim(ltrim(str_replace('\\\\', '\\', $namespace), '\\'), '\\');
 

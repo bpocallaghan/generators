@@ -4,12 +4,9 @@ namespace Bpocallaghan\Generators\Commands;
 
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
-use Illuminate\Console\DetectsApplicationNamespace;
 
 class FileCommand extends GeneratorCommand
 {
-    use DetectsApplicationNamespace;
-
     /**
      * The console command name.
      *
@@ -141,7 +138,7 @@ class FileCommand extends GeneratorCommand
         $stub = str_replace('{{namespaceWithoutApp}}', $this->getNamespace($name, false), $stub);
 
         // App\
-        $stub = str_replace('{{rootNamespace}}', $this->getAppNamespace(), $stub);
+        $stub = str_replace('{{rootNamespace}}', $this->getLaravel()->getNamespace(), $stub);
 
         // Bar
         $stub = str_replace('{{class}}', $this->getClassName(), $stub);
@@ -208,7 +205,7 @@ class FileCommand extends GeneratorCommand
 
         $pieces = array_map('ucfirst', explode('/', $path));
 
-        $namespace = ($withApp === true ? $this->getAppNamespace() : '') . implode('\\', $pieces);
+        $namespace = ($withApp === true ? $this->getLaravel()->getNamespace() : '') . implode('\\', $pieces);
 
         $namespace = rtrim(ltrim(str_replace('\\\\', '\\', $namespace), '\\'), '\\');
 

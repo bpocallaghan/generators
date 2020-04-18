@@ -263,7 +263,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 
         $pieces = array_map('ucfirst', explode('/', $path));
 
-        $namespace = ($withApp === true ? $this->getAppNamespace() : '') . implode('\\', $pieces);
+        $namespace = ($withApp === true ? $this->getLaravel()->getNamespace() : '') . implode('\\', $pieces);
 
         $namespace = rtrim(ltrim(str_replace('\\\\', '\\', $namespace), '\\'), '\\');
 

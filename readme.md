@@ -11,6 +11,7 @@ Laravel 5.2 - 5.3 : v3.0.3
 Laravel 5.4 : v4.1.9
 Laravel 5.5 - 5.8 : v5.0.0+
 Laravel 6.0 : v5.1.0+  
+Laravel 7.0 : v6.0+  
 ```
 
 ## Commands
