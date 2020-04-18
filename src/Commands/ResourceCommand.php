@@ -64,7 +64,7 @@ class ResourceCommand extends GeneratorCommand
     /**
      * Call the generate:model command
      */
-    private function callModel()
+    private function callModel(): void
     {
         $name = $this->getModelName();
 
@@ -87,7 +87,7 @@ class ResourceCommand extends GeneratorCommand
     /**
      * Generate the resource views
      */
-    private function callView()
+    private function callView(): void
     {
         if ($this->confirm("Create crud views for the $this->resource resource?")) {
             $views = config('generators.resource_views');
@@ -106,11 +106,11 @@ class ResourceCommand extends GeneratorCommand
     /**
      * Generate the Repository / Contract Pattern files
      */
-    private function callRepository()
+    private function callRepository(): void
     {
         // check the config
         if (config('generators.settings.controller.repository_contract')) {
-            if ($this->confirm("Create a reposity and contract for the $this->resource resource?")) {
+            if ($this->confirm("Create a repository and contract for the $this->resource resource?")) {
                 $name = $this->getModelName();
 
                 $this->repositoryContract = true;
@@ -127,7 +127,7 @@ class ResourceCommand extends GeneratorCommand
     /**
      * Generate the resource controller
      */
-    private function callController()
+    private function callController(): void
     {
         $name = $this->getResourceControllerName();
 
@@ -155,7 +155,7 @@ class ResourceCommand extends GeneratorCommand
     /**
      * Call the generate:migration command
      */
-    private function callMigration()
+    private function callMigration(): void
     {
         $name = $this->getMigrationName($this->option('migration'));
 
@@ -170,7 +170,7 @@ class ResourceCommand extends GeneratorCommand
     /**
      * Call the generate:seed command
      */
-    private function callSeed()
+    private function callSeed(): void
     {
         $name = $this->getSeedName() . config('generators.settings.seed.postfix');
 
@@ -182,7 +182,7 @@ class ResourceCommand extends GeneratorCommand
     /**
      * Call the generate:test command
      */
-    private function callTest()
+    private function callTest(): void
     {
         $name = $this->getModelName() . 'Test';
 
@@ -202,7 +202,7 @@ class ResourceCommand extends GeneratorCommand
     /**
      * Call the generate:factory command
      */
-    private function callFactory()
+    private function callFactory(): void
     {
         $name = $this->getModelName() . 'Factory';
 
@@ -215,7 +215,7 @@ class ResourceCommand extends GeneratorCommand
     /**
      * Call the migrate command
      */
-    protected function callMigrate()
+    protected function callMigrate(): void
     {
         if ($this->confirm('Migrate the database?')) {
             $this->call('migrate');
@@ -227,7 +227,7 @@ class ResourceCommand extends GeneratorCommand
      * @param       $name
      * @param array $options
      */
-    private function callCommand($command, $name, $options = [])
+    private function callCommand($command, $name, $options = []): void
     {
         $options = array_merge($options, [
             'name'    => $name,
@@ -246,7 +246,7 @@ class ResourceCommand extends GeneratorCommand
      * @param null  $stub
      * @param array $options
      */
-    private function callCommandFile($type, $name = null, $stub = null, $options = [])
+    private function callCommandFile($type, $name = null, $stub = null, $options = []): void
     {
         $this->call('generate:file', array_merge($options, [
             'name'    => ($name ? $name : $this->argument('resource')),
@@ -300,7 +300,7 @@ class ResourceCommand extends GeneratorCommand
      *
      * @return string
      */
-    private function getResourceControllerName()
+    private function getResourceControllerName(): string
     {
         return $this->getControllerName(Str::plural($this->resource),
                 false) . config('generators.settings.controller.postfix');
@@ -312,7 +312,7 @@ class ResourceCommand extends GeneratorCommand
      * @param null $name
      * @return string
      */
-    private function getMigrationName($name = null)
+    private function getMigrationName($name = null): string
     {
         return 'create_' . Str::plural($this->getResourceName($name)) . '_table';
     }

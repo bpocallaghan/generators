@@ -14,6 +14,7 @@ class GenerateResourceTest extends TestCase
             ->expectsQuestion('Create a migration (create_posts_table) for the post resource?', true)
             ->expectsQuestion('Create a seed (PostsTableSeeder) for the post resource?', true)
             ->expectsQuestion('Create a test (PostTest) for the post resource?', true)
+            ->expectsQuestion('Create a factory (PostFactory) for the post resource?', true)
             ->expectsQuestion('Migrate the database?', false)
             ->expectsQuestion('Run \'composer dump-autoload\'?', false)
             ->assertExitCode(0);
@@ -40,6 +41,7 @@ class GenerateResourceTest extends TestCase
             ->expectsQuestion('Create a migration (create_articles_table) for the article resource?', true)
             ->expectsQuestion('Create a seed (ArticlesTableSeeder) for the article resource?', true)
             ->expectsQuestion('Create a test (ArticleTest) for the article resource?', true)
+            ->expectsQuestion('Create a factory (ArticleFactory) for the article resource?', true)
             ->expectsQuestion('Migrate the database?', false)
             ->expectsQuestion('Run \'composer dump-autoload\'?', false)
             ->assertExitCode(0);
@@ -66,6 +68,7 @@ class GenerateResourceTest extends TestCase
             ->expectsQuestion('Create a migration (create_articles_table) for the article resource?', false)
             ->expectsQuestion('Create a seed (ArticlesTableSeeder) for the article resource?', false)
             ->expectsQuestion('Create a test (ArticleTest) for the article resource?', false)
+            ->expectsQuestion('Create a factory (ArticleFactory) for the article resource?', false)
             ->expectsQuestion('Migrate the database?', false)
             ->expectsQuestion('Run \'composer dump-autoload\'?', false)
             ->assertExitCode(0);
