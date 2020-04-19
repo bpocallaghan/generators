@@ -21,7 +21,7 @@
     "require": {
         "php": "^7.2.5",
         "symfony/console": "^5.0",
-        "laravel/framework": "7.0"
+        "illuminate/filesystem": "7.0"
     },
     "require-dev": {
         "orchestra/testbench": "5.*"
@@ -45,5 +45,7 @@
     },
     "scripts": {
         "test": "phpunit"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
