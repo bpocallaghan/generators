@@ -1,5 +1,5 @@
 Schema::create('{{table}}', function (Blueprint $table) {
-            $table->increments('id')->unique()->index();
+            $table->bigIncrements('id')->unique()->index();
             {{schema_up}}
             $table->timestamps();
             $table->softDeletes();
