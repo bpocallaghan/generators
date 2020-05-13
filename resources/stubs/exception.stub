@@ -1,0 +1,17 @@
+<?php
+
+namespace {{namespace}};
+
+use Exception;
+use Throwable;
+
+class {{class}} extends Exception
+{
+    /**
+     * @param $request
+     */
+    public function render($request)
+    {
+        //
+    }
+}

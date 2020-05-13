@@ -17,6 +17,7 @@ use Bpocallaghan\Generators\Commands\PublishCommand;
 use Bpocallaghan\Generators\Commands\ContractCommand;
 use Bpocallaghan\Generators\Commands\ListenerCommand;
 use Bpocallaghan\Generators\Commands\ResourceCommand;
+use Bpocallaghan\Generators\Commands\ExceptionCommand;
 use Bpocallaghan\Generators\Commands\MigrationCommand;
 use Bpocallaghan\Generators\Commands\ControllerCommand;
 use Bpocallaghan\Generators\Commands\RepositoryCommand;
@@ -57,6 +58,8 @@ class GeneratorsServiceProvider extends ServiceProvider
         $this->registerCommand(ViewCommand::class, 'view');
         $this->registerCommand(ControllerCommand::class, 'controller');
 
+        $this->registerCommand(MiddlewareCommand::class, 'middleware');
+
         $this->registerCommand(MigrationCommand::class, 'migration');
         $this->registerCommand(MigrationPivotCommand::class, 'migrate.pivot');
         $this->registerCommand(SeedCommand::class, 'seed');
@@ -77,7 +80,7 @@ class GeneratorsServiceProvider extends ServiceProvider
         $this->registerCommand(JobCommand::class, 'job');
         $this->registerCommand(ConsoleCommand::class, 'console');
 
-        $this->registerCommand(MiddlewareCommand::class, 'middleware');
+        $this->registerCommand(ExceptionCommand::class, 'exception');
 
         $this->registerCommand(ResourceCommand::class, 'resource');
         $this->registerCommand(FileCommand::class, 'file');

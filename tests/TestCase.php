@@ -94,6 +94,7 @@ abstract class TestCase extends Orchestra
         $app['config']->set('generators.stubs.repository', "{$path}repository.stub");
         $app['config']->set('generators.stubs.contract', "{$path}contract.stub");
         $app['config']->set('generators.stubs.factory', "{$path}factory.stub");
+        $app['config']->set('generators.stubs.exception', "{$path}exception.stub");
         $app['config']->set('generators.stubs.test', "{$path}test.stub");
 
         //$path = '../tests/output/';
