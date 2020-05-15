@@ -37,6 +37,7 @@ php artisan generate:middleware
 php artisan generate:factory
 php artisan generate:test
 php artisan generate:file
+php artisan generate:exception
 ```
 
 ### Option for all the commands
