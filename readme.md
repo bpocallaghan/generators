@@ -41,7 +41,7 @@ php artisan generate:exception
 ```
 
 ### Option for all the commands
-`--force` This will overide the existing file, if it exist.
+`--force` This will override the existing file, if it exists.
 
 ### Option for all the commands, except `views` and `migration:pivot`
 `--plain` This will use the .plain stub of the command (generate an empty controller)
