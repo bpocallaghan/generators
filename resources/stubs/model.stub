@@ -2,6 +2,7 @@
 
 namespace {{namespace}};
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class Client
  * @mixin Builder
  */
-class {{class}} extends AdminModel
+class {{class}} extends Model
 {
     use SoftDeletes;
 
