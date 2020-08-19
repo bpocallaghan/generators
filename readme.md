@@ -10,8 +10,8 @@ Laravel 5.1 : v2.1.3
 Laravel 5.2 - 5.3 : v3.0.3
 Laravel 5.4 : v4.1.9
 Laravel 5.5 - 5.8 : v5.0.0+
-Laravel 6.0 : v5.1.0+  
-Laravel 7.0 : v6.0+  
+Laravel 6.0 : v5.1.0+
+Laravel 7.0 : v6.0+
 ```
 
 ## Commands
@@ -59,7 +59,7 @@ You can specify a custom name of the file to be generated.
 You can add the --plain or --force options.
 You can override the default stub to be used.
 You can create your own stubs with the available placeholders.
-You can create new settings' types, for example: 
+You can create new settings' types, for example:
 - 'exception' => ['namespace' => '\Exceptions', 'path' => './app/Exceptions/', 'postfix' => 'Exception'],
 
 [Available placeholders](https://github.com/bpocallaghan/generators/blob/master/resources/stubs/example.stub)
@@ -279,11 +279,11 @@ You can also add new stubs.
 This will also copy all the stubs to `/resources/stubs/`.
 Here you can make changes to the current stubs, add your own boilerplate / comments to the files.
 You can also add your own stubs here and specify it in the config to be used.
-
+**Migration Stub Note**: The `migration.stub` is only the outer part and the `schema_create.stub or schema_change.stub` is where you modify the schema itself. The `schema_create.stub` has boilerplate added to it.
 
 ### File
 
-This is the base command for the view, model, controller, seed commands. 
+This is the base command for the view, model, controller, seed commands.
 The migration and migration:pivot uses Jeffrey's classes.
 In the config there is a `settings` array, this is the 'types' and their settings. You can add more, for example, if you use repositories, you can add it here.
 
