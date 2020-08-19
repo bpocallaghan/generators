@@ -22,6 +22,6 @@ class {{class}} extends Model
      * Validation rules for this model
      */
     static public $rules = [
-        'name' => 'required|min:3:max:255',
+        'name' => 'required|min:3|max:255',
     ];
 }

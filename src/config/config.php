@@ -51,6 +51,12 @@ return [
             'dump_autoload'       => false,
             'repository_contract' => false,
         ],
+        'request' => [
+            'namespace'           => '\Http\Requests',
+            'path'                => './app/Http/Requests/',
+            'postfix'             => 'Request',
+            'directory_namespace' => true,
+        ],
         'seed'         => ['path' => './database/seeds/', 'postfix' => 'TableSeeder'],
         'migration'    => ['path' => './database/migrations/'],
         'notification' => [
@@ -145,6 +151,7 @@ return [
         'controller_plain'       => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/controller.plain.stub',
         'controller_admin'       => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/controller_admin.stub',
         'controller_repository'  => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/controller_repository.stub',
+        'request'                => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/request.stub',
         'pivot'                  => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/pivot.stub',
         'seed'                   => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/seed.stub',
         'seed_plain'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/seed.plain.stub',
