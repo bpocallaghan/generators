@@ -68,8 +68,11 @@ abstract class TestCase extends Orchestra
         $app['config']->set('generators.stubs.controller', "{$path}controller.stub");
         $app['config']->set('generators.stubs.controller_plain', "{$path}controller.plain.stub");
         $app['config']->set('generators.stubs.controller_admin', "{$path}controller_admin.stub");
-        $app['config']->set('generators.stubs.controller_repository',
-            "{$path}controller_repository.stub");
+        $app['config']->set(
+            'generators.stubs.controller_repository',
+            "{$path}controller_repository.stub"
+        );
+        $app['config']->set('generators.stubs.request', "{$path}request.stub");
         $app['config']->set('generators.stubs.pivot', "{$path}pivot.stub");
         $app['config']->set('generators.stubs.seed', "{$path}seed.stub");
         $app['config']->set('generators.stubs.seed_plain', "{$path}seed.plain.stub");
@@ -85,8 +88,10 @@ abstract class TestCase extends Orchestra
         $app['config']->set('generators.stubs.notification', "{$path}notification.stub");
         $app['config']->set('generators.stubs.event', "{$path}event.stub");
         $app['config']->set('generators.stubs.listener', "{$path}listener.stub");
-        $app['config']->set('generators.stubs.many_many_relationship',
-            "{$path}many_many_relationship.stub");
+        $app['config']->set(
+            'generators.stubs.many_many_relationship',
+            "{$path}many_many_relationship.stub"
+        );
         $app['config']->set('generators.stubs.trait', "{$path}trait.stub");
         $app['config']->set('generators.stubs.job', "{$path}job.stub");
         $app['config']->set('generators.stubs.console', "{$path}console.stub");
