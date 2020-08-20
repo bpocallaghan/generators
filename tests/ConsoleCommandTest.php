@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateConsoleTest extends TestCase
+class ConsoleCommandTest extends TestCase
 {
     /** @test */
     public function generate_console()
