@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateEventsTest extends TestCase
+class EventCommandTest extends TestCase
 {
     /** @test */
     public function generate_events()

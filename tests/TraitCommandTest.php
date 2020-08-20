@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateTraitTest extends TestCase
+class TraitCommandTest extends TestCase
 {
     /** @test */
     public function generate_trait()

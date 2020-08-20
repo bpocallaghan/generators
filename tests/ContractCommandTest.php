@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateContractTest extends TestCase
+class ContractCommandTest extends TestCase
 {
     /** @test */
     public function generate_contract()

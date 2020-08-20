@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateFileTest extends TestCase
+class FileCommandTest extends TestCase
 {
     /** @test */
     public function generate_file()

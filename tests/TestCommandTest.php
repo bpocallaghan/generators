@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateTestTest extends TestCase
+class TestCommandTest extends TestCase
 {
     /** @test */
     public function generate_test()

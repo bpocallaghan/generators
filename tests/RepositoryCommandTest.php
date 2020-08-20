@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateRepositoryTest extends TestCase
+class RepositoryCommandTest extends TestCase
 {
     /** @test */
     public function generate_repository()

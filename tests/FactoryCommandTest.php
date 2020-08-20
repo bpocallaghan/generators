@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateFactoryTest extends TestCase
+class FactoryCommandTest extends TestCase
 {
     /** @test */
     public function generate_factory()

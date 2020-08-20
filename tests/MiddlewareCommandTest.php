@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateMiddlewareTest extends TestCase
+class MiddlewareCommandTest extends TestCase
 {
     /** @test */
     public function generate_middleware()

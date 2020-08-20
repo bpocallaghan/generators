@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateViewTest extends TestCase
+class ViewCommandTest extends TestCase
 {
     /** @test */
     public function generate_view()

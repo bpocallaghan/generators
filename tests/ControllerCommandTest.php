@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateControllerTest extends TestCase
+class ControllerCommandTest extends TestCase
 {
     /** @test */
     public function generate_controller()

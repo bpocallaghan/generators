@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateNotificationTest extends TestCase
+class NotificationCommandTest extends TestCase
 {
     /** @test */
     public function generate_notification()

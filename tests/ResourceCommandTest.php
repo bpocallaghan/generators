@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateResourceTest extends TestCase
+class ResourceCommandTest extends TestCase
 {
     /** @test */
     public function generate_resource()

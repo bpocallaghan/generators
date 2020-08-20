@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateExceptionTest extends TestCase
+class ExceptionCommandTest extends TestCase
 {
     /** @test */
     public function generate_exception()

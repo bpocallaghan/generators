@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateJobTest extends TestCase
+class JobCommandTest extends TestCase
 {
     /** @test */
     public function generate_job()

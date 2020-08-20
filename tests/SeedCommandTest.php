@@ -2,7 +2,7 @@
 
 namespace Bpocallaghan\Generators\Tests;
 
-class GenerateSeedTest extends TestCase
+class SeedCommandTest extends TestCase
 {
     /** @test */
     public function generate_seed()
