@@ -31,12 +31,12 @@
                                 <input type="text" class="form-control" value="{{ $item->slug }}" readonly>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label>Description</label>
-                            <div class="well well-light well-form-description">
-                                {!! $item->description !!}
-                            </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <div class="well well-light well-form-description">
+                            {!! $item->description !!}
                         </div>
                     </div>
                 </fieldset>
