@@ -309,6 +309,16 @@ migration:pivot=php artisan generate:migration:pivot
 seed=php artisan generate:seed
 resource=php artisan generate:resource
 ```
+## Customizing file was created message to add support for ide opening the files
+
+Make links for opening output.Add output_path_handler as a function to your config/generators.php.Example:
+
+```
+'output_path_handler' => static function($path){
+    return 'file:///' . base_path() . $path;
+},
+```
+This will output a file schema uri which JetBrain Products (Intellij,Php Storm,Web Storm,...) then can open directly from your terminal.
 
 ## Thank you
 
