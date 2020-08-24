@@ -10,28 +10,24 @@ class EventGenerateCommand extends GeneratorCommand
 {
     /**
      * The console command name.
-     *
      * @var string
      */
     protected $name = 'generate:event-listener';
 
     /**
      * The console command description.
-     *
      * @var string
      */
     protected $description = 'Generate the missing events and listeners based on registration';
 
     /**
      * The type of class being generated.
-     *
      * @var string
      */
     protected $type = 'Event-Listener';
 
     /**
      * Execute the console command.
-     *
      * @return void
      */
     public function handle()

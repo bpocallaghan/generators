@@ -9,28 +9,24 @@ class FileCommand extends GeneratorCommand
 {
     /**
      * The console command name.
-     *
      * @var string
      */
     protected $name = 'generate:file';
 
     /**
      * The console command description.
-     *
      * @var string
      */
     protected $description = 'Create a file from a stub in the config';
 
     /**
      * The type of class being generated.
-     *
      * @var string
      */
     protected $type = 'File';
 
     /**
      * Get the filename of the file to generate
-     *
      * @return string
      */
     private function getFileName()
@@ -39,7 +35,6 @@ class FileCommand extends GeneratorCommand
 
         switch ($this->option('type')) {
             case 'view':
-
                 break;
             case 'model':
                 $name = $this->getModelName();
@@ -52,7 +47,7 @@ class FileCommand extends GeneratorCommand
                 break;
         }
 
-        // overide the name
+        // override the name
         if ($this->option('name')) {
             return $this->option('name') . $this->settings['file_type'];
         }
@@ -83,13 +78,13 @@ class FileCommand extends GeneratorCommand
         // build file and save it at location
         $this->files->put($path, $this->buildClass($this->argumentName()));
 
-        // check if has a output handler
+        // check if there is an output handler function
         $output_handler = config('generators.output_path_handler');
         $this->info(ucfirst($this->option('type')) . ' created successfully.');
-        if(is_callable($output_handler)){
+        if (is_callable($output_handler)) {
             // output to console from the user defined function
-            $this->info($output_handler(Str::after($path,'.')));
-        }else{
+            $this->info($output_handler(Str::after($path, '.')));
+        } else {
             // output to console
             $this->info('- ' . $path);
         }
@@ -228,8 +223,10 @@ class FileCommand extends GeneratorCommand
     protected function getUrl($lowercase = true)
     {
         if ($lowercase) {
-            $url = '/' . rtrim(implode('/',
-                    array_map('Str::snake', explode('/', $this->getArgumentPath(true)))), '/');
+            $url = '/' . rtrim(implode(
+                '/',
+                array_map('Str::snake', explode('/', $this->getArgumentPath(true)))
+            ), '/');
             $url = (implode('/', array_map('Str::slug', explode('/', $url))));
 
             return $url;
@@ -244,8 +241,11 @@ class FileCommand extends GeneratorCommand
      */
     protected function getClassName()
     {
-        return ucwords(Str::camel(str_replace([$this->settings['file_type']], [''],
-            $this->getFileName())));
+        return ucwords(Str::camel(str_replace(
+            [$this->settings['file_type']],
+            [''],
+            $this->getFileName()
+        )));
     }
 
     /**

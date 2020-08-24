@@ -8,21 +8,18 @@ class ConsoleCommand extends GeneratorCommand
 {
     /**
      * The console command name.
-     *
      * @var string
      */
     protected $name = 'generate:console';
 
     /**
      * The console command description.
-     *
      * @var string
      */
     protected $description = 'Create a new Artisan Console Command';
 
     /**
      * The type of class being generated.
-     *
      * @var string
      */
     protected $type = 'Console';
@@ -35,7 +32,6 @@ class ConsoleCommand extends GeneratorCommand
 
     /**
      * Get the console command options.
-     *
      * @return array
      */
     protected function getOptions()
