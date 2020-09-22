@@ -19,12 +19,12 @@
         }
     ],
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.3",
         "symfony/console": "^5.0",
-        "laravel/framework": "^7.6"
+        "laravel/framework": "^8.0"
     },
     "require-dev": {
-        "orchestra/testbench": "5.*"
+        "orchestra/testbench": "6.*"
     },
     "autoload": {
         "psr-4": {
