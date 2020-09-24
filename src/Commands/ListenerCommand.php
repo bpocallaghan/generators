@@ -84,12 +84,12 @@ class ListenerCommand extends GeneratorCommand
             case 'controller':
                 $name = $this->getControllerName($name);
                 break;
-            case 'seed':
+            case 'seeder':
                 $name = $this->getSeedName($name);
                 break;
         }
 
-        // overide the name
+        // override the name
         if ($this->option('name')) {
             return $this->option('name') . $this->settings['file_type'];
         }
@@ -172,8 +172,10 @@ class ListenerCommand extends GeneratorCommand
         // event - listeners
         $event = $this->option('event');
 
-        if (!Str::startsWith($event, $this->laravel->getNamespace()) && !Str::startsWith($event,
-                'Illuminate')
+        if (!Str::startsWith($event, $this->laravel->getNamespace()) && !Str::startsWith(
+            $event,
+            'Illuminate'
+        )
         ) {
             $event = $this->laravel->getNamespace() . 'Events\\' . $event;
         }
@@ -221,8 +223,10 @@ class ListenerCommand extends GeneratorCommand
     protected function getUrl($lowercase = true)
     {
         if ($lowercase) {
-            $url = '/' . rtrim(implode('/',
-                    array_map('Str::snake', explode('/', $this->getArgumentPath(true)))), '/');
+            $url = '/' . rtrim(implode(
+                '/',
+                array_map('Str::snake', explode('/', $this->getArgumentPath(true)))
+            ), '/');
             $url = (implode('/', array_map('Str::slug', explode('/', $url))));
 
             return $url;
@@ -237,8 +241,11 @@ class ListenerCommand extends GeneratorCommand
      */
     protected function getClassName()
     {
-        return ucwords(Str::camel(str_replace([$this->settings['file_type']], [''],
-            $this->getFileName())));
+        return ucwords(Str::camel(str_replace(
+            [$this->settings['file_type']],
+            [''],
+            $this->getFileName()
+        )));
     }
 
     /**

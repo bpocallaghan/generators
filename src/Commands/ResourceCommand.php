@@ -20,7 +20,7 @@ class ResourceCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new Resource (Model, Views, Controller, Migration, Seed)';
+    protected $description = 'Create a new Resource (Model, Views, Controller, Migration, Seeder)';
 
     /**
      * The type of class being generated.
@@ -46,7 +46,7 @@ class ResourceCommand extends GeneratorCommand
         $this->callRepository();
         $this->callController();
         $this->callMigration();
-        $this->callSeed();
+        $this->callSeeder();
         $this->callTest();
         $this->callFactory();
         $this->callMigrate();
@@ -57,8 +57,11 @@ class ResourceCommand extends GeneratorCommand
         }
 
         $this->info('All Done!');
-        $this->info('Remember to add ' . "`Route::resource('" . str_replace('_', '-',
-                $this->getCollectionName()) . "', '" . $this->getResourceControllerName() . "');`" . ' in `routes\\web.php`');
+        $this->info('Remember to add ' . "`Route::resource('" . str_replace(
+            '_',
+            '-',
+            $this->getCollectionName()
+        ) . "', '" . $this->getResourceControllerName() . "');`" . ' in `routes\\web.php`');
     }
 
     /**
@@ -97,8 +100,12 @@ class ResourceCommand extends GeneratorCommand
                     $resource = str_replace('.', '/', $resource);
                 }
 
-                $this->callCommandFile('view', $this->getViewPath($resource),
-                    $key . $this->option('view'), ['--name' => $name]);
+                $this->callCommandFile(
+                    'view',
+                    $this->getViewPath($resource),
+                    $key . $this->option('view'),
+                    ['--name' => $name]
+                );
             }
         }
     }
@@ -133,19 +140,21 @@ class ResourceCommand extends GeneratorCommand
 
         if ($this->confirm("Create a controller ($name) for the $this->resource resource?")) {
             $arg = $this->getArgumentResource();
-            $name = substr_replace($arg, Str::plural($this->resource),
-                strrpos($arg, $this->resource), strlen($this->resource));
+            $name = substr_replace(
+                $arg,
+                Str::plural($this->resource),
+                strrpos($arg, $this->resource),
+                strlen($this->resource)
+            );
 
             if ($this->repositoryContract) {
                 $this->callCommandFile('controller', $name, 'controller_repository');
-            }
-            else {
+            } else {
 
                 // if admin - update stub
                 if (Str::contains($name, 'admin.') || $this->option('controller') === 'admin') {
                     $this->callCommandFile('controller', $name, 'controller_admin');
-                }
-                else {
+                } else {
                     $this->callCommandFile('controller', $name, 'controller');
                 }
             }
@@ -170,12 +179,12 @@ class ResourceCommand extends GeneratorCommand
     /**
      * Call the generate:seed command
      */
-    private function callSeed(): void
+    private function callSeeder(): void
     {
-        $name = $this->getSeedName() . config('generators.settings.seed.postfix');
+        $name = $this->getSeedName() . config('generators.settings.seeder.postfix');
 
-        if ($this->confirm("Create a seed ($name) for the $this->resource resource?")) {
-            $this->callCommandFile('seed');
+        if ($this->confirm("Create a seeder ($name) for the $this->resource resource?")) {
+            $this->callCommandFile('seeder');
         }
     }
 
@@ -207,7 +216,6 @@ class ResourceCommand extends GeneratorCommand
         $name = $this->getModelName() . 'Factory';
 
         if ($this->confirm("Create a factory ($name) for the $this->resource resource?")) {
-
             $this->callCommandFile('factory', $name);
         }
     }
@@ -302,8 +310,10 @@ class ResourceCommand extends GeneratorCommand
      */
     private function getResourceControllerName(): string
     {
-        return $this->getControllerName(Str::plural($this->resource),
-                false) . config('generators.settings.controller.postfix');
+        return $this->getControllerName(
+            Str::plural($this->resource),
+            false
+        ) . config('generators.settings.controller.postfix');
     }
 
     /**
