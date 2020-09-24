@@ -181,7 +181,7 @@ class ResourceCommand extends GeneratorCommand
      */
     private function callSeeder(): void
     {
-        $name = $this->getSeedName() . config('generators.settings.seeder.postfix');
+        $name = $this->getSeederName() . config('generators.settings.seeder.postfix');
 
         if ($this->confirm("Create a seeder ($name) for the $this->resource resource?")) {
             $this->callCommandFile('seeder');

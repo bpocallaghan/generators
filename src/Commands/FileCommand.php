@@ -43,7 +43,7 @@ class FileCommand extends GeneratorCommand
                 $name = $this->getControllerName($name);
                 break;
             case 'seeder':
-                $name = $this->getSeedName($name);
+                $name = $this->getSeederName($name);
                 break;
         }
 
