@@ -52,8 +52,17 @@ class MigrationPivotCommand extends GeneratorCommand
         $this->makeDirectory($path);
         $this->files->put($path, $this->buildClass($name));
 
+        // output to console
+        // check if there is an output handler function
+        $output_handler = config('generators.output_path_handler');
         $this->info($this->type . ' created successfully.');
-        $this->info('- ' . $path);
+        if (is_callable($output_handler)) {
+            // output to console from the user defined function
+            $this->info($output_handler(Str::after($path, '.')));
+        } else {
+            // output to console
+            $this->info('- ' . $path);
+        }
     }
 
     /**
