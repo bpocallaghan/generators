@@ -2,10 +2,10 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
-use Illuminate\Support\Str;
 use Bpocallaghan\Generators\Migrations\NameParser;
 use Bpocallaghan\Generators\Migrations\SchemaParser;
 use Bpocallaghan\Generators\Migrations\SyntaxBuilder;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
 class MigrationCommand extends GeneratorCommand
@@ -48,7 +48,6 @@ class MigrationCommand extends GeneratorCommand
     public function handle()
     {
         $this->meta = (new NameParser)->parse($this->argumentName());
-
         $name = $this->qualifyClass($this->getNameInput());
         $path = $this->getPath($name);
 
@@ -69,6 +68,7 @@ class MigrationCommand extends GeneratorCommand
             // output to console
             $this->info('- ' . $path);
         }
+
         // if model is required
         if ($this->optionModel() === true || $this->optionModel() === 'true') {
             $this->call('generate:model', [
