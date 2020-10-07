@@ -61,7 +61,7 @@ class ResourceCommandTest extends TestCase
     /** @test */
     public function generate_resource_with_bootstrap_4_stubs()
     {
-        $this->artisan('generate:resource articles --view=b4')
+        $this->artisan('generate:resource articles --view=b3')
             ->expectsQuestion('Create a Article model?', false)
             ->expectsQuestion('Create crud views for the article resource?', true)
             ->expectsQuestion('Create a controller (ArticlesController) for the article resource?', false)
