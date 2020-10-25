@@ -20,7 +20,9 @@ class {{class}} extends AdminController
 	{
 		save_resource_url();
 
-		return $this->view('{{viewPath}}.index')->with('items', {{model}}::all());
+		return $this->view('{{viewPath}}.index', [
+            'items' => {{model}}::all()
+        ]);
 	}
 
 	/**
@@ -38,11 +40,9 @@ class {{class}} extends AdminController
 	 *
 	 * @return RedirectResponse|Redirector
 	 */
-	public function store()
+	public function store({{model}}Request $request)
 	{
-		$attributes = request()->validate({{model}}::$rules, {{model}}::$messages);
-
-        ${{resource}} = $this->createEntry({{model}}::class, $attributes);
+        ${{resource}} = $this->createEntry({{model}}::class, $request->validated());
 
         return redirect_to_resource();
 	}
@@ -75,11 +75,9 @@ class {{class}} extends AdminController
 	 * @param {{model}}  ${{resource}}
      * @return RedirectResponse|Redirector
      */
-    public function update({{model}} ${{resource}})
+    public function update({{model}}Request $request, {{model}} ${{resource}})
 	{
-		$attributes = request()->validate({{model}}::$rules, {{model}}::$messages);
-
-        ${{resource}} = $this->updateEntry(${{resource}}, $attributes);
+        ${{resource}} = $this->updateEntry(${{resource}}, $request->validated());
 
         return redirect_to_resource();
 	}
