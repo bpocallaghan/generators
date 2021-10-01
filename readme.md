@@ -326,9 +326,9 @@ This will output a file schema uri which JetBrain Products (Intellij,Php Storm,W
 - Thank you [Taylor Ottwell](https://github.com/taylorotwell) for [Laravel](http://laravel.com/).
 - Thank you [Jeffrey Way](https://github.com/JeffreyWay) for the awesome resources at [Laracasts](https://laracasts.com/).
 
-## My other Packages
+## My Other Packages
 
-- [Notify](https://github.com/bpocallaghan/notify) Laravel Flash Notifications with icons and animations and with a timeout
 - [Alert](https://github.com/bpocallaghan/alert) A helper package to flash a bootstrap alert to the browser via a Facade or a helper function.
+- [Notify](https://github.com/bpocallaghan/notify) Laravel Flash Notifications with icons and animations and with a timeout
 - [Impersonate User](https://github.com/bpocallaghan/impersonate) This allows you to authenticate as any of your customers.
 - [Sluggable](https://github.com/bpocallaghan/sluggable) Provides a HasSlug trait that will generate a unique slug when saving your Laravel Eloquent model.
