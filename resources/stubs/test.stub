@@ -13,6 +13,10 @@ class {{class}} extends TestCase
     /** @test */
     public function {{resourceLowercase}}()
     {
+        // arrange
 
+        // act
+
+        // assert
     }
 }
