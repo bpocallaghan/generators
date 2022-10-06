@@ -41,13 +41,7 @@ class TestCommand extends GeneratorCommand
     protected function getOptions()
     {
         return array_merge([
-            [
-                'unit',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'Create a unit test.',
-                'Feature'
-            ],
+            ['unit', 'u', InputOption::VALUE_NONE, 'Create a unit test.'],
         ], parent::getOptions());
     }
 }

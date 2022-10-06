@@ -123,7 +123,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 
         // if type Test -> see if Feature or Unit
         if ($this->option('type') === 'test') {
-            $folder = $this->option('unit') ?? 'Unit'; // Feature unless null -> Unit
+            $folder = $this->option('unit') ? 'Unit': 'Feature'; // Feature unless null -> Unit
 
             $name = $folder . DIRECTORY_SEPARATOR . $name;
         }
@@ -139,7 +139,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 
         // if test - return the prefix folder
         if ($this->option('type') === 'test') {
-            return ($this->option('unit') ?? 'Unit') . DIRECTORY_SEPARATOR;
+            return ($this->option('unit') ? 'Unit': 'Feature') . DIRECTORY_SEPARATOR;
         }
 
         return '';
@@ -418,18 +418,8 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
         return [
             ['plain', null, InputOption::VALUE_NONE, 'Generate an empty class.'],
             ['force', null, InputOption::VALUE_NONE, 'Warning: Override file if it already exist'],
-            [
-                'stub',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'The name of the view stub you would like to generate.'
-            ],
-            [
-                'name',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'If you want to override the name of the file that will be generated'
-            ],
+            ['stub', null, InputOption::VALUE_OPTIONAL, 'The name of the view stub you would like to generate.'],
+            ['name', null, InputOption::VALUE_OPTIONAL, 'If you want to override the name of the file that will be generated'],
         ];
     }
 }
