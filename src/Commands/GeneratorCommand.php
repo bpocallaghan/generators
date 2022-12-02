@@ -60,6 +60,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
             '--force' => $this->optionForce(), // force override
             '--stub'  => $this->optionStub(), // custom stub name
             '--name'  => $this->optionName(), // custom name for file
+            '--test'  => $this->optionTest(), // also generate test file
         ];
 
         // extra custom option
@@ -419,7 +420,8 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
             ['plain', null, InputOption::VALUE_NONE, 'Generate an empty class.'],
             ['force', null, InputOption::VALUE_NONE, 'Warning: Override file if it already exist'],
             ['stub', null, InputOption::VALUE_OPTIONAL, 'The name of the view stub you would like to generate.'],
-            ['name', null, InputOption::VALUE_OPTIONAL, 'If you want to override the name of the file that will be generated'],
+            ['name', null, InputOption::VALUE_OPTIONAL, 'If you want to override the name of the file that will be generated.'],
+            ['test', null, InputOption::VALUE_NONE, 'Generate a test file.'],
         ];
     }
 }

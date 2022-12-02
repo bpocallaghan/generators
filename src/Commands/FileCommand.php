@@ -2,6 +2,7 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -57,8 +58,8 @@ class FileCommand extends GeneratorCommand
 
     /**
      * Execute the console command.
-     *
      * @return void
+     * @throws FileNotFoundException
      */
     public function handle()
     {
@@ -95,19 +96,32 @@ class FileCommand extends GeneratorCommand
                 $this->composer->dumpAutoloads();
             }
         }
+
+        // if we need to generate a test file
+        if ($this->option('test')) {
+            // ./app/Http
+            $name = Str::replace('./app', '', $path);
+            $name = Str::replace('/Http/', '', $name);
+            $name = Str::replace('.php', '', $name);
+
+            $this->call('generate:test', [
+                'name' => $name,
+                '--unit' => $this->settings['postfix'] !== 'Controller',
+            ]);
+        }
     }
 
     /**
      * Get the destination class path.
      *
-     * @param  string $name
+     * @param string $name
      * @return string
      */
     protected function getPath($name)
     {
         $name = $this->getFileName();
 
-        $withName = (bool) $this->option('name');
+        $withName = (bool)$this->option('name');
 
         $path = $this->settings['path'];
 
@@ -192,8 +206,8 @@ class FileCommand extends GeneratorCommand
     /**
      * Get the full namespace name for a given class.
      *
-     * @param  string $name
-     * @param bool    $withApp
+     * @param string $name
+     * @param bool $withApp
      * @return string
      */
     protected function getNamespace($name, $withApp = true)
@@ -224,9 +238,9 @@ class FileCommand extends GeneratorCommand
     {
         if ($lowercase) {
             $url = '/' . rtrim(implode(
-                '/',
-                array_map('Str::snake', explode('/', $this->getArgumentPath(true)))
-            ), '/');
+                    '/',
+                    array_map('Str::snake', explode('/', $this->getArgumentPath(true)))
+                ), '/');
             $url = (implode('/', array_map('Str::slug', explode('/', $url))));
 
             return $url;
@@ -256,29 +270,11 @@ class FileCommand extends GeneratorCommand
     protected function getOptions()
     {
         return array_merge([
-            [
-                'type',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'The type of file: model, view, controller, migration, seed',
-                'view'
-            ],
-            // optional for the generate:console
-            [
-                'command',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'The terminal command that should be assigned.',
-                'command:name'
-            ],
-            // optional for the generate:test
-            [
-                'unit',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'Create a unit test.',
-                'Feature'
-            ],
+            ['type', null, InputOption::VALUE_OPTIONAL, 'The type of file: model, view, controller, migration, seed', 'view'],
+            // optional for to generate:console
+            ['command', null, InputOption::VALUE_OPTIONAL, 'The terminal command that should be assigned.', 'command:name'],
+            // optional for to generate:test
+            ['unit', null, InputOption::VALUE_OPTIONAL, 'Create a unit test.', 'Feature'],
         ], parent::getOptions());
     }
 }

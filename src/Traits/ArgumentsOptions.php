@@ -8,7 +8,7 @@ trait ArgumentsOptions
      * Get the argument name of the file that needs to be generated
      * If settings exist, remove the postfix from the file
      */
-    protected function argumentName()
+    protected function argumentName(): array|bool|string|null
     {
         if ($this->settings) {
             return str_replace($this->settings['postfix'], '', $this->argument('name'));
@@ -20,7 +20,7 @@ trait ArgumentsOptions
     /**
      * Get the value for the force option
      */
-    protected function optionForce()
+    protected function optionForce(): bool|array|string|null
     {
         return $this->option('force');
     }
@@ -28,7 +28,7 @@ trait ArgumentsOptions
     /**
      * Get the value for the plain option
      */
-    protected function optionPlain()
+    protected function optionPlain(): bool|array|string|null
     {
         return $this->option('plain');
     }
@@ -36,7 +36,7 @@ trait ArgumentsOptions
     /**
      * Get the value for the stub option
      */
-    protected function optionStub()
+    protected function optionStub(): bool|array|string|null
     {
         return $this->option('stub');
     }
@@ -44,7 +44,7 @@ trait ArgumentsOptions
     /**
      * Get the value for the model option
      */
-    protected function optionModel()
+    protected function optionModel(): bool|array|string|null
     {
         return $this->option('model');
     }
@@ -52,7 +52,7 @@ trait ArgumentsOptions
     /**
      * Get the value for the schema option
      */
-    protected function optionSchema()
+    protected function optionSchema(): bool|array|string|null
     {
         return $this->option('schema');
     }
@@ -60,15 +60,23 @@ trait ArgumentsOptions
     /**
      * Get the value for the name option
      */
-    protected function optionName()
+    protected function optionName(): bool|array|string|null
     {
         return $this->option('name');
     }
 
     /**
+     * Get the value for the name option
+     */
+    protected function optionTest(): bool|array|string|null
+    {
+        return $this->option('test');
+    }
+
+    /**
      * Get the value for the extra option
      */
-    protected function optionExtra()
+    protected function optionExtra(): bool|array|string|null
     {
         return $this->option($this->extraOption);
     }
