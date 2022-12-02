@@ -34,4 +34,12 @@ class ControllerCommandTest extends TestCase
         $this->artisan('generate:controller SuffixController');
         $this->assertFileExists('app/Http/Controllers/SuffixController.php');
     }
+
+    /** @test */
+    public function option_test_generate_test_file()
+    {
+        $this->artisan('generate:controller foo --test');
+        $this->assertFileExists('app/Http/Controllers/FooController.php');
+        $this->assertFileExists('tests/Feature/Controllers/FooControllerTest.php');
+    }
 }
