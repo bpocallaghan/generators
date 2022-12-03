@@ -7,3 +7,7 @@ composer.lock
 .phpunit.result.cache
 tests/temp/database.sqlite
 app/
+tests/Unit
+tests/Feature
+tests/tests/Unit
+tests/tests/Feature

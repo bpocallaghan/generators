@@ -36,7 +36,7 @@ class ControllerCommandTest extends TestCase
     }
 
     /** @test */
-    public function option_test_generate_test_file()
+    public function generate_controller_with_option_test()
     {
         $this->artisan('generate:controller foo --test');
         $this->assertFileExists('app/Http/Controllers/FooController.php');

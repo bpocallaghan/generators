@@ -13,4 +13,12 @@ class TraitCommandTest extends TestCase
         $this->artisan('generate:trait Http/Controllers/Traits/PhotoHelper');
         $this->assertFileExists('app/Http/Controllers/Traits/PhotoHelper.php');
     }
+
+    /** @test */
+    public function generate_trait_with_option_test()
+    {
+        $this->artisan('generate:trait Traits/RoleHelper --test');
+        $this->assertFileExists('app/Traits/RoleHelper.php');
+        $this->assertFileExists('tests/Unit/Traits/RoleHelperTest.php');
+    }
 }
