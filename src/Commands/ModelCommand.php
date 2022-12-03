@@ -39,9 +39,15 @@ class ModelCommand extends GeneratorCommand
 
         if ($this->option('migration')) {
             $this->call('generate:migration', [
-                'name'     => $this->getMigrationName(),
-                '--model'  => false,
+                'name' => $this->getMigrationName(),
+                '--model' => false,
                 '--schema' => $this->option('schema')
+            ]);
+        }
+
+        if ($this->option('factory')) {
+            $this->call('generate:factory', [
+                'name' => $this->getArgumentNameOnly(),
             ]);
         }
     }
@@ -70,6 +76,7 @@ class ModelCommand extends GeneratorCommand
     {
         return array_merge([
             ['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file as well.'],
+            ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory file as well.'],
             ['schema', 's', InputOption::VALUE_OPTIONAL, 'Optional schema to be attached to the migration', null],
         ], parent::getOptions());
     }

@@ -11,8 +11,9 @@ Laravel 5.2 - 5.3 : v3.0.3
 Laravel 5.4 : v4.1.9
 Laravel 5.5 - 5.8 : v5.0.0+
 Laravel 6.0 : v5.1.0+
-Laravel 7.0 : v6.0
-Laravel 8.0 : v7.0+
+Laravel 7.0 : v6.x
+Laravel 8.0 : v7.x
+Laravel 9.0 : v8.x
 ```
 
 ## Commands
@@ -42,10 +43,11 @@ php artisan generate:exception
 ```
 
 ### Option for all the commands
-`--force` This will override the existing file, if it exists.
+ - `--force` This will override the existing file, if it exists.
+ - `--test` This will also generate a test file.
 
 ### Option for all the commands, except `views` and `migration:pivot`
-`--plain` This will use the .plain stub of the command (generate an empty controller)
+ - `--plain` This will use the .plain stub of the command (generate an empty controller)
 
 ### Customization
 This is for all except the `migration` and `migration:pivot` commands
@@ -123,6 +125,8 @@ Run `php artisan` command to see the new commands in the `generate:*` section
 php artisan generate:model bar
 php artisan generate:model foo.bar --plain
 php artisan generate:model bar --force
+php artisan generate:model bar --factory
+php artisan generate:model bar --migration
 php artisan generate:model bar --migration --schema="title:string, body:text"
 ```
 
