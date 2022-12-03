@@ -63,7 +63,6 @@ class FileCommand extends GeneratorCommand
      */
     public function handle()
     {
-        // setup
         $this->setSettings();
         $this->getResourceName($this->getUrl(false));
 

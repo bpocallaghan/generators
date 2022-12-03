@@ -21,4 +21,11 @@ class RepositoryCommandTest extends TestCase
         $this->assertFileExists('app/Repositories/FooRepository.php');
         $this->assertFileExists('tests/Unit/Repositories/FooRepositoryTest.php');
     }
+
+    /** @test */
+    public function generate_repository_with_contract_stub()
+    {
+        $this->artisan('generate:repository BookingRepository --contract');
+        $this->assertFileExists('app/Repositories/BookingRepository.php');
+    }
 }

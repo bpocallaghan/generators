@@ -3,66 +3,11 @@
 namespace {{namespace}};
 
 use App\Models\{{model}};
-use Illuminate\Http\Request;
-use {{contractNamespace}}\{{contract}} as Contract;
 
-class {{class}} implements Contract
+class {{class}}
 {
-    /**
-     * The {{model}} instance.
-     *
-     * @var App\Models\{{model}};
-     */
-    protected ${{resourceLowercase}};
-
-    /**
-     * {{model}} constructor.
-     * @param {{model}} ${{resourceLowercase}}
-     */
-    public function __construct({{model}} ${{resourceLowercase}})
-    {
-        $this->{{resourceLowercase}} = ${{resourceLowercase}};
-    }
-
     public function all()
     {
-        return $this->{{resourceLowercase}}->all();
-    }
-
-    /**
-     * @param Request $request
-     * @return mixed
-     */
-    public function getColumn(Request $request)
-    {
-        // TODO: Implement getColumn() method.
-    }
-
-    /**
-     * @param Request $request
-     * @return mixed
-     */
-    public function getList(Request $request)
-    {
-        // TODO: Implement getList() method.
-    }
-
-    /**
-     * @param Request $request
-     * @return mixed
-     */
-    public function create(Request $request)
-    {
-        // TODO: Implement create() method.
-    }
-
-    /**
-     * @param Request $request
-     * @param         $id
-     * @return mixed
-     */
-    public function update(Request $request, $id)
-    {
-        // TODO: Implement update() method.
+        return {{model}}::all();
     }
 }

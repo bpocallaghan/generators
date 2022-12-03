@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | The singular resource words that will not be pluralized
@@ -176,6 +175,7 @@ return [
         'exception'              => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/exception.stub',
         'middleware'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/middleware.stub',
         'repository'             => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/repository.stub',
+        'repository_contract'    => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/repository.contract.stub',
         'contract'               => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/contract.stub',
         'factory'                => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/factory.stub',
         'test'                   => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/test.stub',

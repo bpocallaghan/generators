@@ -2,6 +2,8 @@
 
 namespace Bpocallaghan\Generators\Commands;
 
+use Symfony\Component\Console\Input\InputOption;
+
 class RepositoryCommand extends GeneratorCommand
 {
     /**
@@ -26,26 +28,31 @@ class RepositoryCommand extends GeneratorCommand
     protected $type = 'Repository';
 
     /**
-     * Add an extra option to use for generating the file
-     * @var string
+     * Execute the console command.
+     *
+     * @return void
      */
-    //protected $extraOption = 'contract';
+    public function handle()
+    {
+        if (!$this->option('contract')) {
+            parent::handle();
+        } else {
+            $this->call('generate:repository', [
+                'name' => $this->argumentName(),
+                '--stub' => 'repository_contract',
+            ]);
+        }
+    }
 
     /**
      * Get the console command options.
      *
      * @return array
      */
-    /*protected function getOptions()
+    protected function getOptions()
     {
         return array_merge([
-            [
-                'contract',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'The name of the contract interface to implement.',
-                'Contract'
-            ],
+            ['contract', 'c', InputOption::VALUE_NONE, 'Use the implements Contract Stub.'],
         ], parent::getOptions());
-    }*/
+    }
 }
