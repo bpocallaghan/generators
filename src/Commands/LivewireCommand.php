@@ -34,20 +34,13 @@ class LivewireCommand extends GeneratorCommand
      */
     public function handle()
     {
-//        $this->call('generate:file', [
-//                'name' => $this->argumentName(),
-//                '--type'  => strtolower($this->type),
-//                '--stub' => 'repository_contract',
-//            ]);
+        parent::handle();
 
-//        if (!$this->option('contract')) {
-            parent::handle();
-//        } else {
-//            $this->call('generate:repository', [
-//                'name' => $this->argumentName(),
-//                '--stub' => 'repository_contract',
-//            ]);
-//        }
+        $this->call('generate:file', [
+                'name' => $this->argumentName(),
+                '--type'  => strtolower($this->type).'_view',
+                '--stub' => strtolower($this->type).'_view',
+            ]);
     }
 
     /**

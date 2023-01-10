@@ -124,12 +124,12 @@ return [
             'postfix'             => '',
             'directory_namespace' => true,
         ],
-//        'livewire-view' => [
-//            'path'                => './resources/views/',
-//            'file_type'           => '.blade.php',
-//            'directory_format'    => 'strtolower',
-//            'directory_namespace' => true
-//        ],
+        'livewire_view' => [
+            'path'                => './resources/views/livewire/',
+            'file_type'           => '.blade.php',
+            'directory_format'    => 'strtolower',
+            'directory_namespace' => true
+        ],
     ],
 
     /*

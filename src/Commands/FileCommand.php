@@ -46,6 +46,9 @@ class FileCommand extends GeneratorCommand
             case 'livewire':
                 $name = $this->getControllerName($name);
                 break;
+            case 'livewire_view':
+                $name = $this->getViewName($name);
+                break;
             case 'seeder':
                 $name = $this->getSeederName($name);
                 break;

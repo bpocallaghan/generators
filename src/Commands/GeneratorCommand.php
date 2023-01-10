@@ -194,13 +194,18 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
         return ucwords(Str::camel(str_replace($this->settings['postfix'], '', ($name))));
     }
 
+    protected function getViewName(string $name = null): string
+    {
+        $name = strtolower(preg_replace('/([a-zA-Z])(?=[A-Z])/', '$1-', $name));
+        return (str_replace($this->settings['postfix'], '', $name));
+    }
+
     /**
      * Get the name for the seed
      *
      * @param null $name
-     * @return string
      */
-    protected function getSeederName($name = null)
+    protected function getSeederName($name = null): string
     {
         return ucwords(Str::camel(str_replace(
             $this->settings['postfix'],
