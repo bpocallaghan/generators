@@ -54,13 +54,13 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
     public function handle()
     {
         $args = [
-            'name'    => $this->argumentName(),
-            '--type'  => strtolower($this->type), // settings type
+            'name' => $this->argumentName(),
+            '--type' => strtolower($this->type), // settings type
             '--plain' => $this->optionPlain(), // if plain stub
             '--force' => $this->optionForce(), // force override
-            '--stub'  => $this->optionStub(), // custom stub name
-            '--name'  => $this->optionName(), // custom name for file
-            '--test'  => $this->optionTest(), // also generate test file
+            '--stub' => $this->optionStub(), // custom stub name
+            '--name' => $this->optionName(), // custom name for file
+            '--test' => $this->optionTest(), // also generate test file
         ];
 
         // extra custom option
@@ -124,7 +124,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 
         // if type Test -> see if Feature or Unit
         if ($this->option('type') === 'test') {
-            $folder = $this->option('unit') ? 'Unit': 'Feature'; // Feature unless null -> Unit
+            $folder = $this->option('unit') ? 'Unit' : 'Feature'; // Feature unless null -> Unit
 
             $name = $folder . DIRECTORY_SEPARATOR . $name;
         }
@@ -140,7 +140,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
 
         // if test - return the prefix folder
         if ($this->option('type') === 'test') {
-            return ($this->option('unit') ? 'Unit': 'Feature') . DIRECTORY_SEPARATOR;
+            return ($this->option('unit') ? 'Unit' : 'Feature') . DIRECTORY_SEPARATOR;
         }
 
         return '';
@@ -280,14 +280,18 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
      * @param $name
      * @return string
      */
-    protected function getViewPath($name)
+    protected function getViewPath($name, $plural = false)
     {
         $pieces = explode('/', $name);
 
         // dont plural if reserve word
         foreach ($pieces as $k => $value) {
             if (!in_array($value, config('generators.reserve_words'))) {
-                $pieces[$k] = Str::plural(Str::snake($pieces[$k]));
+                if (!$plural) {
+                    $pieces[$k] = Str::snake($pieces[$k]);
+                } else {
+                    $pieces[$k] = Str::plural(Str::snake($pieces[$k]));
+                }
             }
         }
 
@@ -369,6 +373,9 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
         $key = $this->getOptionStubKey();
         $stub = config('generators.stubs.' . $key);
         if ($stub === null) {
+            if (app()->environment() === 'testing') {
+                dump('The stub does not exist in the config file - "' . $key . '"');
+            }
             $this->error('The stub does not exist in the config file - "' . $key . '"');
             exit;
         }
