@@ -51,9 +51,6 @@ class ResourceCommand extends GeneratorCommand
         $this->callFactory();
         $this->callMigrate();
 
-        // call request
-        // test - feature and unit
-
         // confirm dump autoload
         if ($this->confirm("Run 'composer dump-autoload'?")) {
             $this->composer->dumpAutoloads();

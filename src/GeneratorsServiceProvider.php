@@ -12,6 +12,7 @@ use Bpocallaghan\Generators\Commands\FactoryCommand;
 use Bpocallaghan\Generators\Commands\FileCommand;
 use Bpocallaghan\Generators\Commands\JobCommand;
 use Bpocallaghan\Generators\Commands\ListenerCommand;
+use Bpocallaghan\Generators\Commands\LivewireCommand;
 use Bpocallaghan\Generators\Commands\MiddlewareCommand;
 use Bpocallaghan\Generators\Commands\MigrationCommand;
 use Bpocallaghan\Generators\Commands\MigrationPivotCommand;
@@ -75,6 +76,8 @@ class GeneratorsServiceProvider extends ServiceProvider
         $this->registerCommand(TraitCommand::class, 'trait');
         $this->registerCommand(ContractCommand::class, 'contract');
         $this->registerCommand(RepositoryCommand::class, 'repository');
+
+        $this->registerCommand(LivewireCommand::class, 'livewire');
 
         $this->registerCommand(TestCommand::class, 'test');
         $this->registerCommand(FactoryCommand::class, 'factory');

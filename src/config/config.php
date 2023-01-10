@@ -118,6 +118,18 @@ return [
             'postfix'             => 'Test',
             'path'                => './tests/',
         ],
+        'livewire'   => [
+            'namespace'           => '\Http\Livewire',
+            'path'                => './app/Http/Livewire/',
+            'postfix'             => '',
+            'directory_namespace' => true,
+        ],
+//        'livewire-view' => [
+//            'path'                => './resources/views/',
+//            'file_type'           => '.blade.php',
+//            'directory_format'    => 'strtolower',
+//            'directory_namespace' => true
+//        ],
     ],
 
     /*
@@ -179,5 +191,7 @@ return [
         'contract'               => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/contract.stub',
         'factory'                => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/factory.stub',
         'test'                   => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/test.stub',
+        'livewire'               => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/livewire.stub',
+        'livewire_view'          => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/livewire.view.stub',
     ]
 ];

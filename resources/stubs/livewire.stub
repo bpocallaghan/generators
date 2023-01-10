@@ -1,0 +1,42 @@
+<?php
+
+namespace {{namespace}};
+
+use Livewire\Component;
+
+class {{class}} extends Component
+{
+    public {{model}} $resource;
+
+	public function mount()
+    {
+        //
+    }
+
+    private function resetForm()
+    {
+        $this->resource = new {{model}};
+        $this->resource->name = '';
+    }
+
+    public function rules(): array
+    {
+        return (new {{class}}Request())->rules();
+    }
+
+    public function submit()
+    {
+        $this->validate();
+
+        $this->resource->save();
+
+        $this->resetForm();
+
+        alert()->success("", "Entry saved.");
+    }
+
+    public function render()
+    {
+        return view('livewire.{{view}}');
+    }
+}
