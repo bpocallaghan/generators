@@ -35,7 +35,18 @@ class LivewireCommandTest extends TestCase
     /** @test */
     public function generate_livewire_test_option()
     {
-//        $this->artisan('generate:model foo --test');
-//        $this->artisan('generate:model foo --request');
+        $this->artisan('generate:livewire Foo --test');
+        $this->assertFileExists('app/Http/Livewire/Foo.php');
+        $this->assertFileExists('resources/views/livewire/foo.blade.php');
+        $this->assertFileExists('tests/Feature/Livewire/FooTest.php');
+    }
+
+    /** @test */
+    public function generate_livewire_request_option()
+    {
+        $this->artisan('generate:livewire Foo/Bar/Baz --request');
+        $this->assertFileExists('app/Http/Livewire/Foo/Bar/Baz.php');
+        $this->assertFileExists('resources/views/livewire/foo/bar/baz.blade.php');
+        $this->assertFileExists('app/Http/Requests/Foo/Bar/BazRequest.php');
     }
 }
