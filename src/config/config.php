@@ -130,6 +130,18 @@ return [
             'directory_format'    => 'strtolower',
             'directory_namespace' => true
         ],
+        'component'   => [
+            'namespace'           => '\View\Components',
+            'path'                => './app/View/Components/',
+            'postfix'             => '',
+            'directory_namespace' => true,
+        ],
+        'component_view' => [
+            'path'                => './resources/views/components/',
+            'file_type'           => '.blade.php',
+            'directory_format'    => 'strtolower',
+            'directory_namespace' => true
+        ],
     ],
 
     /*
@@ -193,5 +205,7 @@ return [
         'test'                   => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/test.stub',
         'livewire'               => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/livewire.stub',
         'livewire_view'          => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/livewire.view.stub',
+        'component'              => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/component.stub',
+        'component_view'         => base_path() . '/vendor/bpocallaghan/generators/resources/stubs/component.view.stub',
     ]
 ];

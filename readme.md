@@ -40,6 +40,7 @@ php artisan generate:factory
 php artisan generate:test
 php artisan generate:file
 php artisan generate:exception
+php artisan generate:component
 php artisan generate:livewire
 ```
 
@@ -270,6 +271,15 @@ php artisan generate:test Post --unit
 php artisan generate:test Auth\LoginTest
 ```
 This will generate Feature\UserCanLogin and Unit\PostTest and Unit\Auth\LoginTest files.
+
+### Component
+```
+php artisan generate:component Foo
+php artisan generate:component Foo/Bar
+php artisan generate:component Baz --test
+```
+This will generate a Laravel Component. The php and blade files will be generated.
+You can also specify to generate a unit test.
 
 ### Livewire
 ```

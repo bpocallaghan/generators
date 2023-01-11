@@ -41,12 +41,12 @@ class FileCommand extends GeneratorCommand
                 $name = $this->getModelName();
                 break;
             case 'controller':
-                $name = $this->getControllerName($name);
-                break;
             case 'livewire':
+            case 'component':
                 $name = $this->getControllerName($name);
                 break;
             case 'livewire_view':
+            case 'component_view':
                 $name = $this->getViewName($name);
                 break;
             case 'seeder':

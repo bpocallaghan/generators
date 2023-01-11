@@ -1,0 +1,4 @@
+<div>
+    {{-- Any code of your own that you haven’t looked at for six or more months might as well have been written by someone else. --}}
+    {{-- If you have to spend effort looking at a fragment of code and figuring out what it’s doing, then you should extract it into a function and name the function after the what. --}}
+</div>

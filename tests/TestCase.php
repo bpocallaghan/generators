@@ -97,6 +97,8 @@ abstract class TestCase extends Orchestra
         $app['config']->set('generators.stubs.test', "{$path}test.stub");
         $app['config']->set('generators.stubs.livewire', "{$path}livewire.stub");
         $app['config']->set('generators.stubs.livewire_view', "{$path}livewire.view.stub");
+        $app['config']->set('generators.stubs.component', "{$path}component.stub");
+        $app['config']->set('generators.stubs.component_view', "{$path}component.view.stub");
 
 //        $path = '../tests/output/';
 //        dd($app['config']->get('generators'));

@@ -2,6 +2,7 @@
 
 namespace Bpocallaghan\Generators;
 
+use Bpocallaghan\Generators\Commands\ComponentCommand;
 use Bpocallaghan\Generators\Commands\ConsoleCommand;
 use Bpocallaghan\Generators\Commands\ContractCommand;
 use Bpocallaghan\Generators\Commands\ControllerCommand;
@@ -78,6 +79,7 @@ class GeneratorsServiceProvider extends ServiceProvider
         $this->registerCommand(RepositoryCommand::class, 'repository');
 
         $this->registerCommand(LivewireCommand::class, 'livewire');
+        $this->registerCommand(ComponentCommand::class, 'component');
 
         $this->registerCommand(TestCommand::class, 'test');
         $this->registerCommand(FactoryCommand::class, 'factory');

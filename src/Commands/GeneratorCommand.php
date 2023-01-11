@@ -379,6 +379,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
         $stub = config('generators.stubs.' . $key);
         if ($stub === null) {
             if (app()->environment() === 'testing') {
+                // Tests\TestCase.php
                 dump('The stub does not exist in the config file - "' . $key . '"');
             }
             $this->error('The stub does not exist in the config file - "' . $key . '"');
