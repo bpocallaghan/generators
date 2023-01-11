@@ -3,7 +3,7 @@
 Custom Laravel File Generators with a config file and publishable stubs.
 You can publish the stubs. You can add your own stubs to generate.
 
-This package is being used in the [Admin Starter Project](https://github.com/bpocallaghan/titan-starter) that focusses on test driven development and has the foundation ready for you.
+This package is being used in [Admin Starter Project](https://github.com/bpocallaghan/titan-starter) that focuses on test driven development and has the foundation ready for you.
 
 ```
 Laravel 5.1 : v2.1.3
@@ -40,6 +40,7 @@ php artisan generate:factory
 php artisan generate:test
 php artisan generate:file
 php artisan generate:exception
+php artisan generate:livewire
 ```
 
 ### Option for all the commands
@@ -270,6 +271,16 @@ php artisan generate:test Auth\LoginTest
 ```
 This will generate Feature\UserCanLogin and Unit\PostTest and Unit\Auth\LoginTest files.
 
+### Livewire
+```
+php artisan generate:livewire Foo
+php artisan generate:livewire Foo/Bar
+php artisan generate:livewire Baz --test
+php artisan generate:livewire foo-bar --request
+```
+This will generate a Livewire component. The php and blade files will be generated.
+You can also specify to generate a test or a form request.
+
 ### Configuration
 
 ```
@@ -299,24 +310,10 @@ php artisan generate:file foo.bar --type=model
 php artisan generate:file foo.bar --type=model --stub=model_custom
 ```
 
-## Shortcuts
-
-```
-art=php artisan
-model=php artisan generate:model
-view=php artisan generate:view
-view:index=php artisan generate:view:index
-view:create_edit=php artisan generate:view:create_edit
-view:show=php artisan generate:view:show
-controller=php artisan generate:controller
-migration=php artisan generate:migration
-migration:pivot=php artisan generate:migration:pivot
-seed=php artisan generate:seed
-resource=php artisan generate:resource
-```
 ## Customizing file was created message to add support for ide opening the files
 
-Make links for opening output.Add output_path_handler as a function to your config/generators.php.Example:
+Make links for opening output.
+Add output_path_handler as a function to your config/generators.php.Example:
 
 ```
 'output_path_handler' => static function($path){
@@ -327,8 +324,8 @@ This will output a file schema uri which JetBrain Products (Intellij,Php Storm,W
 
 ## Thank you
 
-- Thank you [Taylor Ottwell](https://github.com/taylorotwell) for [Laravel](http://laravel.com/).
-- Thank you [Jeffrey Way](https://github.com/JeffreyWay) for the awesome resources at [Laracasts](https://laracasts.com/).
+- Thank you, [Taylor Ottwell](https://github.com/taylorotwell) for [Laravel](http://laravel.com/).
+- Thank you, [Jeffrey Way](https://github.com/JeffreyWay) for the awesome resources at [Laracasts](https://laracasts.com/).
 
 ## My Other Packages
 
