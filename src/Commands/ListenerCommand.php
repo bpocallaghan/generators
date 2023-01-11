@@ -265,13 +265,7 @@ class ListenerCommand extends GeneratorCommand
     {
         return array_merge([
             ['event', 'e', InputOption::VALUE_REQUIRED, 'The event class being listened for.'],
-            [
-                'type',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'Type is listner',
-                'listener'
-            ]
+            ['type', null, InputOption::VALUE_OPTIONAL, 'Type is listener', 'listener']
         ], parent::getOptions());
     }
 }

@@ -111,7 +111,7 @@ class FileCommand extends GeneratorCommand
 
             $this->call('generate:test', [
                 'name' => $name,
-                '--unit' => $this->settings['postfix'] !== 'Controller',
+                '--unit' => !(Str::contains($this->settings['namespace'], 'Http\\')),
             ]);
         }
     }
