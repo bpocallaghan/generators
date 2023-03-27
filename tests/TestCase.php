@@ -71,8 +71,8 @@ abstract class TestCase extends Orchestra
         $app['config']->set('generators.stubs.controller_repository', "{$path}controller_repository.stub");
         $app['config']->set('generators.stubs.request', "{$path}request.stub");
         $app['config']->set('generators.stubs.pivot', "{$path}pivot.stub");
-        $app['config']->set('generators.stubs.seed', "{$path}seed.stub");
-        $app['config']->set('generators.stubs.seed_plain', "{$path}seed.plain.stub");
+        $app['config']->set('generators.stubs.seeder', "{$path}seeder.stub");
+        $app['config']->set('generators.stubs.seeder_plain', "{$path}seeder.plain.stub");
         $app['config']->set('generators.stubs.view', "{$path}view.stub");
         $app['config']->set('generators.stubs.view_index', "{$path}view.index.stub");
         $app['config']->set('generators.stubs.view_indexb4', "{$path}view.index.b4.stub");
@@ -91,6 +91,7 @@ abstract class TestCase extends Orchestra
         $app['config']->set('generators.stubs.console', "{$path}console.stub");
         $app['config']->set('generators.stubs.middleware', "{$path}middleware.stub");
         $app['config']->set('generators.stubs.repository', "{$path}repository.stub");
+        $app['config']->set('generators.stubs.repository_contract', "{$path}repository.contract.stub");
         $app['config']->set('generators.stubs.contract', "{$path}contract.stub");
         $app['config']->set('generators.stubs.factory', "{$path}factory.stub");
         $app['config']->set('generators.stubs.exception', "{$path}exception.stub");

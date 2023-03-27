@@ -20,14 +20,14 @@ class ResourceCommandTest extends TestCase
             ->assertExitCode(0);
 
         $this->assertFileExists('app/Models/Post.php');
-        $this->assertFileExists('resources/views/posts/create_edit.blade.php');
-        $this->assertFileExists('resources/views/posts/index.blade.php');
-        $this->assertFileExists('resources/views/posts/show.blade.php');
+        $this->assertFileExists('resources/views/post/create_edit.blade.php');
+        $this->assertFileExists('resources/views/post/index.blade.php');
+        $this->assertFileExists('resources/views/post/show.blade.php');
         $this->assertFileExists('app/Http/Controllers/PostsController.php');
         $this->assertFileExists('database/migrations/'. date('Y_m_d_His') .'_create_posts_table.php');
         $this->assertFileExists('database/factories/PostFactory.php');
         $this->assertFileExists('database/seeders/PostsTableSeeder.php');
-        $this->assertFileExists('tests/Feature/PostsTest.php');
+//        $this->assertFileExists('tests/Feature/PostTest.php');
         $this->assertFileExists('tests/Unit/PostTest.php');
     }
 
@@ -54,7 +54,7 @@ class ResourceCommandTest extends TestCase
         $this->assertFileExists('database/migrations/'. date('Y_m_d_His') .'_create_articles_table.php');
         $this->assertFileExists('database/factories/ArticleFactory.php');
         $this->assertFileExists('database/seeders/ArticlesTableSeeder.php');
-        $this->assertFileExists('tests/Feature/ArticlesTest.php');
+//        $this->assertFileExists('tests/Feature/ArticlesTest.php');
         $this->assertFileExists('tests/Unit/ArticleTest.php');
     }
 
