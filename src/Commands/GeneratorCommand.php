@@ -293,9 +293,9 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
         foreach ($pieces as $k => $value) {
             if (!in_array($value, config('generators.reserve_words'))) {
                 if (!$plural) {
-                    $pieces[$k] = Str::snake($pieces[$k]);
+                    $pieces[$k] = Str::snake($pieces[$k], '-');
                 } else {
-                    $pieces[$k] = Str::plural(Str::snake($pieces[$k]));
+                    $pieces[$k] = Str::plural(Str::snake($pieces[$k], '-'));
                 }
             }
         }
