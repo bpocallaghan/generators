@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class FileCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_file()
+    public function test_generate_file()
     {
         $this->artisan('generate:file test');
 
