@@ -15,9 +15,12 @@ Laravel 7.0 : v6.x
 Laravel 8.0 : v7.x
 Laravel 9.0 : v8.x
 Laravel 10.0 : v9.x
+Laravel 11.0 : v11.x
+Laravel 12.0 : v12.x
 ```
 
 ## Commands
+
 ```bash
 php artisan generate:publish-stubs
 php artisan generate:model
@@ -46,13 +49,16 @@ php artisan generate:livewire
 ```
 
 ### Option for all the commands
- - `--force` This will override the existing file, if it exists.
- - `--test` This will also generate a test file.
+
+-   `--force` This will override the existing file, if it exists.
+-   `--test` This will also generate a test file.
 
 ### Option for all the commands, except `views` and `migration:pivot`
- - `--plain` This will use the .plain stub of the command (generate an empty controller)
+
+-   `--plain` This will use the .plain stub of the command (generate an empty controller)
 
 ### Customization
+
 This is for all except the `migration` and `migration:pivot` commands
 
 ```
@@ -66,7 +72,8 @@ You can add the --plain or --force options.
 You can override the default stub to be used.
 You can create your own stubs with the available placeholders.
 You can create new settings' types, for example:
-- 'exception' => ['namespace' => '\Exceptions', 'path' => './app/Exceptions/', 'postfix' => 'Exception'],
+
+-   'exception' => ['namespace' => '\Exceptions', 'path' => './app/Exceptions/', 'postfix' => 'Exception'],
 
 [Available placeholders](https://github.com/bpocallaghan/generators/blob/master/resources/stubs/example.stub)
 
@@ -102,25 +109,25 @@ Run `php artisan` command to see the new commands in the `generate:*` section
 
 ## Usage
 
-- [Models](#models)
-- [Views](#views)
-- [Controllers](#controllers)
-- [Migrations](#migrations)
-- [Pivot Tables](#pivot-tables)
-- [Database Seeders](#database-seeders)
-- [Resource](#resource)
-- [Repository](#repository)
-- [Contract](#contract)
-- [Notifications](#notifications)
-- [Events and Listeners](#events-and-listeners)
-- [Trait](#trait)
-- [Job](#job)
-- [Console](#console)
-- [Middleware](#middleware)
-- [Factory](#factory)
-- [Test](#test)
-- [File](#file)
-- [Configuration](#configuration)
+-   [Models](#models)
+-   [Views](#views)
+-   [Controllers](#controllers)
+-   [Migrations](#migrations)
+-   [Pivot Tables](#pivot-tables)
+-   [Database Seeders](#database-seeders)
+-   [Resource](#resource)
+-   [Repository](#repository)
+-   [Contract](#contract)
+-   [Notifications](#notifications)
+-   [Events and Listeners](#events-and-listeners)
+-   [Trait](#trait)
+-   [Job](#job)
+-   [Console](#console)
+-   [Middleware](#middleware)
+-   [Factory](#factory)
+-   [Test](#test)
+-   [File](#file)
+-   [Configuration](#configuration)
 
 ### Models
 
@@ -152,8 +159,7 @@ php artisan generate:controller bar --plain
 php artisan generate:controller BarController --plain
 ```
 
-- The `Controller` postfix will be added if needed.
-
+-   The `Controller` postfix will be added if needed.
 
 ### Migrations
 
@@ -181,7 +187,7 @@ php artisan generate:seed bar
 php artisan generate:seed BarTableSeeder
 ```
 
-- The `TableSeeder` suffix will be added if needed.
+-   The `TableSeeder` suffix will be added if needed.
 
 ### Resource
 
@@ -193,21 +199,25 @@ php artisan generate:resource bar --schema="title:string, body:text, slug:string
 php artisan generate:resource articles --controller=admin
 ```
 
-- This will generate a Bar model, BarsController, resources views (in config), create_bars_table migration, BarTableSeeder
-- In the config there is a `resource_views` array, you can specify the views that you want to generate there, just make sure the stub exist.
-- This will also ask you to generate the 'repository - contract pattern' files.
-- The `--controller=admin` allows you to use the controller_admin stub when generating the controller.
+-   This will generate a Bar model, BarsController, resources views (in config), create_bars_table migration, BarTableSeeder
+-   In the config there is a `resource_views` array, you can specify the views that you want to generate there, just make sure the stub exist.
+-   This will also ask you to generate the 'repository - contract pattern' files.
+-   The `--controller=admin` allows you to use the controller_admin stub when generating the controller.
 
 ### Repository
+
 ```
 php artisan generate:repository Posts
 ```
+
 This will generate a Posts Repository file to be used in your controller.
 
 ### Contract
+
 ```
 php artisan generate:contract Cache
 ```
+
 This will generate a Cache Contract file to be used with your repositories.
 
 ### Notifications
@@ -226,6 +236,7 @@ php artisan generate:event InvoiceWasPaid
 php artisan generate:listener NotifyUserAboutPayment --event=InvoiceWasPaid
 php artisan generate:event-listener
 ```
+
 This will generate the event and listener.
 Laravel's events provides a simple observer implementation, allowing you to subscribe and listen for various events that occur in your application
 
@@ -233,62 +244,78 @@ Laravel's events provides a simple observer implementation, allowing you to subs
 Will generate all the missing events and listeners defined in your EventServiceProvider.
 
 ### Trait
+
 ```
 php artisan generate:trait Http\Controllers\Traits\Bar
 ```
+
 This will generate a FooBar Trait file. The command will use the name as your namespace.
 `generate:trait Foo` will create a file in `app/Foo.php`, `generate:trait Foo\Bar` will create a file in `app/Foo/Bar.php`.
 
 ### Job
+
 ```
 php artisan generate:job SendReminderEmail
 ```
+
 This will generate a SendReminderEmail Job file.
 
 ### Console (Artisan Command)
+
 ```
 php artisan generate:console SendEmails
 php artisan generate:console SendEmails --command=send:emails
 ```
+
 This will generate a SendEmails Artisan Command file. The --command option is optional.
 
 ### Middleware
+
 ```
 php artisan generate:middleware AuthenticateAdmin
 ```
+
 This will generate an AuthenticateAdmin Middleware file.
 
 ### Factory
+
 ```
 php artisan generate:factory Post
 php artisan generate:factory PostFactory
 ```
+
 This will generate a PostFactory model file.
 
 ### Test
+
 ```
 php artisan generate:test UserCanLogin
 php artisan generate:test Post --unit
 php artisan generate:test Auth\LoginTest
 ```
+
 This will generate Feature\UserCanLogin and Unit\PostTest and Unit\Auth\LoginTest files.
 
 ### Component
+
 ```
 php artisan generate:component Foo
 php artisan generate:component Foo/Bar
 php artisan generate:component Baz --test
 ```
+
 This will generate a Laravel Component. The php and blade files will be generated.
 You can also specify to generate a unit test.
 
 ### Livewire
+
 ```
 php artisan generate:livewire Foo
 php artisan generate:livewire Foo/Bar
 php artisan generate:livewire Baz --test
 php artisan generate:livewire foo-bar --request
 ```
+
 This will generate a Livewire component. The php and blade files will be generated.
 You can also specify to generate a test or a form request.
 
@@ -331,16 +358,12 @@ Add output_path_handler as a function to your config/generators.php.Example:
     return 'file:///' . base_path() . $path;
 },
 ```
+
 This will output a file schema uri which JetBrain Products (Intellij,Php Storm,Web Storm,...) then can open directly from your terminal.
-
-## Thank you
-
-- Thank you, [Taylor Ottwell](https://github.com/taylorotwell) for [Laravel](http://laravel.com/).
-- Thank you, [Jeffrey Way](https://github.com/JeffreyWay) for the awesome resources at [Laracasts](https://laracasts.com/).
 
 ## My Other Packages
 
-- [Alert](https://github.com/bpocallaghan/alert) A helper package to flash a bootstrap alert to the browser via a Facade or a helper function.
-- [Notify](https://github.com/bpocallaghan/notify) Laravel Flash Notifications with icons and animations and with a timeout
-- [Impersonate User](https://github.com/bpocallaghan/impersonate) This allows you to authenticate as any of your customers.
-- [Sluggable](https://github.com/bpocallaghan/sluggable) Provides a HasSlug trait that will generate a unique slug when saving your Laravel Eloquent model.
+-   [Alert](https://github.com/bpocallaghan/alert) A helper package to flash a bootstrap alert to the browser via a Facade or a helper function.
+-   [Notify](https://github.com/bpocallaghan/notify) Laravel Flash Notifications with icons and animations and with a timeout
+-   [Impersonate User](https://github.com/bpocallaghan/impersonate) This allows you to authenticate as any of your customers.
+-   [Sluggable](https://github.com/bpocallaghan/sluggable) Provides a HasSlug trait that will generate a unique slug when saving your Laravel Eloquent model.
