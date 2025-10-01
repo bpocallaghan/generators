@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class ModelCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_model()
+    public function test_generate_model()
     {
         $this->artisan('generate:model test');
         $this->assertFileExists('app/Models/Test.php');
@@ -23,8 +22,7 @@ class ModelCommandTest extends TestCase
         $this->assertFileExists('app/Models/Foo.php');
     }
 
-    /** @test */
-    public function generate_model_with_migration()
+    public function test_generate_model_with_migration()
     {
         $this->artisan('generate:model foo --migration');
         $this->assertFileExists('app/Models/Foo.php');
@@ -35,16 +33,14 @@ class ModelCommandTest extends TestCase
         $this->assertFileExists('database/migrations/'. date('Y_m_d_His') .'_create_user_comments_table.php');
     }
 
-    /** @test */
-    public function generate_model_with_option_factory()
+    public function test_generate_model_with_option_factory()
     {
         $this->artisan('generate:model Comment --factory');
         $this->assertFileExists('app/Models/Comment.php');
         $this->assertFileExists('database/factories/CommentFactory.php');
     }
 
-    /** @test */
-    public function generate_model_with_option_test()
+    public function test_generate_model_with_option_test()
     {
         $this->artisan('generate:model Post --test');
         $this->assertFileExists('app/Models/Post.php');
