@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class EventCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_events()
+    public function test_generate_events()
     {
         $this->artisan('generate:event InvoiceWasPaid');
         $this->assertFileExists('app/Events/InvoiceWasPaid.php');

@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class ContractCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_contract()
+    public function test_generate_contract()
     {
         $this->artisan('generate:contract Cache');
         $this->assertFileExists('app/Contracts/CacheRepository.php');
