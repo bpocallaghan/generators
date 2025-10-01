@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class ResourceCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_resource()
+    public function test_generate_resource()
     {
         $this->artisan('generate:resource post')
             ->expectsQuestion('Create a Post model?', true)
@@ -31,8 +30,7 @@ class ResourceCommandTest extends TestCase
         $this->assertFileExists('tests/Unit/PostTest.php');
     }
 
-    /** @test */
-    public function generate_resource_with_admin_controller_stub()
+    public function test_generate_resource_with_admin_controller_stub()
     {
         $this->artisan('generate:resource articles --controller=admin')
             ->expectsQuestion('Create a Article model?', true)
@@ -58,8 +56,7 @@ class ResourceCommandTest extends TestCase
         $this->assertFileExists('tests/Unit/ArticleTest.php');
     }
 
-    /** @test */
-    public function generate_resource_with_bootstrap_4_stubs()
+    public function test_generate_resource_with_bootstrap_4_stubs()
     {
         $this->artisan('generate:resource articles --view=b3')
             ->expectsQuestion('Create a Article model?', false)

@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class TestCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_test()
+    public function test_generate_test()
     {
         $this->artisan('generate:test Controllers/UsersController');
         $this->assertFileExists('tests/Feature/Controllers/UsersControllerTest.php');
