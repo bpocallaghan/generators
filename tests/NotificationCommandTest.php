@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class NotificationCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_notification()
+    public function test_generate_notification()
     {
         $this->artisan('generate:notification ContractUsSubmitted');
         $this->assertFileExists('app/Notifications/ContractUsSubmitted.php');

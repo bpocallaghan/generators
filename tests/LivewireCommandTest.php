@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class LivewireCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_livewire()
+    public function test_generate_livewire()
     {
         $this->artisan('generate:livewire foo');
         $this->assertFileExists('app/Http/Livewire/Foo.php');
@@ -32,8 +31,7 @@ class LivewireCommandTest extends TestCase
         $this->assertFileExists('resources/views/livewire/folder/foo-bar.blade.php');
     }
 
-    /** @test */
-    public function generate_livewire_test_option()
+    public function test_generate_livewire_test_option()
     {
         $this->artisan('generate:livewire Foo --test');
         $this->assertFileExists('app/Http/Livewire/Foo.php');
@@ -41,8 +39,7 @@ class LivewireCommandTest extends TestCase
         $this->assertFileExists('tests/Feature/Livewire/FooTest.php');
     }
 
-    /** @test */
-    public function generate_livewire_request_option()
+    public function test_generate_livewire_request_option()
     {
         $this->artisan('generate:livewire Foo/Bar/Baz --request');
         $this->assertFileExists('app/Http/Livewire/Foo/Bar/Baz.php');

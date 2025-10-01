@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class MigrationCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_migration()
+    public function test_generate_migration()
     {
         $this->artisan('generate:migration create_users_table');
         $this->assertFileExists('app/Models/User.php');
@@ -16,8 +15,7 @@ class MigrationCommandTest extends TestCase
         $this->assertFileExists('database/migrations/'. date('Y_m_d_His') .'_create_user_comments_table.php');
     }
 
-    /** @test */
-    public function generate_migration_pivot()
+    public function test_generate_migration_pivot()
     {
         $this->artisan('generate:migration create_tags_table');
         $this->artisan('generate:migration create_posts_table');
