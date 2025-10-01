@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class ComponentCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_component()
+    public function test_generate_component()
     {
         $this->artisan('generate:component foo');
         $this->assertFileExists('app/View/Components/Foo.php');
@@ -32,8 +31,7 @@ class ComponentCommandTest extends TestCase
         $this->assertFileExists('resources/views/components/folder/foo-bar.blade.php');
     }
 
-    /** @test */
-    public function generate_component_test_option()
+    public function test_generate_component_test_option()
     {
         $this->artisan('generate:component Foo --test');
         $this->assertFileExists('app/View/Components/Foo.php');
