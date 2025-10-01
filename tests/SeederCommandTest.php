@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class SeederCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_seeder()
+    public function test_generate_seeder()
     {
         $this->artisan('generate:seeder post');
         $this->assertFileExists('database/seeders/PostsTableSeeder.php');

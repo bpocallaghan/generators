@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class ViewCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_view()
+    public function test_generate_view()
     {
         $this->artisan('generate:view view');
         $this->assertFileExists('resources/views/view.blade.php');

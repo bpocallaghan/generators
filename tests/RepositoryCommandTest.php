@@ -4,8 +4,7 @@ namespace Bpocallaghan\Generators\Tests;
 
 class RepositoryCommandTest extends TestCase
 {
-    /** @test */
-    public function generate_repository()
+    public function test_generate_repository()
     {
         $this->artisan('generate:repository Post');
         $this->assertFileExists('app/Repositories/PostRepository.php');
@@ -14,16 +13,14 @@ class RepositoryCommandTest extends TestCase
         $this->assertFileExists('app/Repositories/TagsRepository.php');
     }
 
-    /** @test */
-    public function generate_repository_with_option_test()
+    public function test_generate_repository_with_option_test()
     {
         $this->artisan('generate:repository Foo --test');
         $this->assertFileExists('app/Repositories/FooRepository.php');
         $this->assertFileExists('tests/Unit/Repositories/FooRepositoryTest.php');
     }
 
-    /** @test */
-    public function generate_repository_with_contract_stub()
+    public function test_generate_repository_with_contract_stub()
     {
         $this->artisan('generate:repository BookingRepository --contract');
         $this->assertFileExists('app/Repositories/BookingRepository.php');
